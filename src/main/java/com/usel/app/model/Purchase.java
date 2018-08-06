@@ -1,39 +1,68 @@
 package com.usel.app.model;
 
 public class Purchase {
-	private int user_id;
-	private int job_id;
+	private int userId;
+	private int jobId;
 	private int po;
-	private int vendor_id;
-	private String final_po_number;
-	public int getUser_id() {
-		return user_id;
+	private int vendorId;
+	private String finalPoNumber;
+	boolean createdAt;
+	boolean updatedAt;
+
+	public int getUserId() {
+		return userId;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public int getJob_id() {
-		return job_id;
+
+	public int getJobId() {
+		return jobId;
 	}
-	public void setJob_id(int job_id) {
-		this.job_id = job_id;
+
+	public void setJobId(int jobId) {
+		this.jobId = jobId;
 	}
+
 	public int getPo() {
 		return po;
 	}
+
 	public void setPo(int po) {
 		this.po = po;
 	}
-	public int getVendor_id() {
-		return vendor_id;
+
+	public int getVendorId() {
+		return vendorId;
 	}
-	public void setVendor_id(int vendor_id) {
-		this.vendor_id = vendor_id;
+
+	public void setVendorId(int vendorId) {
+		this.vendorId = vendorId;
 	}
-	public String getFinal_po_number() {
-		return final_po_number;
+
+	public String getFinalPoNumber() {
+		return finalPoNumber;
 	}
-	public void setFinal_po_number(String final_po_number) {
-		this.final_po_number = final_po_number;
+
+	public void setFinalPoNumber(String finalPoNumber) {
+		this.finalPoNumber = finalPoNumber;
 	}
+
+	public boolean isCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(boolean createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public boolean isUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(boolean updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	
 }
