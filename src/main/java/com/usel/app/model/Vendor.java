@@ -6,6 +6,9 @@ public class Vendor {
 	boolean createdAt;
 	boolean updatedAt;
 
+	public Vendor() {
+	}
+	
 	public int getId() {
 		return id;
 	}

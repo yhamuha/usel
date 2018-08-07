@@ -6,6 +6,9 @@ public class Vessel {
 	boolean createdAt;
 	boolean updatedAt;
 
+	public Vessel() {
+	}
+	
 	public int getId() {
 		return id;
 	}

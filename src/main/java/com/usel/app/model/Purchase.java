@@ -9,6 +9,9 @@ public class Purchase {
 	boolean createdAt;
 	boolean updatedAt;
 
+	public Purchase() {
+	}
+	
 	public int getUserId() {
 		return userId;
 	}

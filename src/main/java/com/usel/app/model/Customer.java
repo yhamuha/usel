@@ -7,6 +7,9 @@ public class Customer {
 	private boolean createdAt;
 	private boolean updatedAt;
 
+	public Customer() {
+	}
+	
 	public int getId() {
 		return id;
 	}

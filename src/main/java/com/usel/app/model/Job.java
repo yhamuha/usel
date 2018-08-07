@@ -12,6 +12,9 @@ public class Job {
 	boolean createdAt;
 	boolean updatedAt;
 
+	public Job() {
+	}
+	
 	public int getId() {
 		return id;
 	}

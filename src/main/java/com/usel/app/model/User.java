@@ -12,6 +12,9 @@ public class User {
 	boolean createdAt;
 	boolean updatedAt;
 
+	public User() {
+	}
+	
 	public int getId() {
 		return id;
 	}
