@@ -1,5 +1,4 @@
 # Operating System Files
-
 *.DS_Store
 Thumbs.db
 *.sw?
@@ -9,24 +8,17 @@ Thumbs.db
 *.sublime-*
 
 # Build Artifacts
-
 .gradle/
+.gradle/4.3/fileHashes/
 build/
 target/
 bin/
 dependency-reduced-pom.xml
 
 # Eclipse Project Files
-
 .classpath
 .project
 .settings/
 
-# IntelliJ IDEA Files
-
-*.iml
-*.ipr
-*.iws
-*.idea
-
 README.html
+
