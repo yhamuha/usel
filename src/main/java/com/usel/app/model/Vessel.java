@@ -1,20 +1,56 @@
 package com.usel.app.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "VESSELS")
 public class Vessel {
-	private int id;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CUSTOMER_ID")
+	private Vessel vessel;
+
+	@Id
+	@Column(name = "VESSEL_ID")
+	@GeneratedValue
+	private int vesselId;
+
+	@Column(name = "NAME")
 	private String name;
-	boolean createdAt;
-	boolean updatedAt;
+
+	@Column(name = "CREATED_AT")
+	private boolean createdAt;
+
+	@Column(name = "UPDATED_AT")
+	private boolean updatedAt;
+
+	@Column(name = "CUSTOMER_ID")
+	private int customerId;
 
 	public Vessel() {
 	}
-	
-	public int getId() {
-		return id;
+
+	public Vessel getVessel() {
+		return vessel;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setVessel(Vessel vessel) {
+		this.vessel = vessel;
+	}
+
+	public int getVesselId() {
+		return vesselId;
+	}
+
+	public void setVesselId(int vesselId) {
+		this.vesselId = vesselId;
 	}
 
 	public String getName() {
@@ -39,6 +75,14 @@ public class Vessel {
 
 	public void setUpdatedAt(boolean updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 
 }

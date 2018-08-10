@@ -1,26 +1,77 @@
 package com.usel.app.model;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "JOBS")
 public class Job {
-	private int id;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PO_ID")
+	private Job job;
+
+	@OneToMany(mappedBy = "job")
+	private List<Customer> items = new LinkedList<Customer>();
+
+	@Id
+	@Column(name = "JOB_ID")
+	@GeneratedValue
+	private int jobId;
+
+	@Column(name = "DESCRIPTION")
 	private String description;
-	private int customerId;
-	private int vesselId;
-	private String customerPo;
+
+	@Column(name = "DUE_DATE")
 	private String dueDate;
+
+	@Column(name = "M_S_SALE")
 	private String mSSale;
+
+	@Column(name = "STATUS")
 	private boolean status;
-	boolean createdAt;
-	boolean updatedAt;
+	
+	@Id
+	@Column(name = "CUSTOMER_ID")
+	@GeneratedValue
+	private int customerId;
+
+	@Column(name = "CREATED_AT")
+	private boolean createdAt;
+
+	@Column(name = "UPDATED_AT")
+	private boolean updatedAt;
+
+	@Column(name = "PO_ID")
+	private int poId;
 
 	public Job() {
 	}
-	
-	public int getId() {
-		return id;
+
+	public Job getJob() {
+		return job;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setJob(Job job) {
+		this.job = job;
+	}
+
+	public int getJobId() {
+		return jobId;
+	}
+
+	public void setJobId(int jobId) {
+		this.jobId = jobId;
 	}
 
 	public String getDescription() {
@@ -29,30 +80,6 @@ public class Job {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public int getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
-
-	public int getVesselId() {
-		return vesselId;
-	}
-
-	public void setVesselId(int vesselId) {
-		this.vesselId = vesselId;
-	}
-
-	public String getCustomerPo() {
-		return customerPo;
-	}
-
-	public void setCustomerPo(String customerPo) {
-		this.customerPo = customerPo;
 	}
 
 	public String getDueDate() {
@@ -79,6 +106,14 @@ public class Job {
 		this.status = status;
 	}
 
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
+
 	public boolean isCreatedAt() {
 		return createdAt;
 	}
@@ -93,6 +128,14 @@ public class Job {
 
 	public void setUpdatedAt(boolean updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public int getPoId() {
+		return poId;
+	}
+
+	public void setPoId(int poId) {
+		this.poId = poId;
 	}
 
 }
