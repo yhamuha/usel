@@ -1,27 +1,29 @@
 package com.usel.app.model;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "PURCHASES")
 public class Purchase {
 
-	@OneToMany(mappedBy = "vendor")
-	private List<Vendor> items = new LinkedList<Vendor>();
-
-	@OneToMany(mappedBy = "user")
-	private List<User> items2 = new LinkedList<User>();
-
-	@OneToMany(mappedBy = "job")
-	private List<Job> items3 = new LinkedList<Job>();
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "VENDOR_ID")
+	private Vendor vendor;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID")
+	private User user;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "JOB_ID")
+	private Job job;
 
 	@Id
 	@Column(name = "PO")
@@ -31,28 +33,46 @@ public class Purchase {
 	@Column(name = "FINAL_PO_NUMBER")
 	private String finalPoNumber;
 
-	@Id
-	@Column(name = "USER_ID")
-	@GeneratedValue
-	private int userId;
-
-	@Id
-	@Column(name = "JOB_ID")
-	@GeneratedValue
-	private int jobId;
-	
-	@Id
-	@Column(name = "VENDOR_ID")
-	@GeneratedValue
-	private int vendorId;
-
 	@Column(name = "CREATED_AT")
 	private boolean createdAt;
 
 	@Column(name = "UPDATED_AT")
 	private boolean updatedAt;
+	
+	@Column(name = "USER_ID")
+	private int userId;
+
+	@Column(name = "JOB_ID")
+	private int jobId;
+	
+	@Column(name = "VENDOR_ID")
+	private int vendorId;
 
 	public Purchase() {
+	}
+
+	public Vendor getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Job getJob() {
+		return job;
+	}
+
+	public void setJob(Job job) {
+		this.job = job;
 	}
 
 	public int getPo() {
@@ -69,6 +89,22 @@ public class Purchase {
 
 	public void setFinalPoNumber(String finalPoNumber) {
 		this.finalPoNumber = finalPoNumber;
+	}
+
+	public boolean isCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(boolean createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public boolean isUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(boolean updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	public int getUserId() {
@@ -95,20 +131,11 @@ public class Purchase {
 		this.vendorId = vendorId;
 	}
 
-	public boolean isCreatedAt() {
-		return createdAt;
+	@Override
+	public String toString() {
+		return "Purchase [vendor=" + vendor + ", user=" + user + ", job=" + job + ", po=" + po + ", finalPoNumber="
+				+ finalPoNumber + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", userId=" + userId
+				+ ", jobId=" + jobId + ", vendorId=" + vendorId + "]";
 	}
-
-	public void setCreatedAt(boolean createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public boolean isUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(boolean updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
+	
 }

@@ -1,6 +1,6 @@
 package com.usel.app.model;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,17 +17,17 @@ import javax.persistence.Table;
 @Table(name = "CUSTOMERS")
 public class Customer {
 
+	@OneToMany(mappedBy = "job")
+	private List<Job> jobs = new LinkedList<Job>();
+	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "JOB_ID")
-	private Job job;
-
-	@OneToMany(mappedBy = "vessel")
-	private List<Vessel> items = new ArrayList<Vessel>();
-
+	@JoinColumn(name = "VESSEL_ID")
+	private Vessel vessel;
+	
 	@Id
-	@Column(name = "CUSTOMER_ID")
+	@Column(name = "ID")
 	@GeneratedValue
-	private int customerId;
+	private int id;
 
 	@Column(name = "NAME")
 	private String name;
@@ -52,28 +52,28 @@ public class Customer {
 	public Customer() {
 	}
 
-	public Job getJob() {
-		return job;
+	public List<Job> getJobs() {
+		return jobs;
 	}
 
-	public void setJob(Job job) {
-		this.job = job;
+	public void setJobs(List<Job> jobs) {
+		this.jobs = jobs;
 	}
 
-	public List<Vessel> getItems() {
-		return items;
+	public Vessel getVessel() {
+		return vessel;
 	}
 
-	public void setItems(List<Vessel> items) {
-		this.items = items;
+	public void setVessel(Vessel vessel) {
+		this.vessel = vessel;
 	}
 
-	public int getCustomerId() {
-		return customerId;
+	public int getId() {
+		return id;
 	}
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -124,4 +124,12 @@ public class Customer {
 		this.jobId = jobId;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [jobs=" + jobs + ", vessel=" + vessel + ", id=" + id + ", name=" + name + ", customerPo="
+				+ customerPo + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", vesselId=" + vesselId
+				+ ", jobId=" + jobId + "]";
+	}
+
+	
 }

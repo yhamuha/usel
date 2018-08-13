@@ -1,26 +1,26 @@
 package com.usel.app.model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "USERS")
 public class User {
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PO_ID")
-	private User user;
-
+	@OneToMany(mappedBy = "user")
+	private List<User> users = new LinkedList<User>();
+	
 	@Id
-	@Column(name = "USER_ID")
+	@Column(name = "ID")
 	@GeneratedValue
-	private int userId;
+	private int id;
 
 	@Column(name = "NAME")
 	private int name;
@@ -52,20 +52,20 @@ public class User {
 	public User() {
 	}
 
-	public User getUser() {
-		return user;
+	public List<User> getUsers() {
+		return users;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
-	public int getUserId() {
-		return userId;
+	public int getId() {
+		return id;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getName() {
@@ -138,6 +138,13 @@ public class User {
 
 	public void setPoId(int poId) {
 		this.poId = poId;
+	}
+
+	@Override
+	public String toString() {
+		return "User [users=" + users + ", id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email
+				+ ", password=" + password + ", shortName=" + shortName + ", isEnabled=" + isEnabled + ", createdAt="
+				+ createdAt + ", updatedAt=" + updatedAt + ", poId=" + poId + "]";
 	}
 
 }

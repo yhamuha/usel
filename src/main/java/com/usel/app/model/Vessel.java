@@ -1,26 +1,26 @@
 package com.usel.app.model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "VESSELS")
 public class Vessel {
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CUSTOMER_ID")
-	private Vessel vessel;
+	@OneToMany(mappedBy = "vessel")
+	private List<Vessel> vessel = new LinkedList<Vessel>();
 
 	@Id
-	@Column(name = "VESSEL_ID")
+	@Column(name = "ID")
 	@GeneratedValue
-	private int vesselId;
+	private int id;
 
 	@Column(name = "NAME")
 	private String name;
@@ -37,20 +37,20 @@ public class Vessel {
 	public Vessel() {
 	}
 
-	public Vessel getVessel() {
+	public List<Vessel> getVessel() {
 		return vessel;
 	}
 
-	public void setVessel(Vessel vessel) {
+	public void setVessel(List<Vessel> vessel) {
 		this.vessel = vessel;
 	}
 
-	public int getVesselId() {
-		return vesselId;
+	public int getId() {
+		return id;
 	}
 
-	public void setVesselId(int vesselId) {
-		this.vesselId = vesselId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -85,4 +85,10 @@ public class Vessel {
 		this.customerId = customerId;
 	}
 
+	@Override
+	public String toString() {
+		return "Vessel [vessel=" + vessel + ", id=" + id + ", name=" + name + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + ", customerId=" + customerId + "]";
+	}
+	
 }

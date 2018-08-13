@@ -1,26 +1,26 @@
 package com.usel.app.model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "VENDORS")
 public class Vendor {
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "VENDOR_ID")
-	private Vendor vendor;
+	@OneToMany(mappedBy = "vendor")
+	private List<Vendor> vendors = new LinkedList<Vendor>();
 
 	@Id
-	@Column(name = "VENDOR_ID")
+	@Column(name = "ID")
 	@GeneratedValue
-	private int vendorId;
+	private int id;
 
 	@Column(name = "NAME")
 	private String name;
@@ -34,20 +34,20 @@ public class Vendor {
 	public Vendor() {
 	}
 
-	public Vendor getVendor() {
-		return vendor;
+	public List<Vendor> getVendors() {
+		return vendors;
 	}
 
-	public void setVendor(Vendor vendor) {
-		this.vendor = vendor;
+	public void setVendors(List<Vendor> vendors) {
+		this.vendors = vendors;
 	}
 
-	public int getVendorId() {
-		return vendorId;
+	public int getId() {
+		return id;
 	}
 
-	public void setVendorId(int vendorId) {
-		this.vendorId = vendorId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -73,4 +73,11 @@ public class Vendor {
 	public void setUpdatedAt(boolean updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
+	@Override
+	public String toString() {
+		return "Vendor [vendors=" + vendors + ", id=" + id + ", name=" + name + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + "]";
+	}
+	
 }

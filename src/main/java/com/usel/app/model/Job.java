@@ -17,17 +17,17 @@ import javax.persistence.Table;
 @Table(name = "JOBS")
 public class Job {
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PO_ID")
-	private Job job;
-
 	@OneToMany(mappedBy = "job")
-	private List<Customer> items = new LinkedList<Customer>();
+	private List<Job> jobs = new LinkedList<Job>();
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CUSTOMER_ID")
+	private Customer customer;
 
 	@Id
-	@Column(name = "JOB_ID")
+	@Column(name = "ID")
 	@GeneratedValue
-	private int jobId;
+	private int id;
 
 	@Column(name = "DESCRIPTION")
 	private String description;
@@ -58,20 +58,28 @@ public class Job {
 	public Job() {
 	}
 
-	public Job getJob() {
-		return job;
+	public List<Job> getJobs() {
+		return jobs;
 	}
 
-	public void setJob(Job job) {
-		this.job = job;
+	public void setJobs(List<Job> jobs) {
+		this.jobs = jobs;
 	}
 
-	public int getJobId() {
-		return jobId;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setJobId(int jobId) {
-		this.jobId = jobId;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getDescription() {
@@ -136,6 +144,13 @@ public class Job {
 
 	public void setPoId(int poId) {
 		this.poId = poId;
+	}
+
+	@Override
+	public String toString() {
+		return "Job [jobs=" + jobs + ", customer=" + customer + ", id=" + id + ", description=" + description
+				+ ", dueDate=" + dueDate + ", mSSale=" + mSSale + ", status=" + status + ", customerId=" + customerId
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", poId=" + poId + "]";
 	}
 
 }
