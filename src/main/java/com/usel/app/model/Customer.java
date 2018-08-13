@@ -49,7 +49,9 @@ public class Customer {
 	@Column(name = "JOB_ID")
 	private int jobId;
 
-	public Customer() {
+	public Customer(int id, String name) {
+		this.name = name;
+		this.id=id;
 	}
 
 	public List<Job> getJobs() {
