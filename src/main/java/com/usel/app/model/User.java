@@ -23,19 +23,19 @@ public class User {
 	private int id;
 
 	@Column(name = "NAME")
-	private int name;
+	private String name;
 
 	@Column(name = "LAST_NAME")
-	private int lastName;
+	private String lastName;
 
 	@Column(name = "EMAIL")
-	private int email;
+	private String email;
 
 	@Column(name = "PASSWORD")
-	private int password;
+	private String password;
 
 	@Column(name = "SHORT_NAME")
-	private int shortName;
+	private String shortName;
 
 	@Column(name = "IS_ENABLED")
 	private boolean isEnabled;
@@ -49,7 +49,21 @@ public class User {
 	@Column(name = "PO_ID")
 	private int poId;
 
-	public User() {
+	protected User() {
+	}
+	
+	public User(int id, String name, String lastName, String email, String password, String shortName, boolean isEnabled, 
+			    boolean createdAt, boolean updatedAt, int poId) {
+		this.id = id;
+		this.name = name;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.shortName = shortName;
+		this.isEnabled = isEnabled;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.poId = poId;
 	}
 
 	public List<User> getUsers() {
@@ -68,43 +82,43 @@ public class User {
 		this.id = id;
 	}
 
-	public int getName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setName(int name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public int getLastName() {
+	public String getLastName() {
 		return lastName;
 	}
 
-	public void setLastName(int lastName) {
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	public int getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(int email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public int getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(int password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public int getShortName() {
+	public String getShortName() {
 		return shortName;
 	}
 
-	public void setShortName(int shortName) {
+	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
 

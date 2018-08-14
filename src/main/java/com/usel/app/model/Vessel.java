@@ -34,7 +34,15 @@ public class Vessel {
 	@Column(name = "CUSTOMER_ID")
 	private int customerId;
 
-	public Vessel() {
+	protected Vessel() {
+	}
+	
+	public Vessel(int id, String name, boolean createdAt, boolean updatedAt, int customerId) {
+		this.id = id;
+		this.name = name;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.customerId = customerId;
 	}
 
 	public List<Vessel> getVessel() {

@@ -48,7 +48,17 @@ public class Purchase {
 	@Column(name = "VENDOR_ID")
 	private int vendorId;
 
-	public Purchase() {
+	protected Purchase() {
+	}
+	
+	public Purchase(int po, String finalPoNumber, boolean createdAt, boolean updatedAt, int userId, int jobId, int vendorId) {
+		this.po = po;
+		this.finalPoNumber = finalPoNumber;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.userId = userId;
+		this.jobId = jobId;
+		this.vendorId = vendorId;
 	}
 
 	public Vendor getVendor() {

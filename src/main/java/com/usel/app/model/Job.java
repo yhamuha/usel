@@ -41,9 +41,7 @@ public class Job {
 	@Column(name = "STATUS")
 	private boolean status;
 	
-	@Id
 	@Column(name = "CUSTOMER_ID")
-	@GeneratedValue
 	private int customerId;
 
 	@Column(name = "CREATED_AT")
@@ -55,9 +53,20 @@ public class Job {
 	@Column(name = "PO_ID")
 	private int poId;
 
-	public Job() {
+	protected Job() {
 	}
 
+	public Job(int id, String description, String dueDate, String mSSale, boolean status, int customerId, boolean createdAt, boolean updatedAt, int poId) {
+		this.id=id;
+		this.description=description;
+		this.dueDate=dueDate;
+		this.mSSale=mSSale;
+		this.status=status;
+		this.customerId=customerId;
+		this.createdAt=createdAt;
+		this.updatedAt=updatedAt;
+		this.poId=poId;
+	}
 	public List<Job> getJobs() {
 		return jobs;
 	}

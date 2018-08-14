@@ -41,17 +41,24 @@ public class Customer {
 	@Column(name = "UPDATED_AT")
 	private boolean updatedAt;
 
-	@Id
 	@Column(name = "VESSEL_ID")
-	@GeneratedValue
 	private int vesselId;
 
 	@Column(name = "JOB_ID")
 	private int jobId;
 
-	public Customer(int id, String name) {
-		this.name = name;
-		this.id=id;
+	protected Customer() {
+		
+	}
+	
+	public Customer(int id, String name, int customerPo, boolean createdAt, boolean updatedAt, int vesselId, int jobId) {
+		this.id = id;
+		this.name=name;
+		this.customerPo=customerPo;
+		this.createdAt=createdAt;
+		this.updatedAt=updatedAt;
+		this.vesselId=vesselId;
+		this.jobId=jobId;
 	}
 
 	public List<Job> getJobs() {

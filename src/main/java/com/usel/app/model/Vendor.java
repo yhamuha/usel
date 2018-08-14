@@ -31,7 +31,14 @@ public class Vendor {
 	@Column(name = "UPDATED_AT")
 	private boolean updatedAt;
 
-	public Vendor() {
+	protected Vendor() {
+	}
+	
+	public Vendor(int id, String name, boolean createdAt, boolean updatedAt) {
+		this.id = id;
+		this.name = name;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 	}
 
 	public List<Vendor> getVendors() {
