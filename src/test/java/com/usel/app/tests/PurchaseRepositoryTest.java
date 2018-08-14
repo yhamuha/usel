@@ -1,5 +1,4 @@
 package com.usel.app.tests;
-
 import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
@@ -13,47 +12,28 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.usel.app.model.Customer;
-import com.usel.app.repository.CustomerRepository;
+import com.usel.app.model.Purchase;
+import com.usel.app.repository.PurchaseRepository;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
 @TestPropertySource(locations="classpath:application.yml")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace=Replace.NONE)
-public class CustomerRepositoryTest {
+public class PurchaseRepositoryTest {
 	@Autowired
     private TestEntityManager entityManager;
 	
 	@Autowired
-	CustomerRepository customerRepository;
+	PurchaseRepository purchaseRepository;
 	
 	@Test
 	public void whenFindAllThenReturnNotEmptyList() {
-		Customer customer = new Customer();
+		Purchase purchase = new Purchase();
+		purchase.setFinalPoNumber("AP 2296 - 0450");
 		
-		customer.setName("Test Customer");
-		customer.setOwnPo(120033);
-		
-		entityManager.persist(customer);
+		entityManager.persist(purchase);
 
-		assertFalse(customerRepository.findAll().isEmpty());
+		assertFalse(purchaseRepository.findAll().isEmpty());
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-    

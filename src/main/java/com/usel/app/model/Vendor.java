@@ -31,7 +31,7 @@ public class Vendor {
 	@Column(name = "UPDATED_AT")
 	private boolean updatedAt;
 
-	protected Vendor() {
+	public Vendor() {
 	}
 	
 	public Vendor(int id, String name, boolean createdAt, boolean updatedAt) {

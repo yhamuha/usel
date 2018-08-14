@@ -53,7 +53,7 @@ public class Job {
 	@Column(name = "PO_ID")
 	private int poId;
 
-	protected Job() {
+	public Job() {
 	}
 
 	public Job(int id, String description, String dueDate, String mSSale, boolean status, int customerId, boolean createdAt, boolean updatedAt, int poId) {

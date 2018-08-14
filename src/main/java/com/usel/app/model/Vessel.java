@@ -34,7 +34,7 @@ public class Vessel {
 	@Column(name = "CUSTOMER_ID")
 	private int customerId;
 
-	protected Vessel() {
+	public Vessel() {
 	}
 	
 	public Vessel(int id, String name, boolean createdAt, boolean updatedAt, int customerId) {

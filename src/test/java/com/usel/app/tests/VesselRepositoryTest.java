@@ -1,5 +1,4 @@
 package com.usel.app.tests;
-
 import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
@@ -13,47 +12,28 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.usel.app.model.Customer;
-import com.usel.app.repository.CustomerRepository;
+import com.usel.app.model.Vessel;
+import com.usel.app.repository.VesselRepository;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
 @TestPropertySource(locations="classpath:application.yml")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace=Replace.NONE)
-public class CustomerRepositoryTest {
+public class VesselRepositoryTest {
 	@Autowired
     private TestEntityManager entityManager;
 	
 	@Autowired
-	CustomerRepository customerRepository;
+	VesselRepository vesselRepository;
 	
 	@Test
 	public void whenFindAllThenReturnNotEmptyList() {
-		Customer customer = new Customer();
+		Vessel vessel = new Vessel();
+		vessel.setName("Test Vendor's Name");
 		
-		customer.setName("Test Customer");
-		customer.setOwnPo(120033);
-		
-		entityManager.persist(customer);
+		entityManager.persist(vessel);
 
-		assertFalse(customerRepository.findAll().isEmpty());
+		assertFalse(vesselRepository.findAll().isEmpty());
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-    

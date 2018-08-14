@@ -33,7 +33,7 @@ public class Customer {
 	private String name;
 
 	@Column(name = "CUSTOMER_PO")
-	private int customerPo;
+	private int ownPo;
 
 	@Column(name = "CREATED_AT")
 	private boolean createdAt;
@@ -47,14 +47,14 @@ public class Customer {
 	@Column(name = "JOB_ID")
 	private int jobId;
 
-	protected Customer() {
+	public Customer() {
 		
 	}
 	
 	public Customer(int id, String name, int customerPo, boolean createdAt, boolean updatedAt, int vesselId, int jobId) {
 		this.id = id;
 		this.name=name;
-		this.customerPo=customerPo;
+		this.ownPo=customerPo;
 		this.createdAt=createdAt;
 		this.updatedAt=updatedAt;
 		this.vesselId=vesselId;
@@ -93,12 +93,12 @@ public class Customer {
 		this.name = name;
 	}
 
-	public int getCustomerPo() {
-		return customerPo;
+	public int getOwnPo() {
+		return ownPo;
 	}
 
-	public void setCustomerPo(int customerPo) {
-		this.customerPo = customerPo;
+	public void setOwnPo(int ownPo) {
+		this.ownPo = ownPo;
 	}
 
 	public boolean isCreatedAt() {
@@ -136,9 +136,8 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer [jobs=" + jobs + ", vessel=" + vessel + ", id=" + id + ", name=" + name + ", customerPo="
-				+ customerPo + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", vesselId=" + vesselId
+				+ ownPo + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", vesselId=" + vesselId
 				+ ", jobId=" + jobId + "]";
 	}
 
-	
 }

@@ -13,47 +13,31 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.usel.app.model.Customer;
-import com.usel.app.repository.CustomerRepository;
+import com.usel.app.model.Job;
+import com.usel.app.repository.JobRepository;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
 @TestPropertySource(locations="classpath:application.yml")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace=Replace.NONE)
-public class CustomerRepositoryTest {
+public class JobRepositoryTest {
 	@Autowired
     private TestEntityManager entityManager;
 	
 	@Autowired
-	CustomerRepository customerRepository;
+	JobRepository jobRepository;
 	
 	@Test
 	public void whenFindAllThenReturnNotEmptyList() {
-		Customer customer = new Customer();
+		Job job = new Job();
+		job.setDescription("Job description");
+		job.setDueDate("05/18/18");
+		job.setmSSale("Test mSSale value");
+		job.setStatus(true);
 		
-		customer.setName("Test Customer");
-		customer.setOwnPo(120033);
-		
-		entityManager.persist(customer);
+		entityManager.persist(job);
 
-		assertFalse(customerRepository.findAll().isEmpty());
+		assertFalse(jobRepository.findAll().isEmpty());
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-    
