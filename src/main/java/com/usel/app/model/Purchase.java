@@ -48,7 +48,7 @@ public class Purchase {
 	@Column(name = "VENDOR_ID")
 	private int vendorId;
 
-	public Purchase() {
+	protected Purchase() {
 	}
 	
 	public Purchase(int po, String finalPoNumber, boolean createdAt, boolean updatedAt, int userId, int jobId, int vendorId) {

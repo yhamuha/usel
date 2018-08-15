@@ -1,5 +1,6 @@
 package com.usel.app.model;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class Job {
 	private String description;
 
 	@Column(name = "DUE_DATE")
-	private String dueDate;
+	private Date dueDate;
 
 	@Column(name = "M_S_SALE")
 	private String mSSale;
@@ -53,10 +54,10 @@ public class Job {
 	@Column(name = "PO_ID")
 	private int poId;
 
-	public Job() {
+	protected Job() {
 	}
 
-	public Job(int id, String description, String dueDate, String mSSale, boolean status, int customerId, boolean createdAt, boolean updatedAt, int poId) {
+	public Job(int id, String description, Date dueDate, String mSSale, boolean status, int customerId, boolean createdAt, boolean updatedAt, int poId) {
 		this.id=id;
 		this.description=description;
 		this.dueDate=dueDate;
@@ -99,11 +100,11 @@ public class Job {
 		this.description = description;
 	}
 
-	public String getDueDate() {
+	public Date getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(String dueDate) {
+	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
 

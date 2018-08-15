@@ -3,6 +3,7 @@ package com.usel.app.model;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,8 +32,9 @@ public class Customer {
 
 	@Column(name = "NAME")
 	private String name;
-
-	@Column(name = "CUSTOMER_PO")
+	
+	@Basic (optional = false)
+	@Column(name = "CUSTOMER_PO", length = 50)
 	private int ownPo;
 
 	@Column(name = "CREATED_AT")
@@ -47,7 +49,7 @@ public class Customer {
 	@Column(name = "JOB_ID")
 	private int jobId;
 
-	public Customer() {
+	protected Customer() {
 		
 	}
 	

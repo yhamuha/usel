@@ -30,6 +30,10 @@ public class UserRepositoryTest {
 	UserRepository userRepository;
 	
 	@Test
+	
+	// Need to use methods from JPARepository
+	
+	
 	public void whenFindAllThenReturnNotEmptyList() {
 		User user = new User();
 		user.setName("Test Name");
