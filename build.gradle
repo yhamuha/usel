@@ -41,8 +41,7 @@ dependencies {
   compile 'mysql:mysql-connector-java'
   compile group: 'org.postgresql', name: 'postgresql', version: '42.2.2'
   compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.281'
-  // 
-
+  // Used it for integration tests 
   testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 

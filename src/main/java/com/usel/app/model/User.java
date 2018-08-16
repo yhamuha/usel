@@ -49,7 +49,7 @@ public class User {
 	@Column(name = "PO_ID")
 	private int poId;
 
-	protected User() {
+	public User() {
 	}
 	
 	public User(int id, String name, String lastName, String email, String password, String shortName, boolean isEnabled, 
