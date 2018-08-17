@@ -49,7 +49,7 @@ public class Customer {
 	@Column(name = "JOB_ID")
 	private int jobId;
 
-	protected Customer() {
+	public Customer() {
 		
 	}
 	
