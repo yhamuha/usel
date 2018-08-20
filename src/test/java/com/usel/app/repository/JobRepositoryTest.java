@@ -1,4 +1,5 @@
-package com.usel.app.tests;
+package com.usel.app.repository;
+
 import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
@@ -9,31 +10,36 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.usel.app.model.Vessel;
-import com.usel.app.repository.VesselRepository;
+import com.usel.app.model.Job;
+import com.usel.app.repository.JobRepository;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
 @TestPropertySource(locations="classpath:application.yml")
 @DataJpaTest
+@ContextConfiguration
 @AutoConfigureTestDatabase(replace=Replace.NONE)
-public class VesselRepositoryTest {
+public class JobRepositoryTest {
 	@Autowired
     private TestEntityManager entityManager;
 	
 	@Autowired
-	VesselRepository vesselRepository;
+	JobRepository jobRepository;
 	
 	@Test
 	public void whenFindAllThenReturnNotEmptyList() {
-		Vessel vessel = new Vessel();
-		vessel.setName("Test Vendor's Name");
+		Job job = new Job();
+		job.setDescription("Job description");
+		job.setDueDate("05/18/18");
+		job.setmSSale("Test mSSale value");
+		job.setStatus(true);
 		
-		entityManager.persist(vessel);
+		entityManager.persist(job);
 
-		assertFalse(vesselRepository.findAll().isEmpty());
+		assertFalse(jobRepository.findAll().isEmpty());
 	}
 }

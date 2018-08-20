@@ -1,4 +1,4 @@
-package com.usel.app.tests;
+package com.usel.app.repository;
 import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -19,6 +20,7 @@ import com.usel.app.repository.PurchaseRepository;
 @ActiveProfiles("test")
 @TestPropertySource(locations="classpath:application.yml")
 @DataJpaTest
+@ContextConfiguration
 @AutoConfigureTestDatabase(replace=Replace.NONE)
 public class PurchaseRepositoryTest {
 	@Autowired

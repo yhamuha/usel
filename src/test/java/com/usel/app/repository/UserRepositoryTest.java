@@ -1,6 +1,7 @@
-package com.usel.app.tests;
+package com.usel.app.repository;
 
 import static org.junit.Assert.assertFalse;
+
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,34 +11,44 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.usel.app.model.Job;
-import com.usel.app.repository.JobRepository;
+import com.usel.app.model.User;
+import com.usel.app.repository.UserRepository;
 
 @RunWith(SpringRunner.class)
+
 @ActiveProfiles("test")
 @TestPropertySource(locations="classpath:application.yml")
 @DataJpaTest
+@ContextConfiguration
 @AutoConfigureTestDatabase(replace=Replace.NONE)
-public class JobRepositoryTest {
+public class UserRepositoryTest {
+	
+	/*
+	 * Use entityManager to persist entity
+	 */
 	@Autowired
     private TestEntityManager entityManager;
 	
 	@Autowired
-	JobRepository jobRepository;
+	UserRepository userRepository;
 	
+	//TODO: need to create tests of CRUD operations for User entity
+	/*
+	 * for example:
+	 */
 	@Test
 	public void whenFindAllThenReturnNotEmptyList() {
-		Job job = new Job();
-		job.setDescription("Job description");
-		job.setDueDate("05/18/18");
-		job.setmSSale("Test mSSale value");
-		job.setStatus(true);
+		User user = new User();
+		user.setName("TestUser");
+		user.setEmail("test@gmail.com");
+		user.setPassword("testpass");
 		
-		entityManager.persist(job);
+		entityManager.persist(user);
 
-		assertFalse(jobRepository.findAll().isEmpty());
+		assertFalse(userRepository.findAll().isEmpty());
 	}
 }

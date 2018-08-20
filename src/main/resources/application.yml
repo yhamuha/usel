@@ -1,0 +1,34 @@
+amazonProperties: 
+  endpointUrl: https://s3.us-east-2.amazonaws.com
+  bucketName: surveyor-software-storage
+  accessKey: AKIAJU5VMMPZ2ZER7QRT
+  secretKey: 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
+  
+--- 
+
+spring:
+  profiles: test
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:mysql://localhost:3306/usel  
+    username: root 
+    password: nbtsa0880  
+    
+spring.jpa:
+    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate.ddl-auto: validate
+    show_sql: true
+    
+    #logging.level.org.springframework.test: ERROR
+    #logging.level.org.springframework.web: WARN
+    #logging.level.org.hibernate: WARN
+    
+#logging:
+ # level:
+  #  ROOT: FATAL
+   # #springframework.web: INFO
+    # #hibernate: INFO
+    
+logging:
+    file: /var/log/memento/security.log
+    level.org.springframework: OFF

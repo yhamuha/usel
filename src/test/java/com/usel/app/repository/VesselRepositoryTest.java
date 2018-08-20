@@ -1,4 +1,4 @@
-package com.usel.app.tests;
+package com.usel.app.repository;
 import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
@@ -9,31 +9,33 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.usel.app.model.Vendor;
-import com.usel.app.repository.VendorRepository;
+import com.usel.app.model.Vessel;
+import com.usel.app.repository.VesselRepository;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
 @TestPropertySource(locations="classpath:application.yml")
 @DataJpaTest
+@ContextConfiguration
 @AutoConfigureTestDatabase(replace=Replace.NONE)
-public class VendorRepositoryTest {
+public class VesselRepositoryTest {
 	@Autowired
     private TestEntityManager entityManager;
 	
 	@Autowired
-	VendorRepository vendorRepository;
+	VesselRepository vesselRepository;
 	
 	@Test
 	public void whenFindAllThenReturnNotEmptyList() {
-		Vendor vendor = new Vendor();
-		vendor.setName("Test Vendor's Name");
+		Vessel vessel = new Vessel();
+		vessel.setName("Test Vendor's Name");
 		
-		entityManager.persist(vendor);
+		entityManager.persist(vessel);
 
-		assertFalse(vendorRepository.findAll().isEmpty());
+		assertFalse(vesselRepository.findAll().isEmpty());
 	}
 }
