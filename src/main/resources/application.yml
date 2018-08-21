@@ -4,8 +4,6 @@ amazonProperties:
   accessKey: AKIAJU5VMMPZ2ZER7QRT
   secretKey: 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
   
---- 
-
 spring:
   profiles: test
   datasource:
@@ -19,16 +17,12 @@ spring.jpa:
     hibernate.ddl-auto: validate
     show_sql: true
     
-    #logging.level.org.springframework.test: ERROR
-    #logging.level.org.springframework.web: WARN
-    #logging.level.org.hibernate: WARN
-    
 #logging:
  # level:
   #  ROOT: FATAL
    # #springframework.web: INFO
     # #hibernate: INFO
     
-logging:
-    file: /var/log/memento/security.log
-    level.org.springframework: OFF
+#logging:
+#    file: /var/log/memento/security.log
+#    level.org.springframework: OFF
