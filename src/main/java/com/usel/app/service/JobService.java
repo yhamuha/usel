@@ -29,14 +29,14 @@ public interface JobService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		List<Job> createJob(Job job) throws ServiceException;
+		void createJob(Job job) throws ServiceException;
 		
 		/**
 		 * <p>
 		 * This method are getting particular Job (GET{id})
 		 * @param 	jobId
-	     *          The id of the particular job {@link Job}.
-	     * @return 	List of jobs
+	     *          The id of the particular {@link Job}.
+	     * @return 	job
 	     * </p> 
 	     * @throws ServiceException
 	     * 			If any errors are encountered in the repository layer 
@@ -48,20 +48,20 @@ public interface JobService {
 		* <p>
 		* Create particular job (PUT)
 		* @param	jobId
-		*          	The id of the particular job {@link Job}.
+		*          	The id of the particular {@link Job}.
 		* @return 	void
 		* </p> 
 		* @throws ServiceException
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		Job createBy (int jobId) throws ServiceException;
+		void createBy (int jobId) throws ServiceException;
 		
 		/**
 		 * <p>
 		 * This method delete job by id (DELETE{id})
 		 * @param 	jobId
-		 * 			The id of the particular job {@link Job}.
+		 * 			The id of the particular {@link Job}.
 	     * @return 	void 
 	     * </p> 
 	     * @throws ServiceException

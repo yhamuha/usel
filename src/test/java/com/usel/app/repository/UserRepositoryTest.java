@@ -23,7 +23,7 @@ import com.usel.app.repository.UserRepository;
 @ActiveProfiles("test")
 @TestPropertySource(locations="classpath:application.yml")
 @DataJpaTest
-@ContextConfiguration
+//@ContextConfiguration
 @AutoConfigureTestDatabase(replace=Replace.NONE)
 public class UserRepositoryTest {
 	

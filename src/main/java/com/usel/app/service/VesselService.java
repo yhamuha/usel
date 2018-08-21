@@ -29,14 +29,14 @@ public interface VesselService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		List<Vessel> createVendor(Vessel vendor) throws ServiceException;
+		void createVessel(Vessel vessel) throws ServiceException;
 		
 		/**
 		 * <p>
 		 * This method are getting particular vessel (GET{id})
 		 * @param 	vesselId
-	     *          The id of the particular vendor {@link Vessel}.
-	     * @return 	List of vessels
+	     *          The id of the particular {@link Vessel}.
+	     * @return 	vessel
 	     * </p> 
 	     * @throws ServiceException
 	     * 			If any errors are encountered in the repository layer 
@@ -48,20 +48,20 @@ public interface VesselService {
 		* <p>
 		* Create particular vessel (PUT)
 		* @param	vesselId
-		*          	The id of the particular vessel {@link Vessel}.
+		*          	The id of the particular {@link Vessel}.
 		* @return 	void
 		* </p> 
 		* @throws ServiceException
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		Vessel createBy (int vesselId) throws ServiceException;
+		void createBy (int vesselId) throws ServiceException;
 		
 		/**
 		 * <p>
 		 * This method delete Vessel by id (DELETE{id})
 		 * @param 	vesselId
-		 * 			The id of the particular vessel {@link Vessel}.
+		 * 			The id of the particular {@link Vessel}.
 	     * @return 	void 
 	     * </p> 
 	     * @throws ServiceException

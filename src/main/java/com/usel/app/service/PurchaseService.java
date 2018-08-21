@@ -29,14 +29,14 @@ public interface PurchaseService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		List<Purchase> createCustomer(Purchase purchase) throws ServiceException;
+		void createCustomer(Purchase purchase) throws ServiceException;
 		
 		/**
 		 * <p>
 		 * This method are getting particular purchase (GET{id})
 		 * @param 	purchaseId
-	     *          The id of the particular purchase {@link Purchase}.
-	     * @return 	List of purchases
+	     *          The id of the particular {@link Purchase}.
+	     * @return 	purchase
 	     * </p> 
 	     * @throws ServiceException
 	     * 			If any errors are encountered in the repository layer 
@@ -48,20 +48,20 @@ public interface PurchaseService {
 		* <p>
 		* Create particular purchase (PUT)
 		* @param	purchaseId
-		*          	The id of the particular purchase {@link Purchase}.
+		*          	The id of the particular {@link Purchase}.
 		* @return 	void
 		* </p> 
 		* @throws ServiceException
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		Purchase createBy (int purchaseId) throws ServiceException;
+		void createBy (int purchaseId) throws ServiceException;
 		
 		/**
 		 * <p>
 		 * This method delete purchase by id (DELETE{id})
 		 * @param 	purchaseId
-		 * 			The id of the particular purchase {@link Purchase}.
+		 * 			The id of the particular {@link Purchase}.
 	     * @return 	void 
 	     * </p> 
 	     * @throws ServiceException

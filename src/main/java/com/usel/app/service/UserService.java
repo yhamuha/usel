@@ -29,14 +29,14 @@ public interface UserService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		List<User> createCustomer(User user) throws ServiceException;
+		void createCustomer(User user) throws ServiceException;
 		
 		/**
 		 * <p>
 		 * This method are getting particular user (GET{id})
 		 * @param 	userId
-	     *          The id of the particular user {@link User}.
-	     * @return 	List of purchases
+	     *          The id of the particular {@link User}.
+	     * @return 	purchase
 	     * </p> 
 	     * @throws ServiceException
 	     * 			If any errors are encountered in the repository layer 
@@ -55,13 +55,13 @@ public interface UserService {
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		User createBy (int userId) throws ServiceException;
+		void createBy (int userId) throws ServiceException;
 		
 		/**
 		 * <p>
 		 * This method delete user by id (DELETE{id})
 		 * @param 	userId
-		 * 			The id of the particular user {@link User}.
+		 * 			The id of the particular {@link User}.
 	     * @return 	void 
 	     * </p> 
 	     * @throws ServiceException

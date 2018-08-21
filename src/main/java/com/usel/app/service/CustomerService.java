@@ -11,7 +11,7 @@ public interface CustomerService {
 		 * <p>
 		 * This method are getting all the customers (GET)
 	     * @param	none
-	     * @return	List of customers 
+	     * @return	List of customers {@link Customer} 
 	     * </p> 
 	     * @throws ServiceException
 	     * 			If any errors are encountered in the repository layer 
@@ -29,14 +29,14 @@ public interface CustomerService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		List<Customer> createCustomer(Customer customer) throws ServiceException;
+		void createCustomer(Customer customer) throws ServiceException;
 		
 		/**
 		 * <p>
 		 * This method are getting particular customer (GET{id})
 		 * @param 	customerId
-	     *          The id of the customer {@link Customer}.
-	     * @return 	List of customers
+	     *          The id of {@link Customer}.
+	     * @return 	customer
 	     * </p> 
 	     * @throws ServiceException
 	     * 			If any errors are encountered in the repository layer 
@@ -48,20 +48,20 @@ public interface CustomerService {
 		* <p>
 		* Create particular customer (PUT)
 		* @param	customerId
-		*          	The id of the particular customer {@link Customer}.
+		*          	The id of the particular {@link Customer}.
 		* @return 	void
 		* </p> 
 		* @throws ServiceException
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		Customer createBy (int customerId) throws ServiceException;
+		void createBy (int customerId) throws ServiceException;
 		
 		/**
 		 * <p>
 		 * This method delete customer by id (DELETE{id})
 		 * @param 	customerId
-		 * 			The id of the particular customer {@link Customer}.
+		 * 			The id of the particular {@link Customer}.
 	     * @return 	void 
 	     * </p> 
 	     * @throws ServiceException

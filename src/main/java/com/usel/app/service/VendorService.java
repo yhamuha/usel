@@ -29,14 +29,14 @@ public interface VendorService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		List<Vendor> createVendor(Vendor vendor) throws ServiceException;
+		void createVendor(Vendor vendor) throws ServiceException;
 		
 		/**
 		 * <p>
 		 * This method are getting particular vendor (GET{id})
 		 * @param 	vendorId
-	     *          The id of the particular vendor {@link Vendor}.
-	     * @return 	List of vendors
+	     *          The id of the particular {@link Vendor}.
+	     * @return 	vendor
 	     * </p> 
 	     * @throws ServiceException
 	     * 			If any errors are encountered in the repository layer 
@@ -48,20 +48,20 @@ public interface VendorService {
 		* <p>
 		* Create particular vendor (PUT)
 		* @param	vendorId
-		*          	The id of the particular vendor {@link Vendor}.
+		*          	The id of the particular {@link Vendor}.
 		* @return 	void
 		* </p> 
 		* @throws ServiceException
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		Vendor createBy (int vendorId) throws ServiceException;
+		void createBy (int vendorId) throws ServiceException;
 		
 		/**
 		 * <p>
 		 * This method delete Vendor by id (DELETE{id})
 		 * @param 	vendorId
-		 * 			The id of the particular vendor {@link Vendor}.
+		 * 			The id of the particular {@link Vendor}.
 	     * @return 	void 
 	     * </p> 
 	     * @throws ServiceException
