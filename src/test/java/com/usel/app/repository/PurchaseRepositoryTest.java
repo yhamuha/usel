@@ -1,13 +1,14 @@
 package com.usel.app.repository;
 import static org.junit.Assert.assertFalse;
 
+import javax.persistence.EntityManager;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
@@ -24,7 +25,7 @@ import com.usel.app.repository.PurchaseRepository;
 @AutoConfigureTestDatabase(replace=Replace.NONE)
 public class PurchaseRepositoryTest {
 	@Autowired
-    private TestEntityManager entityManager;
+    private EntityManager entityManager;
 	
 	@Autowired
 	PurchaseRepository purchaseRepository;

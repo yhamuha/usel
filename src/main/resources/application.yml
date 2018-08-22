@@ -17,12 +17,3 @@ spring.jpa:
     hibernate.ddl-auto: validate
     show_sql: true
     
-#logging:
- # level:
-  #  ROOT: FATAL
-   # #springframework.web: INFO
-    # #hibernate: INFO
-    
-#logging:
-#    file: /var/log/memento/security.log
-#    level.org.springframework: OFF
