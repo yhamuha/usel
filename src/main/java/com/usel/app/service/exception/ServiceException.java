@@ -1,15 +1,11 @@
 package com.usel.app.service.exception;
 
-public class ServiceException extends Throwable {
+public class ServiceException extends Exception {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	  // If any errors are encountered in the repository layer 
-	  // while retrieving data.
 	
-	
-	
+	public ServiceException(String message) {
+        super(message);
+    }
 	
 }
