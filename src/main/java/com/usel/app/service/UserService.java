@@ -55,7 +55,7 @@ public interface UserService {
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		void createBy (int userId) throws ServiceException;
+		void createBy(int userId) throws ServiceException;
 		
 		/**
 		 * <p>
