@@ -1,12 +1,9 @@
 package com.usel.app.services;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.
 
+import java.util.Optional;
+import org.mockito.Mockito;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,57 +35,73 @@ public class UserServiceImplTest {
 	UserService userService;
 
 	@MockBean
-	UserRepository userRepository;
+	UserRepository mockUserRepository;
 	
 	int id;
-	User user;
+	Optional<User> user;
 
 	@Before
 	public void setUp() {
-		user = new User();
-		when(userRepository.save(user)).thenReturn(user);
-		when(userRepository.findById(id)).thenReturn(user);
+		User user = new User();
+		//
+		// ?
+		//
+		Mockito.when(mockUserRepository.save(user)).thenReturn(user);
+		
+		Mockito.when(mockUserRepository.findById(id)).thenReturn(Optional.of(user));
+		
+		// Mockito.when(mockUserRepository.saveAll((Iterable<User>)user)).thenReturn(null);
+		
 	}
 
 	@Test
 	public void findAllShouldInvokeOnceUserRepositoryfindAllMethod() throws ServiceException {
 		userService.findAll();
-		verify(userRepository, times(1)).findAll();
+		Mockito.verify(mockUserRepository, Mockito.times(1)).findAll();
 	}
 
 	@Test
 	public void createCustomerShouldNotReturnNull() throws ServiceException {
+
 		userService.createCustomer(user);
-		assertNotNull(userService.createCustomer(user));
+		//
+		// 1. we could check the value from DB
+		// 2. we could access to DB through Repository
+		// after that we can hope for returned value for .assertNotNull
+		// ??
+		//
+		
+		// Assert.assertNotNull(mockUserRepository.saveAll(user));
+	
 	}
 	
 	@Test
 	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
 		userService.createCustomer(user);
-		verify(userRepository, times(1)).save(user);
+		Mockito.verify(mockUserRepository, Mockito.times(1)).save(Optional.of(user));
 	}
 
 	@Test
 	public void getUserByIdShouldNotReturnNull() throws ServiceException {
-		assertNotNull(userService.findBy(id));
+		Assert.assertNotNull(userService.findBy(id));
 	}
 
 	@Test
 	public void getUserByEmailShouldInvokeOnceUserRepositoryfindByEmailMethod() throws ServiceException {
 		userService.findBy(id);
-		verify(userRepository, times(1)).findById(id);
+		Mockito.verify(mockUserRepository, Mockito.times(1)).findById(id);
 	}
 	
 	@Test
 	public void createByShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
 		userService.createBy(id);
-		verify(userRepository, times(1)).save(user);
+		Mockito.verify(mockUserRepository, Mockito.times(1)).save(Optional.of(user));
 	}
 	
 	@Test
 	public void deleteByShouldReturnNull() throws ServiceException {
 		userService.deleteBy(id);
-		assertNull(userService.findBy(id));
+		Assert.assertNotNull(userService.findBy(id));
 	}
 	
 }

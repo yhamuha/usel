@@ -1,6 +1,7 @@
 package com.usel.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.usel.app.model.User;
 import com.usel.app.service.exception.ServiceException;
@@ -29,7 +30,7 @@ public interface UserService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		void createCustomer(User user) throws ServiceException;
+		void createCustomer(Optional<User> user) throws ServiceException;
 		
 		/**
 		 * <p>
