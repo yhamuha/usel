@@ -43,15 +43,8 @@ public class UserServiceImplTest {
 	@Before
 	public void setUp() {
 		User user = new User();
-		//
-		// ?
-		//
 		Mockito.when(mockUserRepository.save(user)).thenReturn(user);
-		
 		Mockito.when(mockUserRepository.findById(id)).thenReturn(Optional.of(user));
-		
-		// Mockito.when(mockUserRepository.saveAll((Iterable<User>)user)).thenReturn(null);
-		
 	}
 
 	@Test
@@ -60,21 +53,6 @@ public class UserServiceImplTest {
 		Mockito.verify(mockUserRepository, Mockito.times(1)).findAll();
 	}
 
-	@Test
-	public void createCustomerShouldNotReturnNull() throws ServiceException {
-
-		userService.createCustomer(user);
-		//
-		// 1. we could check the value from DB
-		// 2. we could access to DB through Repository
-		// after that we can hope for returned value for .assertNotNull
-		// ??
-		//
-		
-		// Assert.assertNotNull(mockUserRepository.saveAll(user));
-	
-	}
-	
 	@Test
 	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
 		userService.createCustomer(user);
