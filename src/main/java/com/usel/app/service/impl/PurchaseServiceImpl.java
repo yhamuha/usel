@@ -1,6 +1,7 @@
 package com.usel.app.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -13,32 +14,24 @@ public class PurchaseServiceImpl implements PurchaseService{
 
 	@Override
 	public List<Purchase> findAll() throws ServiceException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void createCustomer(Purchase purchase) throws ServiceException {
-		// TODO Auto-generated method stub
-		
+	public void createPurchase(Optional<Purchase> purchase) throws ServiceException {
 	}
-
+	
 	@Override
 	public Purchase findBy(int purchaseId) throws ServiceException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void createBy(int purchaseId) throws ServiceException {
-		// TODO Auto-generated method stub
-		
+	public void createBy(Optional<Purchase> purchaseId) throws ServiceException {
 	}
 
 	@Override
 	public void deleteBy(int purchaseId) throws ServiceException {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

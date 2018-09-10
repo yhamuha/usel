@@ -1,6 +1,7 @@
 package com.usel.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.usel.app.model.Vendor;
 import com.usel.app.service.exception.ServiceException;
@@ -29,7 +30,7 @@ public interface VendorService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		void createVendor(Vendor vendor) throws ServiceException;
+		void createVendor(Optional<Vendor> vendor) throws ServiceException;
 		
 		/**
 		 * <p>
@@ -47,7 +48,7 @@ public interface VendorService {
 		/**
 		* <p>
 		* Create particular vendor (PUT)
-		* @param	vendorId
+		* @param	vendor
 		*          	The id of the particular {@link Vendor}.
 		* @return 	void
 		* </p> 
@@ -55,7 +56,7 @@ public interface VendorService {
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		void createBy (int vendorId) throws ServiceException;
+		void createBy (Optional<Vendor> vendor) throws ServiceException;
 		
 		/**
 		 * <p>

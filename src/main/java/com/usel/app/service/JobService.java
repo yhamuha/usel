@@ -1,6 +1,7 @@
 package com.usel.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.usel.app.model.Job;
 import com.usel.app.service.exception.ServiceException;
@@ -29,7 +30,7 @@ public interface JobService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		void createJob(Job job) throws ServiceException;
+		void createJob(Optional<Job> job) throws ServiceException;
 		
 		/**
 		 * <p>
@@ -47,7 +48,7 @@ public interface JobService {
 		/**
 		* <p>
 		* Create particular job (PUT)
-		* @param	jobId
+		* @param	job
 		*          	The id of the particular {@link Job}.
 		* @return 	void
 		* </p> 
@@ -55,7 +56,7 @@ public interface JobService {
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		void createBy (int jobId) throws ServiceException;
+		void createBy (Optional<Job> job) throws ServiceException;
 		
 		/**
 		 * <p>

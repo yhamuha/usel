@@ -1,6 +1,7 @@
 package com.usel.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.usel.app.model.Customer;
 import com.usel.app.service.exception.ServiceException;
@@ -29,7 +30,7 @@ public interface CustomerService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		void createCustomer(Customer customer) throws ServiceException;
+		void createCustomer(Optional<Customer> customer) throws ServiceException;
 		
 		/**
 		 * <p>
@@ -47,7 +48,7 @@ public interface CustomerService {
 		/**
 		* <p>
 		* Create particular customer (PUT)
-		* @param	customerId
+		* @param	customer
 		*          	The id of the particular {@link Customer}.
 		* @return 	void
 		* </p> 
@@ -55,7 +56,7 @@ public interface CustomerService {
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		void createBy (int customerId) throws ServiceException;
+		void createBy (Optional<Customer> customer) throws ServiceException;
 		
 		/**
 		 * <p>
