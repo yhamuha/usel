@@ -10,6 +10,6 @@ import com.usel.app.model.User;
 @SpringBootApplication
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-	void save(Optional<Optional<User>> optional);
+	void save(Optional<User> user);
 
 }
