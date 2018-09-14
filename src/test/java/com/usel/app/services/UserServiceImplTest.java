@@ -1,8 +1,11 @@
 package com.usel.app.services;
 
+import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-import org.mockito.Mockito;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,24 +42,26 @@ public class UserServiceImplTest {
 	
 	int id;
 	Optional<User> user;
+	List<User> listUsers = new ArrayList<User>();
 
 	@Before
 	public void setUp() {
 		User user = new User();
-		Mockito.when(mockUserRepository.save(user)).thenReturn(user);
-		Mockito.when(mockUserRepository.findById(id)).thenReturn(Optional.of(user));
+		when(mockUserRepository.save(user)).thenReturn(user);
+		when(mockUserRepository.findById(id)).thenReturn(Optional.of(user));
+		when(mockUserRepository.findAll()).thenReturn(listUsers);
 	}
 
 	@Test
 	public void findAllShouldInvokeOnceUserRepositoryfindAllMethod() throws ServiceException {
-		mockUserRepository.findAll();
-		Mockito.verify(mockUserRepository, Mockito.times(1)).findAll();
+		userService.findAll();
+		verify(mockUserRepository, times(1)).findAll();
 	}
 
 	@Test
 	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
 		mockUserRepository.save(user);
-		Mockito.verify(mockUserRepository, Mockito.times(1)).save(user);
+		verify(mockUserRepository, times(1)).save(user);
 	}
 
 	@Test
@@ -67,13 +72,13 @@ public class UserServiceImplTest {
 	@Test
 	public void getUserByEmailShouldInvokeOnceUserRepositoryfindByEmailMethod() throws ServiceException {
 		mockUserRepository.findById(id);
-		Mockito.verify(mockUserRepository, Mockito.times(1)).findById(id);
+		verify(mockUserRepository, times(1)).findById(id);
 	}
 	
 	@Test
 	public void createByShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
 		mockUserRepository.save(user);
-		Mockito.verify(mockUserRepository, Mockito.times(1)).save(user);
+		verify(mockUserRepository, times(1)).save(user);
 	}
 	
 	@Test
