@@ -83,4 +83,5 @@ public interface UserService {
 	     *         	while retrieving data.
 		 **/
 		boolean isEnabled(User userId) throws ServiceException;
+
 	}

@@ -59,31 +59,26 @@ public class UserServiceImplTest {
 	}
 
 	@Test
-	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		mockUserRepository.save(user);
+	public void createCustomerShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
+		userService.createCustomer(user);
 		verify(mockUserRepository, times(1)).save(user);
 	}
 
 	@Test
 	public void getUserByIdShouldNotReturnNull() throws ServiceException {
+		userService.createBy(id);
 		Assert.assertNotNull("getUserByIdShouldNotReturnNull", mockUserRepository.findById(id));
 	}
 
 	@Test
-	public void getUserByEmailShouldInvokeOnceUserRepositoryfindByEmailMethod() throws ServiceException {
-		mockUserRepository.findById(id);
+	public void getUserByShouldInvokeOnceUserRepositoryfindByIdMethod() throws ServiceException {
+		userService.findBy(id);
 		verify(mockUserRepository, times(1)).findById(id);
 	}
 	
 	@Test
-	public void createByShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		mockUserRepository.save(user);
-		verify(mockUserRepository, times(1)).save(user);
-	}
-	
-	@Test
 	public void deleteByShouldReturnNull() throws ServiceException {
-		mockUserRepository.deleteById(id);
+		userService.deleteBy(id);
 		Assert.assertNotNull("deleteByShouldReturnNull", mockUserRepository.findById(id));
 	}
 	
