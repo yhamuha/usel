@@ -22,6 +22,7 @@ import com.usel.app.service.UserService;
 import com.usel.app.service.exception.ServiceException;
 import com.usel.app.service.impl.UserServiceImpl;
 
+
 @RunWith(SpringRunner.class)
 public class UserServiceImplTest {
 
@@ -58,12 +59,23 @@ public class UserServiceImplTest {
 		verify(mockUserRepository, times(1)).findAll();
 	}
 
+	//YOUR METHOD ORIGINAL
+	/*@Test
+	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
+		userService.create(user);
+		verify(userRepository, times(1)).save(user);
+	}*/
+
+	
+	// YOUR METHOD EDITED..
 	@Test
-	public void createCustomerShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		userService.createCustomer(user);
+	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
+		userService.create(user);
 		verify(mockUserRepository, times(1)).save(user);
 	}
-
+	
+	
+	
 	@Test
 	public void getUserByIdShouldNotReturnNull() throws ServiceException {
 		userService.createBy(id);

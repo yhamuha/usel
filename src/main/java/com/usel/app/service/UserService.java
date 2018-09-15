@@ -30,7 +30,8 @@ public interface UserService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		void createCustomer(Optional<User> user) throws ServiceException;
+		//void createCustomer(Optional<User> user) throws ServiceException;
+		Optional<User> create(Optional<User> user) throws ServiceException;
 		
 		/**
 		 * <p>
