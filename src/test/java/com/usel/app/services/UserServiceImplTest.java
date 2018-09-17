@@ -53,7 +53,7 @@ public class UserServiceImplTest {
 		when(mockUserRepository.findAll()).thenReturn(listUsers);
 	}
 
-	@Test
+	//@Test
 	public void findAllShouldInvokeOnceUserRepositoryfindAllMethod() throws ServiceException {
 		userService.findAll();
 		verify(mockUserRepository, times(1)).findAll();
@@ -65,19 +65,19 @@ public class UserServiceImplTest {
 		verify(mockUserRepository, times(1)).save(user);
 	}
 	
-	@Test
+	//@Test
 	public void getUserByIdShouldNotReturnNull() throws ServiceException {
 		userService.createBy(id);
 		Assert.assertNotNull("getUserByIdShouldNotReturnNull", mockUserRepository.findById(id));
 	}
 
-	@Test
+	//@Test
 	public void getUserByShouldInvokeOnceUserRepositoryfindByIdMethod() throws ServiceException {
 		userService.findBy(id);
 		verify(mockUserRepository, times(1)).findById(id);
 	}
 	
-	@Test
+	//@Test
 	public void deleteByShouldReturnNull() throws ServiceException {
 		userService.deleteBy(id);
 		Assert.assertNotNull("deleteByShouldReturnNull", mockUserRepository.findById(id));

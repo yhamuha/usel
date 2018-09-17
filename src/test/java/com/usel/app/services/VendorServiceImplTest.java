@@ -54,7 +54,7 @@ public class VendorServiceImplTest {
 
 	@Test
 	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		VendorService.createVendor(vendor);
+		VendorService.create(vendor);
 		Mockito.verify(mockVendorRepository, Mockito.times(1)).save(Optional.of(vendor));
 	}
 

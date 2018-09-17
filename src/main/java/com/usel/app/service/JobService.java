@@ -30,7 +30,7 @@ public interface JobService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		void createJob(Optional<Job> job) throws ServiceException;
+		void create(Optional<Job> job) throws ServiceException;
 		
 		/**
 		 * <p>

@@ -6,19 +6,22 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.usel.app.model.Vendor;
+import com.usel.app.repository.VendorRepository;
 import com.usel.app.service.VendorService;
 import com.usel.app.service.exception.ServiceException;
 
 @Service
 public class VendorServiceImpl implements VendorService {
 
+	VendorRepository vendorRepository;
+	
 	@Override
 	public List<Vendor> findAll() throws ServiceException {
 		return null;
 	}
 
 	@Override
-	public void createVendor(Optional<Vendor> vendor) throws ServiceException {
+	public void create(Optional<Vendor> vendor) throws ServiceException {
 	}
 
 	@Override

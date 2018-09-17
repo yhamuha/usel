@@ -30,7 +30,7 @@ public interface VendorService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		void createVendor(Optional<Vendor> vendor) throws ServiceException;
+		void create(Optional<Vendor> vendor) throws ServiceException;
 		
 		/**
 		 * <p>

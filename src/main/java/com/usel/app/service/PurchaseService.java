@@ -30,7 +30,7 @@ public interface PurchaseService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		void createPurchase(Optional<Purchase> purchase) throws ServiceException;
+		void create(Optional<Purchase> purchase) throws ServiceException;
 		
 		/**
 		 * <p>

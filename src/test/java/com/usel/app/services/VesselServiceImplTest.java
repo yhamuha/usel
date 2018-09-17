@@ -54,7 +54,7 @@ public class VesselServiceImplTest {
 
 	@Test
 	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		VesselService.createVessel(vessel);
+		VesselService.create(vessel);
 		Mockito.verify(mockVesselRepository, Mockito.times(1)).save(Optional.of(vessel));
 	}
 

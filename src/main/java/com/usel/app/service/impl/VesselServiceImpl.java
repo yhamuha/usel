@@ -6,19 +6,22 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.usel.app.model.Vessel;
+import com.usel.app.repository.VesselRepository;
 import com.usel.app.service.VesselService;
 import com.usel.app.service.exception.ServiceException;
 
 @Service
 public class VesselServiceImpl implements VesselService{
 
+	VesselRepository vesselRepository;
+	
 	@Override
 	public List<Vessel> findAll() throws ServiceException {
 		return null;
 	}
 
 	@Override
-	public void createVessel(Optional<Vessel> vessel) throws ServiceException {
+	public void create(Optional<Vessel> vessel) throws ServiceException {
 	}
 
 	@Override

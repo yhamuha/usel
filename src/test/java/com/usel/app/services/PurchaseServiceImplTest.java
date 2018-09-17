@@ -54,7 +54,7 @@ public class PurchaseServiceImplTest {
 
 	@Test
 	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		PurchaseService.createPurchase(purchase);
+		PurchaseService.create(purchase);
 		Mockito.verify(mockPurchaseRepository, Mockito.times(1)).save(Optional.of(purchase));
 	}
 

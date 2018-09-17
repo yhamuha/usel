@@ -10,6 +10,8 @@ import com.usel.app.service.exception.ServiceException;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
+	
+	CustomerService customerService;
 
 	@Override
 	public List<Customer> findAll() throws ServiceException {
@@ -17,7 +19,7 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
-	public void createCustomer(Optional<Customer> customer) throws ServiceException {
+	public void create(Optional<Customer> customer) throws ServiceException {
 	}
 
 	@Override

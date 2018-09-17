@@ -30,7 +30,7 @@ public interface CustomerService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		void createCustomer(Optional<Customer> customer) throws ServiceException;
+		void create(Optional<Customer> customer) throws ServiceException;
 		
 		/**
 		 * <p>

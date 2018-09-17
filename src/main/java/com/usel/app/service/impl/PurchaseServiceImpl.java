@@ -6,19 +6,22 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.usel.app.model.Purchase;
+import com.usel.app.repository.PurchaseRepository;
 import com.usel.app.service.PurchaseService;
 import com.usel.app.service.exception.ServiceException;
 
 @Service
 public class PurchaseServiceImpl implements PurchaseService{
 
+	PurchaseRepository purchaseRepository;
+	
 	@Override
 	public List<Purchase> findAll() throws ServiceException {
 		return null;
 	}
 
 	@Override
-	public void createPurchase(Optional<Purchase> purchase) throws ServiceException {
+	public void create(Optional<Purchase> purchase) throws ServiceException {
 	}
 	
 	@Override

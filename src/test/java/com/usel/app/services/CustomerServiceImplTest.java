@@ -54,7 +54,7 @@ public class CustomerServiceImplTest {
 
 	@Test
 	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		customerService.createCustomer(customer);
+		customerService.create(customer);
 		Mockito.verify(mockCustomerRepository, Mockito.times(1)).save(Optional.of(customer));
 	}
 

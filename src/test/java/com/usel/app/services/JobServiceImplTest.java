@@ -54,7 +54,7 @@ public class JobServiceImplTest {
 
 	@Test
 	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		JobService.createJob(job);
+		JobService.create(job);
 		Mockito.verify(mockJobRepository, Mockito.times(1)).save(Optional.of(job));
 	}
 

@@ -30,7 +30,7 @@ public interface VesselService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		void createVessel(Optional<Vessel> vessel) throws ServiceException;
+		void create(Optional<Vessel> vessel) throws ServiceException;
 		
 		/**
 		 * <p>
