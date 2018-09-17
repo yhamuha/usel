@@ -10,43 +10,36 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.usel.app.model.User;
 import com.usel.app.repository.UserRepository;
-import com.usel.app.service.UserService;
 import com.usel.app.service.exception.ServiceException;
 import com.usel.app.service.impl.UserServiceImpl;
 
 
 @RunWith(SpringRunner.class)
 public class UserServiceImplTest {
-
-	@TestConfiguration
+	/*@TestConfiguration
 	static class UserServiceImplTestContextConfiguration {
+	}*/
 
-		@Bean
-		UserService userService() {
-			return new UserServiceImpl();
-		}
-	}
-
-	@Autowired
-	UserService userService;
-
-	@MockBean
+	@Mock
 	UserRepository mockUserRepository;
-	
+
+	@InjectMocks
+	UserServiceImpl userService;
+
 	int id;
 	User user;
 	List<User> listUsers = new ArrayList<User>();
 
 	@Before
 	public void setUp() {
+		MockitoAnnotations.initMocks(this);
 		User user = new User();
 		when(mockUserRepository.save(user)).thenReturn(user);
 		when(mockUserRepository.findById(id)).thenReturn(Optional.of(user));

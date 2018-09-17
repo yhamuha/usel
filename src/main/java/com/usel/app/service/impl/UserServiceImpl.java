@@ -11,7 +11,7 @@ import com.usel.app.service.exception.ServiceException;
 
 @Service
 public class UserServiceImpl implements UserService{
-
+	
 	UserRepository userRepository;
 	
 	public UserServiceImpl(UserRepository userRepository) { 
