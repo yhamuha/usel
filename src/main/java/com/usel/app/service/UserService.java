@@ -1,7 +1,6 @@
 package com.usel.app.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.usel.app.model.User;
 import com.usel.app.service.exception.ServiceException;
@@ -31,7 +30,7 @@ public interface UserService {
 		*           while saving data.
 		**/
 		//void createCustomer(Optional<User> user) throws ServiceException;
-		Optional<User> create(Optional<User> user) throws ServiceException;
+		User create(User user) throws ServiceException;
 		
 		/**
 		 * <p>

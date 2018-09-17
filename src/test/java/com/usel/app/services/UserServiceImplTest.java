@@ -42,7 +42,7 @@ public class UserServiceImplTest {
 	UserRepository mockUserRepository;
 	
 	int id;
-	Optional<User> user;
+	User user;
 	List<User> listUsers = new ArrayList<User>();
 
 	@Before
@@ -59,22 +59,11 @@ public class UserServiceImplTest {
 		verify(mockUserRepository, times(1)).findAll();
 	}
 
-	//YOUR METHOD ORIGINAL
-	/*@Test
-	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		userService.create(user);
-		verify(userRepository, times(1)).save(user);
-	}*/
-
-	
-	// YOUR METHOD EDITED..
 	@Test
 	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
 		userService.create(user);
 		verify(mockUserRepository, times(1)).save(user);
 	}
-	
-	
 	
 	@Test
 	public void getUserByIdShouldNotReturnNull() throws ServiceException {
