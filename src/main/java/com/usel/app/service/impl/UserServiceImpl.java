@@ -29,10 +29,10 @@ public class UserServiceImpl implements UserService{
 		return userRepository.save(user);
 	}
 	
-	/*@Override
+	@Override
 	public Optional<User> findById(int userId) throws ServiceException {
 		return userRepository.findById(userId);
-	}*/
+	}
 
 	@Override
 	public void createBy(int userId) throws ServiceException {
