@@ -42,7 +42,7 @@ public interface UserService {
 	     * 			If any errors are encountered in the repository layer 
 	     *			while retrieving data.
 		 **/
-		User findBy(int userId) throws ServiceException;
+		User findById(int userId) throws ServiceException;
 		
 		/**
 		* <p>

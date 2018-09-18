@@ -23,9 +23,6 @@ import com.usel.app.service.impl.UserServiceImpl;
 
 @RunWith(SpringRunner.class)
 public class UserServiceImplTest {
-	/*@TestConfiguration
-	static class UserServiceImplTestContextConfiguration {
-	}*/
 
 	@Mock
 	UserRepository mockUserRepository;
@@ -45,32 +42,32 @@ public class UserServiceImplTest {
 		when(mockUserRepository.findById(id)).thenReturn(Optional.of(user));
 		when(mockUserRepository.findAll()).thenReturn(listUsers);
 	}
-
-	//@Test
+	
+	// * @Test
 	public void findAllShouldInvokeOnceUserRepositoryfindAllMethod() throws ServiceException {
 		userService.findAll();
 		verify(mockUserRepository, times(1)).findAll();
 	}
 
-	@Test
+	// * @Test
 	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
 		userService.create(user);
 		verify(mockUserRepository, times(1)).save(user);
 	}
 	
-	//@Test
+	// * @Test
 	public void getUserByIdShouldNotReturnNull() throws ServiceException {
 		userService.createBy(id);
 		Assert.assertNotNull("getUserByIdShouldNotReturnNull", mockUserRepository.findById(id));
 	}
 
-	//@Test
+	// @Test
 	public void getUserByShouldInvokeOnceUserRepositoryfindByIdMethod() throws ServiceException {
-		userService.findBy(id);
+		userService.findById(id);
 		verify(mockUserRepository, times(1)).findById(id);
 	}
 	
-	//@Test
+	@Test
 	public void deleteByShouldReturnNull() throws ServiceException {
 		userService.deleteBy(id);
 		Assert.assertNotNull("deleteByShouldReturnNull", mockUserRepository.findById(id));

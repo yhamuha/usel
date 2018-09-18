@@ -1,6 +1,7 @@
 package com.usel.app.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public List<User> findAll() throws ServiceException {
-		return null;
+		return userRepository.findAll();
 	}
 
 	@Override
@@ -28,10 +29,10 @@ public class UserServiceImpl implements UserService{
 		return userRepository.save(user);
 	}
 	
-	@Override
-	public User findBy(int userId) throws ServiceException {
-		return null;
-	}
+	/*@Override
+	public Optional<User> findById(int userId) throws ServiceException {
+		return userRepository.findById(userId);
+	}*/
 
 	@Override
 	public void createBy(int userId) throws ServiceException {
