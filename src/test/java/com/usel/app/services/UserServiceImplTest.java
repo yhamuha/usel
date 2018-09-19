@@ -39,6 +39,7 @@ public class UserServiceImplTest {
 		when(mockUserRepository.save(user)).thenReturn(user);
 		when(mockUserRepository.findById(id)).thenReturn(Optional.of(user));
 		when(mockUserRepository.findAll()).thenReturn(listUsers);
+		when(mockUserRepository.saveAndFlush(user)).thenReturn(user);
 	}
 	
 	@Test
@@ -55,7 +56,7 @@ public class UserServiceImplTest {
 	
 	@Test
 	public void getUserByIdShouldNotReturnNull() throws ServiceException {
-		userService.createById(id);
+		userService.create(user);
 		assertNotNull("findUserByIdShouldNotReturnNull", mockUserRepository.findById(id));
 	}
 
@@ -63,6 +64,13 @@ public class UserServiceImplTest {
 	public void getUserByIdShouldInvokeOnceUserRepositoryFindByIdMethod() throws ServiceException {
 		userService.findById(id);
 		verify(mockUserRepository, times(1)).findById(id);
+	}
+	
+	//#
+	@Test
+	public void  updateShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
+		userService.create(user);
+		verify(mockUserRepository, times(1)).saveAndFlush(user);
 	}
 	
 	@Test

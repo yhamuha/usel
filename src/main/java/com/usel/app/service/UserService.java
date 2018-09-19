@@ -47,16 +47,16 @@ public interface UserService {
 		
 		/**
 		* <p>
-		* Create particular user (PUT)
-		* @param	userId
-		*          	The id of the particular user {@link User}.
-		* @return 	void
+		* Update particular user (UPDATE)
+		* @param	user
+		*          	The particular User {@link User}.
+		* @return 	User
 		* </p> 
 		* @throws ServiceException
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		void createById(int userId) throws ServiceException;
+		User update(User user) throws ServiceException;
 		
 		/**
 		 * <p>

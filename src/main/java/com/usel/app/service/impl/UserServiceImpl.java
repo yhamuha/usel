@@ -2,9 +2,7 @@ package com.usel.app.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.stereotype.Service;
-
 import com.usel.app.model.User;
 import com.usel.app.repository.UserRepository;
 import com.usel.app.service.UserService;
@@ -35,11 +33,13 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void createById(int userId) throws ServiceException {
+	public User update(User user) throws ServiceException {
+		return userRepository.saveAndFlush(user);
 	}
 
 	@Override
 	public void deleteById(int userId) throws ServiceException {
+		userRepository.deleteById(userId);
 	}
 
 	@Override
