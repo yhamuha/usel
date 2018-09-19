@@ -66,10 +66,9 @@ public class UserServiceImplTest {
 		verify(mockUserRepository, times(1)).findById(id);
 	}
 	
-	//#
 	@Test
-	public void  updateShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		userService.create(user);
+	public void  updateShouldInvokeOnceUserRepositorySaveAndFlushMethod() throws ServiceException {
+		userService.update(user);
 		verify(mockUserRepository, times(1)).saveAndFlush(user);
 	}
 	

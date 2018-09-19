@@ -41,10 +41,4 @@ public class UserServiceImpl implements UserService{
 	public void deleteById(int userId) throws ServiceException {
 		userRepository.deleteById(userId);
 	}
-
-	@Override
-	public boolean isEnabled(User userId) throws ServiceException {
-		return false;
-	}
-
 }

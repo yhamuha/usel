@@ -55,15 +55,15 @@ public class VesselServiceImplTest {
 	}
 	
 	@Test
-	public void createByShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		vesselService.createById(id);
-		assertNotNull("findVesselByIdShouldNotReturnNull", mockVesselRepository.findById(id));
-	}
-	
-	@Test
 	public void getUserByEmailShouldInvokeOnceUserRepositoryFindByEmailMethod() throws ServiceException {
 		vesselService.findById(id);
 		verify(mockVesselRepository, times(1)).findById(id);
+	}
+	
+	@Test
+	public void  updateShouldInvokeOnceVesselRepositorySaveAndFlushMethod() throws ServiceException {
+		vesselService.update(vessel);
+		verify(mockVesselRepository, times(1)).saveAndFlush(vessel);
 	}
 
 	@Test

@@ -2,7 +2,6 @@ package com.usel.app.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import com.usel.app.model.Vessel;
 import com.usel.app.service.exception.ServiceException;
 
@@ -47,16 +46,16 @@ public interface VesselService {
 		
 		/**
 		* <p>
-		* Create particular vessel (PUT)
+		* Update particular vessel (UPDATE)
 		* @param	vessel
-		*          	The id of the particular {@link Vessel}.
-		* @return 	void
+		*          	The particular Vessel {@link Vessel}.
+		* @return 	Vessel
 		* </p> 
 		* @throws ServiceException
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		void createById(int vesselId) throws ServiceException;
+		Vessel update(Vessel vessel) throws ServiceException;
 		
 		/**
 		 * <p>

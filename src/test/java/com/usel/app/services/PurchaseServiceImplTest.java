@@ -55,15 +55,15 @@ public class PurchaseServiceImplTest {
 	}
 	
 	@Test
-	public void createByShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		purchaseService.createById(id);
-		assertNotNull("findPurchaseByIdShouldNotReturnNull", mockPurchaseRepository.findById(id));
-	}
-	
-	@Test
 	public void getUserByIdShouldInvokeOnceUserRepositoryFindByIdMethod() throws ServiceException {
 		purchaseService.findById(id);
 		verify(mockPurchaseRepository, times(1)).findById(id);
+	}
+	
+	@Test
+	public void  updateShouldInvokeOncePurchaseRepositorySaveAndFlushMethod() throws ServiceException {
+		purchaseService.update(purchase);
+		verify(mockPurchaseRepository, times(1)).saveAndFlush(purchase);
 	}
 	
 	@Test

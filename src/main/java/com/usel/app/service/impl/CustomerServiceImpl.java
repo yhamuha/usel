@@ -3,7 +3,6 @@ package com.usel.app.service.impl;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
-
 import com.usel.app.model.Customer;
 import com.usel.app.repository.CustomerRepository;
 import com.usel.app.service.CustomerService;
@@ -34,8 +33,8 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
-	public void createById(int customerId) throws ServiceException {
-		
+	public Customer update(Customer customer) throws ServiceException {
+		return customerRepository.saveAndFlush(customer);
 	}
 
 	@Override

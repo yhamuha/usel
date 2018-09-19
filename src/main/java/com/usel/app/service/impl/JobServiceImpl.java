@@ -2,7 +2,6 @@ package com.usel.app.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 import com.usel.app.model.Job;
 import com.usel.app.repository.JobRepository;
@@ -34,7 +33,8 @@ public class JobServiceImpl implements JobService{
 	}
 
 	@Override
-	public void createById(int jobId) throws ServiceException {
+	public Job update(Job job) throws ServiceException {
+		return jobRepository.saveAndFlush(job);
 	}
 
 	@Override

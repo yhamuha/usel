@@ -55,15 +55,15 @@ public class JobServiceImplTest {
 	}
 
 	@Test
-	public void getJobByIdShouldNotReturnNull() throws ServiceException {
-		jobService.createById(id);
-		assertNotNull("findJobByIdShouldNotReturnNull", mockJobRepository.findById(id));
-	}
-	
-	@Test
 	public void getJobByIdShouldInvokeOnceJobRepositoryFindByIdMethod() throws ServiceException {
 		jobService.findById(id);
 		verify(mockJobRepository, times(1)).findById(id);
+	}
+	
+	@Test
+	public void  updateShouldInvokeOnceJobRepositorySaveAndFlushMethod() throws ServiceException {
+		jobService.update(job);
+		verify(mockJobRepository, times(1)).saveAndFlush(job);
 	}
 
 	@Test

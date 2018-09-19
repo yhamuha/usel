@@ -2,7 +2,6 @@ package com.usel.app.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import com.usel.app.model.Purchase;
 import com.usel.app.service.exception.ServiceException;
 
@@ -47,16 +46,16 @@ public interface PurchaseService {
 		
 		/**
 		* <p>
-		* Create particular purchase (PUT)
+		* Update particular purchase (UPDATE)
 		* @param	purchase
-		*          	The id of the particular {@link Purchase}.
-		* @return 	void
+		*          	The particular Purchase {@link Purchase}.
+		* @return 	Purchase
 		* </p> 
 		* @throws ServiceException
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		void createById(int purchaseId) throws ServiceException;
+		Purchase update(Purchase purchase) throws ServiceException;
 		
 		/**
 		 * <p>

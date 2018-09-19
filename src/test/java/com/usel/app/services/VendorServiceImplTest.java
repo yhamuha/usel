@@ -55,15 +55,15 @@ public class VendorServiceImplTest {
 	}
 	
 	@Test
-	public void createByShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		vendorService.createById(id);
+	public void createByIdShouldInvokeOnceVendorRepositoryByIdMethod() throws ServiceException {
+		vendorService.findById(id);
 		assertNotNull("findVendorByIdShouldNotReturnNull", mockVendorRepository.findById(id));
 	}
 	
 	@Test
-	public void createByIdShouldInvokeOnceVendorRepositoryByIdMethod() throws ServiceException {
-		vendorService.findById(id);
-		assertNotNull("findVendorByIdShouldNotReturnNull", mockVendorRepository.findById(id));
+	public void  updateShouldInvokeOnceVendorRepositorySaveAndFlushMethod() throws ServiceException {
+		vendorService.update(vendor);
+		verify(mockVendorRepository, times(1)).saveAndFlush(vendor);
 	}
 	
 	@Test

@@ -32,7 +32,8 @@ public class VendorServiceImpl implements VendorService {
 	}
 
 	@Override
-	public void createById(int vendorId) throws ServiceException {
+	public Vendor update(Vendor vendor) throws ServiceException {
+		return vendorRepository.saveAndFlush(vendor);
 	}
 
 	@Override

@@ -70,18 +70,4 @@ public interface UserService {
 	     *    		while saving data.
 		 **/
 		void deleteById(int userId) throws ServiceException;
-		
-		/**
-		 * <p>
-		 * This method checking user on enable/disable status
-		 * @param 	userId
-	     *          The {@link User}.
-	     * @return true (when user is enabled) / false (when user is disabled)
-	     * </p> 
-	     * @throws ServiceException
-	     *         	If any errors are encountered in the repository layer 
-	     *         	while retrieving data.
-		 **/
-		boolean isEnabled(User userId) throws ServiceException;
-
-	}
+}

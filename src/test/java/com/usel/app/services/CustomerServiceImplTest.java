@@ -55,15 +55,15 @@ public class CustomerServiceImplTest {
 	}
 	
 	@Test
-	public void createByShouldInvokeOnceCustomerRepositorySaveMethod() throws ServiceException {
-		customerService.createById(id);
-		assertNotNull("findCustomerByIdShouldNotReturnNull", mockCustomerRepository.findById(id));
-	}
-
-	@Test
 	public void getUserByIdShouldInvokeOnceCustomerRepositoryFindByIdMethod() throws ServiceException {
 		customerService.findById(id);
 		verify(mockCustomerRepository, times(1)).findById(id);
+	}
+	
+	@Test
+	public void  updateShouldInvokeOnceCustomerRepositorySaveAndFlushMethod() throws ServiceException {
+		customerService.update(customer);
+		verify(mockCustomerRepository, times(1)).saveAndFlush(customer);
 	}
 
 	@Test

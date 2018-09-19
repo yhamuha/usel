@@ -2,9 +2,7 @@ package com.usel.app.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.stereotype.Service;
-
 import com.usel.app.model.Vessel;
 import com.usel.app.repository.VesselRepository;
 import com.usel.app.service.VesselService;
@@ -35,7 +33,8 @@ public class VesselServiceImpl implements VesselService{
 	}
 
 	@Override
-	public void createById(int vesselId) throws ServiceException {
+	public Vessel update(Vessel vessel) throws ServiceException {
+		return vesselRepository.saveAndFlush(vessel);
 	}
 
 	@Override
