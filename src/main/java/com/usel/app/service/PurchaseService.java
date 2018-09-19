@@ -30,7 +30,7 @@ public interface PurchaseService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		void create(Optional<Purchase> purchase) throws ServiceException;
+		Purchase create(Purchase purchase) throws ServiceException;
 		
 		/**
 		 * <p>
@@ -43,7 +43,7 @@ public interface PurchaseService {
 	     * 			If any errors are encountered in the repository layer 
 	     *			while retrieving data.
 		 **/
-		Purchase findBy(int purchaseId) throws ServiceException;
+		Optional<Purchase> findById(int purchaseId) throws ServiceException;
 		
 		/**
 		* <p>
@@ -56,7 +56,7 @@ public interface PurchaseService {
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		void createBy (Optional<Purchase> purchase) throws ServiceException;
+		void createById(int purchaseId) throws ServiceException;
 		
 		/**
 		 * <p>
@@ -69,6 +69,6 @@ public interface PurchaseService {
 	     *   		If any errors are encountered in the repository layer
 	     *    		while saving data.
 		 **/
-		void deleteBy(int purchaseId) throws ServiceException;
+		void deleteById(int purchaseId) throws ServiceException;
 
 	}

@@ -30,7 +30,7 @@ public interface VendorService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		void create(Optional<Vendor> vendor) throws ServiceException;
+		Vendor create(Vendor vendor) throws ServiceException;
 		
 		/**
 		 * <p>
@@ -43,7 +43,7 @@ public interface VendorService {
 	     * 			If any errors are encountered in the repository layer 
 	     *			while retrieving data.
 		 **/
-		Vendor findBy(int vendorId) throws ServiceException;
+		Optional<Vendor> findById(int vendorId) throws ServiceException;
 		
 		/**
 		* <p>
@@ -56,7 +56,7 @@ public interface VendorService {
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		void createBy (Optional<Vendor> vendor) throws ServiceException;
+		void createById(int vendorId) throws ServiceException;
 		
 		/**
 		 * <p>
@@ -69,6 +69,6 @@ public interface VendorService {
 	     *   		If any errors are encountered in the repository layer
 	     *    		while saving data.
 		 **/
-		void deleteBy(int vendorId) throws ServiceException;
+		void deleteById(int vendorId) throws ServiceException;
 		
 	}

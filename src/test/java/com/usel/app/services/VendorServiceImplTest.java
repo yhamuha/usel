@@ -1,83 +1,74 @@
 package com.usel.app.services;
 
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-import org.mockito.Mockito;
-import org.junit.Assert;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import com.usel.app.model.Vendor;
 import com.usel.app.repository.VendorRepository;
-import com.usel.app.service.VendorService;
 import com.usel.app.service.exception.ServiceException;
 import com.usel.app.service.impl.VendorServiceImpl;
 
 @RunWith(SpringRunner.class)
 public class VendorServiceImplTest {
 
-	@TestConfiguration
-	static class VendorServiceImplTestContextConfiguration {
-
-		@Bean
-		VendorService VendorService() {
-			return new VendorServiceImpl();
-		}
-	}
-
-	@Autowired
-	VendorService VendorService;
-
-	@MockBean
+	@Mock
 	VendorRepository mockVendorRepository;
 
+	@InjectMocks
+	VendorServiceImpl vendorService;
+
 	int id;
-	Optional<Vendor> vendor;
+	Vendor vendor;
+	List<Vendor> listVendor = new ArrayList<Vendor>();
 
 	@Before
 	public void setUp() {
+		MockitoAnnotations.initMocks(this);
 		Vendor vendor = new Vendor();
-		Mockito.when(mockVendorRepository.save(vendor)).thenReturn(vendor);
-		Mockito.when(mockVendorRepository.findById(id)).thenReturn(Optional.of(vendor));
+		when(mockVendorRepository.save(vendor)).thenReturn(vendor);
+		when(mockVendorRepository.findById(id)).thenReturn(Optional.of(vendor));
+		when(mockVendorRepository.findAll()).thenReturn(listVendor);
 	}
-
+	
 	@Test
-	public void findAllShouldInvokeOnceUserRepositoryfindAllMethod() throws ServiceException {
-		VendorService.findAll();
-		Mockito.verify(mockVendorRepository, Mockito.times(1)).findAll();
+	public void findAllShouldInvokeOnceVendorRepositoryFindAllMethod() throws ServiceException {
+		vendorService.findAll();
+		verify(mockVendorRepository, times(1)).findAll();
 	}
-
+		
 	@Test
-	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		VendorService.create(vendor);
-		Mockito.verify(mockVendorRepository, Mockito.times(1)).save(Optional.of(vendor));
+	public void createShouldInvokeOnceVendorRepositorySaveMethod() throws ServiceException {
+		vendorService.create(vendor);
+		verify(mockVendorRepository, times(1)).save(vendor);
 	}
-
-	@Test
-	public void getUserByIdShouldNotReturnNull() throws ServiceException {
-		Assert.assertNotNull(VendorService.findBy(id));
-	}
-
-	@Test
-	public void getUserByEmailShouldInvokeOnceUserRepositoryfindByEmailMethod() throws ServiceException {
-		VendorService.findBy(id);
-		Mockito.verify(mockVendorRepository, Mockito.times(1)).findById(id);
-	}
-
+	
 	@Test
 	public void createByShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		VendorService.createBy(vendor);
-		Mockito.verify(mockVendorRepository, Mockito.times(1)).save(Optional.of(vendor));
+		vendorService.createById(id);
+		assertNotNull("findVendorByIdShouldNotReturnNull", mockVendorRepository.findById(id));
 	}
-
+	
 	@Test
-	public void deleteByShouldReturnNull() throws ServiceException {
-		VendorService.deleteBy(id);
-		Assert.assertNotNull(VendorService.findBy(id));
+	public void createByIdShouldInvokeOnceVendorRepositoryByIdMethod() throws ServiceException {
+		vendorService.findById(id);
+		assertNotNull("findVendorByIdShouldNotReturnNull", mockVendorRepository.findById(id));
+	}
+	
+	@Test
+		public void deleteByShouldReturnNull() throws ServiceException {
+			vendorService.deleteById(id);
+			assertNotNull("deleteByIdShouldReturnNull", mockVendorRepository.findById(id));
 	}
 }

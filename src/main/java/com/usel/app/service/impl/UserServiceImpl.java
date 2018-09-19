@@ -35,11 +35,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void createBy(int userId) throws ServiceException {
+	public void createById(int userId) throws ServiceException {
 	}
 
 	@Override
-	public void deleteBy(int userId) throws ServiceException {
+	public void deleteById(int userId) throws ServiceException {
 	}
 
 	@Override

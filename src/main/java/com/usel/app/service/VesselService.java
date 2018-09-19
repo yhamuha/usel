@@ -30,7 +30,7 @@ public interface VesselService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		void create(Optional<Vessel> vessel) throws ServiceException;
+		Vessel create(Vessel vessel) throws ServiceException;
 		
 		/**
 		 * <p>
@@ -43,7 +43,7 @@ public interface VesselService {
 	     * 			If any errors are encountered in the repository layer 
 	     *			while retrieving data.
 		 **/
-		Vessel findBy(int vesselId) throws ServiceException;
+		Optional<Vessel> findById(int vesselId) throws ServiceException;
 		
 		/**
 		* <p>
@@ -56,7 +56,7 @@ public interface VesselService {
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		void createBy (Optional<Vessel> vessel) throws ServiceException;
+		void createById(int vesselId) throws ServiceException;
 		
 		/**
 		 * <p>
@@ -69,6 +69,6 @@ public interface VesselService {
 	     *   		If any errors are encountered in the repository layer
 	     *    		while saving data.
 		 **/
-		void deleteBy(int vesselId) throws ServiceException;
+		void deleteById(int vesselId) throws ServiceException;
 		
 	}

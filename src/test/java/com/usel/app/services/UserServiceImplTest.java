@@ -1,12 +1,11 @@
 package com.usel.app.services;
 
 import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import com.usel.app.model.User;
 import com.usel.app.repository.UserRepository;
 import com.usel.app.service.exception.ServiceException;
@@ -44,7 +42,7 @@ public class UserServiceImplTest {
 	}
 	
 	@Test
-	public void findAllShouldInvokeOnceUserRepositoryfindAllMethod() throws ServiceException {
+	public void findAllShouldInvokeOnceUserRepositoryFindAllMethod() throws ServiceException {
 		userService.findAll();
 		verify(mockUserRepository, times(1)).findAll();
 	}
@@ -57,20 +55,20 @@ public class UserServiceImplTest {
 	
 	@Test
 	public void getUserByIdShouldNotReturnNull() throws ServiceException {
-		userService.createBy(id);
-		Assert.assertNotNull("getUserByIdShouldNotReturnNull", mockUserRepository.findById(id));
+		userService.createById(id);
+		assertNotNull("findUserByIdShouldNotReturnNull", mockUserRepository.findById(id));
 	}
 
 	@Test
-	public void getUserByIdShouldInvokeOnceUserRepositoryfindByIdMethod() throws ServiceException {
+	public void getUserByIdShouldInvokeOnceUserRepositoryFindByIdMethod() throws ServiceException {
 		userService.findById(id);
 		verify(mockUserRepository, times(1)).findById(id);
 	}
 	
 	@Test
-	public void deleteByShouldReturnNull() throws ServiceException {
-		userService.deleteBy(id);
-		Assert.assertNotNull("deleteByShouldReturnNull", mockUserRepository.findById(id));
+	public void deleteByIdShouldReturnNull() throws ServiceException {
+		userService.deleteById(id);
+		assertNotNull("deleteByIdShouldReturnNull", mockUserRepository.findById(id));
 	}
 	
 }

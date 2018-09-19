@@ -1,83 +1,74 @@
 package com.usel.app.services;
 
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-import org.mockito.Mockito;
-import org.junit.Assert;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import com.usel.app.model.Purchase;
 import com.usel.app.repository.PurchaseRepository;
-import com.usel.app.service.PurchaseService;
 import com.usel.app.service.exception.ServiceException;
 import com.usel.app.service.impl.PurchaseServiceImpl;
 
 @RunWith(SpringRunner.class)
 public class PurchaseServiceImplTest {
 
-	@TestConfiguration
-	static class PurchaseServiceImplTestContextConfiguration {
-
-		@Bean
-		PurchaseService PurchaseService() {
-			return new PurchaseServiceImpl();
-		}
-	}
-
-	@Autowired
-	PurchaseService PurchaseService;
-
-	@MockBean
+	@Mock
 	PurchaseRepository mockPurchaseRepository;
 
+	@InjectMocks
+	PurchaseServiceImpl purchaseService;
+
 	int id;
-	Optional<Purchase> purchase;
+	Purchase purchase;
+	List<Purchase> listPurchases = new ArrayList<Purchase>();
 
 	@Before
 	public void setUp() {
+		MockitoAnnotations.initMocks(this);
 		Purchase purchase = new Purchase();
-		Mockito.when(mockPurchaseRepository.save(purchase)).thenReturn(purchase);
-		Mockito.when(mockPurchaseRepository.findById(id)).thenReturn(Optional.of(purchase));
+		when(mockPurchaseRepository.save(purchase)).thenReturn(purchase);
+		when(mockPurchaseRepository.findById(id)).thenReturn(Optional.of(purchase));
+		when(mockPurchaseRepository.findAll()).thenReturn(listPurchases);
 	}
 
 	@Test
-	public void findAllShouldInvokeOnceUserRepositoryfindAllMethod() throws ServiceException {
-		PurchaseService.findAll();
-		Mockito.verify(mockPurchaseRepository, Mockito.times(1)).findAll();
+	public void findAllShouldInvokeOnceUserRepositoryFindAllMethod() throws ServiceException {
+		purchaseService.findAll();
+		verify(mockPurchaseRepository, times(1)).findAll();
 	}
 
 	@Test
-	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		PurchaseService.create(purchase);
-		Mockito.verify(mockPurchaseRepository, Mockito.times(1)).save(Optional.of(purchase));
+	public void createShouldInvokeOncePurchaseRepositorySaveMethod() throws ServiceException {
+		purchaseService.create(purchase);
+		verify(mockPurchaseRepository, times(1)).save(purchase);
 	}
-
-	@Test
-	public void getUserByIdShouldNotReturnNull() throws ServiceException {
-		Assert.assertNotNull(PurchaseService.findBy(id));
-	}
-
-	@Test
-	public void getUserByEmailShouldInvokeOnceUserRepositoryfindByEmailMethod() throws ServiceException {
-		PurchaseService.findBy(id);
-		Mockito.verify(mockPurchaseRepository, Mockito.times(1)).findById(id);
-	}
-
+	
 	@Test
 	public void createByShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
-		PurchaseService.createBy(purchase);
-		Mockito.verify(mockPurchaseRepository, Mockito.times(1)).save(Optional.of(purchase));
+		purchaseService.createById(id);
+		assertNotNull("findPurchaseByIdShouldNotReturnNull", mockPurchaseRepository.findById(id));
 	}
-
+	
+	@Test
+	public void getUserByIdShouldInvokeOnceUserRepositoryFindByIdMethod() throws ServiceException {
+		purchaseService.findById(id);
+		verify(mockPurchaseRepository, times(1)).findById(id);
+	}
+	
 	@Test
 	public void deleteByShouldReturnNull() throws ServiceException {
-		PurchaseService.deleteBy(id);
-		Assert.assertNotNull(PurchaseService.findBy(id));
+		purchaseService.deleteById(id);
+		assertNotNull("deleteByIdShouldReturnNull", mockPurchaseRepository.findById(id));
 	}
 }

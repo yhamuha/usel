@@ -15,26 +15,33 @@ public class PurchaseServiceImpl implements PurchaseService{
 
 	PurchaseRepository purchaseRepository;
 	
+	public PurchaseServiceImpl(PurchaseRepository purchaseRepository) { 
+		this.purchaseRepository = purchaseRepository;
+	}
+	
+	
 	@Override
 	public List<Purchase> findAll() throws ServiceException {
-		return null;
+		return purchaseRepository.findAll();
 	}
 
 	@Override
-	public void create(Optional<Purchase> purchase) throws ServiceException {
+	public Purchase create(Purchase purchase) throws ServiceException {
+		return purchaseRepository.save(purchase);
 	}
 	
 	@Override
-	public Purchase findBy(int purchaseId) throws ServiceException {
-		return null;
+	public void createById(int purchaseId) throws ServiceException {
+		
+	}
+	
+	@Override
+	public Optional<Purchase> findById(int purchaseId) throws ServiceException {
+		return purchaseRepository.findById(purchaseId);
 	}
 
 	@Override
-	public void createBy(Optional<Purchase> purchaseId) throws ServiceException {
-	}
-
-	@Override
-	public void deleteBy(int purchaseId) throws ServiceException {
+	public void deleteById(int purchaseId) throws ServiceException {
 	}
 
 }

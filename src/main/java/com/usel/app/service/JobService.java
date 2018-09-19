@@ -30,7 +30,7 @@ public interface JobService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		void create(Optional<Job> job) throws ServiceException;
+		Job create(Job job) throws ServiceException;
 		
 		/**
 		 * <p>
@@ -43,7 +43,7 @@ public interface JobService {
 	     * 			If any errors are encountered in the repository layer 
 	     *			while retrieving data.
 		 **/
-		Job findBy(int jobId) throws ServiceException;
+		Optional<Job> findById(int jobId) throws ServiceException;
 		
 		/**
 		* <p>
@@ -56,7 +56,7 @@ public interface JobService {
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		void createBy (Optional<Job> job) throws ServiceException;
+		void createById(int jobId) throws ServiceException;
 		
 		/**
 		 * <p>
@@ -69,7 +69,7 @@ public interface JobService {
 	     *   		If any errors are encountered in the repository layer
 	     *    		while saving data.
 		 **/
-		void deleteBy(int jobId) throws ServiceException;
+		void deleteById(int jobId) throws ServiceException;
 	}
 	
 

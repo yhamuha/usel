@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-
 import com.usel.app.model.Job;
 import com.usel.app.repository.JobRepository;
 import com.usel.app.service.JobService;
@@ -15,26 +14,31 @@ public class JobServiceImpl implements JobService{
 
 	JobRepository jobRepository;
 	
+	public JobServiceImpl(JobRepository jobRepository) { 
+		this.jobRepository = jobRepository;
+	}
+	
 	@Override
 	public List<Job> findAll() throws ServiceException {
-		return null;
+		return jobRepository.findAll();
 	}
 
 	@Override
-	public void create(Optional<Job> job) throws ServiceException {
+	public Job create(Job job) throws ServiceException {
+		return jobRepository.save(job);
+	}
+	
+	@Override
+	public Optional<Job> findById(int jobId) throws ServiceException {
+		return jobRepository.findById(jobId);
 	}
 
 	@Override
-	public Job findBy(int jobId) throws ServiceException {
-		return null;
+	public void createById(int jobId) throws ServiceException {
 	}
 
 	@Override
-	public void createBy(Optional <Job> jobId) throws ServiceException {
-	}
-
-	@Override
-	public void deleteBy(int jobId) throws ServiceException {
+	public void deleteById(int jobId) throws ServiceException {
 	}
 
 }

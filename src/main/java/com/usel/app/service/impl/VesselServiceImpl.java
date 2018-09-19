@@ -15,26 +15,31 @@ public class VesselServiceImpl implements VesselService{
 
 	VesselRepository vesselRepository;
 	
+	public VesselServiceImpl(VesselRepository vesselRepository) { 
+		this.vesselRepository = vesselRepository;
+	}
+	
 	@Override
 	public List<Vessel> findAll() throws ServiceException {
-		return null;
+		return vesselRepository.findAll();
 	}
 
 	@Override
-	public void create(Optional<Vessel> vessel) throws ServiceException {
+	public Vessel create(Vessel vessel) throws ServiceException {
+		return vesselRepository.save(vessel);
 	}
 
 	@Override
-	public Vessel findBy(int vesselId) throws ServiceException {
-		return null;
+	public Optional<Vessel> findById(int vesselId) throws ServiceException {
+		return vesselRepository.findById(vesselId);
 	}
 
 	@Override
-	public void createBy(Optional<Vessel> vesselId) throws ServiceException {
+	public void createById(int vesselId) throws ServiceException {
 	}
 
 	@Override
-	public void deleteBy(int vesselId) throws ServiceException {
+	public void deleteById(int vesselId) throws ServiceException {
 	}
 
 }

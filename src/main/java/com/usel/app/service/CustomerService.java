@@ -30,7 +30,7 @@ public interface CustomerService {
 		* 			If any errors are encountered in the repository layer
 		*           while saving data.
 		**/
-		void create(Optional<Customer> customer) throws ServiceException;
+		Customer create(Customer customer) throws ServiceException;
 		
 		/**
 		 * <p>
@@ -43,7 +43,7 @@ public interface CustomerService {
 	     * 			If any errors are encountered in the repository layer 
 	     *			while retrieving data.
 		 **/
-		Customer findBy(int customerId) throws ServiceException;
+		Optional<Customer> findById(int customerId) throws ServiceException;
 		
 		/**
 		* <p>
@@ -56,7 +56,7 @@ public interface CustomerService {
 		* 			If any errors are encountered in the repository layer 
 		*         	while saving data.
 		**/
-		void createBy (Optional<Customer> customer) throws ServiceException;
+		void createById(int customerId) throws ServiceException;
 		
 		/**
 		 * <p>
@@ -69,7 +69,7 @@ public interface CustomerService {
 	     *   		If any errors are encountered in the repository layer
 	     *    		while saving data.
 		 **/
-		void deleteBy(int customerId) throws ServiceException;
+		void deleteById(int customerId) throws ServiceException;
 	}
 	
 
