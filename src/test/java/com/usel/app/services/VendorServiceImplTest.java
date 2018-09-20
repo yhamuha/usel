@@ -40,6 +40,7 @@ public class VendorServiceImplTest {
 		when(mockVendorRepository.save(vendor)).thenReturn(vendor);
 		when(mockVendorRepository.findById(id)).thenReturn(Optional.of(vendor));
 		when(mockVendorRepository.findAll()).thenReturn(listVendor);
+		when(mockVendorRepository.saveAndFlush(vendor)).thenReturn(vendor);
 	}
 	
 	@Test
@@ -55,20 +56,13 @@ public class VendorServiceImplTest {
 	}
 	
 	@Test
-	public void createByIdShouldInvokeOnceVendorRepositoryByIdMethod() throws ServiceException {
-		vendorService.findById(id);
-		assertNotNull("findVendorByIdShouldNotReturnNull", mockVendorRepository.findById(id));
-	}
-	
-	@Test
 	public void  updateShouldInvokeOnceVendorRepositorySaveAndFlushMethod() throws ServiceException {
 		vendorService.update(vendor);
 		verify(mockVendorRepository, times(1)).saveAndFlush(vendor);
 	}
 	
 	@Test
-		public void deleteByIdShouldNotReturnNull() throws ServiceException {
-			vendorService.deleteById(id);
-			assertNotNull("deleteByIdShouldReturnNull", mockVendorRepository.findById(id));
+	public void findByIdShouldNotReturnNull() throws ServiceException {
+		assertNotNull("findByIdShouldReturnNull", vendorService.findById(id));
 	}
 }

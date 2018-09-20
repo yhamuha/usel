@@ -55,12 +55,6 @@ public class UserServiceImplTest {
 	}
 	
 	@Test
-	public void getUserByIdShouldNotReturnNull() throws ServiceException {
-		userService.create(user);
-		assertNotNull("findUserByIdShouldNotReturnNull", mockUserRepository.findById(id));
-	}
-
-	@Test
 	public void getUserByIdShouldInvokeOnceUserRepositoryFindByIdMethod() throws ServiceException {
 		userService.findById(id);
 		verify(mockUserRepository, times(1)).findById(id);
@@ -73,9 +67,8 @@ public class UserServiceImplTest {
 	}
 	
 	@Test
-	public void deleteByIdShouldNotReturnNull() throws ServiceException {
-		userService.deleteById(id);
-		assertNotNull("deleteByIdShouldReturnNull", mockUserRepository.findById(id));
+	public void findByIdShouldNotReturnNull() throws ServiceException {
+		assertNotNull("findByIdShouldReturnNull", userService.findById(id));
 	}
 	
 }

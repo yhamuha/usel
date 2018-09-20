@@ -40,6 +40,7 @@ public class PurchaseServiceImplTest {
 		when(mockPurchaseRepository.save(purchase)).thenReturn(purchase);
 		when(mockPurchaseRepository.findById(id)).thenReturn(Optional.of(purchase));
 		when(mockPurchaseRepository.findAll()).thenReturn(listPurchases);
+		when(mockPurchaseRepository.saveAndFlush(purchase)).thenReturn(purchase);
 	}
 
 	@Test
@@ -55,20 +56,13 @@ public class PurchaseServiceImplTest {
 	}
 	
 	@Test
-	public void getUserByIdShouldInvokeOnceUserRepositoryFindByIdMethod() throws ServiceException {
-		purchaseService.findById(id);
-		verify(mockPurchaseRepository, times(1)).findById(id);
-	}
-	
-	@Test
 	public void  updateShouldInvokeOncePurchaseRepositorySaveAndFlushMethod() throws ServiceException {
 		purchaseService.update(purchase);
 		verify(mockPurchaseRepository, times(1)).saveAndFlush(purchase);
 	}
 	
 	@Test
-	public void deleteByIdShouldNotReturnNull() throws ServiceException {
-		purchaseService.deleteById(id);
-		assertNotNull("deleteByIdShouldReturnNull", mockPurchaseRepository.findById(id));
+	public void findByIdShouldNotReturnNull() throws ServiceException {
+		assertNotNull("findByIdShouldReturnNull", purchaseService.findById(id));
 	}
 }

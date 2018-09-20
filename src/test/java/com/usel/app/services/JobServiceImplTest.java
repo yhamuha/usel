@@ -40,6 +40,7 @@ public class JobServiceImplTest {
 		when(mockJobRepository.save(job)).thenReturn(job);
 		when(mockJobRepository.findById(id)).thenReturn(Optional.of(job));
 		when(mockJobRepository.findAll()).thenReturn(listJobs);
+		when(mockJobRepository.saveAndFlush(job)).thenReturn(job);
 	}
 
 	@Test
@@ -55,20 +56,13 @@ public class JobServiceImplTest {
 	}
 
 	@Test
-	public void getJobByIdShouldInvokeOnceJobRepositoryFindByIdMethod() throws ServiceException {
-		jobService.findById(id);
-		verify(mockJobRepository, times(1)).findById(id);
-	}
-	
-	@Test
 	public void  updateShouldInvokeOnceJobRepositorySaveAndFlushMethod() throws ServiceException {
 		jobService.update(job);
 		verify(mockJobRepository, times(1)).saveAndFlush(job);
 	}
 
 	@Test
-	public void deleteByShouldNotReturnNull() throws ServiceException {
-		jobService.deleteById(id);
-		assertNotNull("deleteByIdShouldReturnNull", mockJobRepository.findById(id));
+	public void findByIdShouldNotReturnNull() throws ServiceException {
+		assertNotNull("findByIdShouldReturnNull", jobService.findById(id));
 	}
 }

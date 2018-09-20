@@ -40,6 +40,7 @@ public class VesselServiceImplTest {
 		when(mockVesselRepository.save(vessel)).thenReturn(vessel);
 		when(mockVesselRepository.findById(id)).thenReturn(Optional.of(vessel));
 		when(mockVesselRepository.findAll()).thenReturn(listVessels);
+		when(mockVesselRepository.saveAndFlush(vessel)).thenReturn(vessel);
 	}
 
 	@Test
@@ -55,20 +56,13 @@ public class VesselServiceImplTest {
 	}
 	
 	@Test
-	public void getUserByEmailShouldInvokeOnceUserRepositoryFindByEmailMethod() throws ServiceException {
-		vesselService.findById(id);
-		verify(mockVesselRepository, times(1)).findById(id);
-	}
-	
-	@Test
 	public void  updateShouldInvokeOnceVesselRepositorySaveAndFlushMethod() throws ServiceException {
 		vesselService.update(vessel);
 		verify(mockVesselRepository, times(1)).saveAndFlush(vessel);
 	}
 
 	@Test
-	public void deleteByIdShouldNotReturnNull() throws ServiceException {
-		vesselService.deleteById(id);
-		assertNotNull("deleteByIdShouldReturnNull", vesselService.findById(id));
+	public void findByIdShouldNotReturnNull() throws ServiceException {
+		assertNotNull("findByIdShouldReturnNull", vesselService.findById(id));
 	}
 }

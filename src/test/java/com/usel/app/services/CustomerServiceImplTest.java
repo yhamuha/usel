@@ -40,6 +40,7 @@ public class CustomerServiceImplTest {
 		when(mockCustomerRepository.save(customer)).thenReturn(customer);
 		when(mockCustomerRepository.findById(id)).thenReturn(Optional.of(customer));
 		when(mockCustomerRepository.findAll()).thenReturn(listCustomers);
+		when(mockCustomerRepository.saveAndFlush(customer)).thenReturn(customer);
 	}
 
 	@Test
@@ -55,20 +56,13 @@ public class CustomerServiceImplTest {
 	}
 	
 	@Test
-	public void getUserByIdShouldInvokeOnceCustomerRepositoryFindByIdMethod() throws ServiceException {
-		customerService.findById(id);
-		verify(mockCustomerRepository, times(1)).findById(id);
-	}
-	
-	@Test
 	public void  updateShouldInvokeOnceCustomerRepositorySaveAndFlushMethod() throws ServiceException {
 		customerService.update(customer);
 		verify(mockCustomerRepository, times(1)).saveAndFlush(customer);
 	}
 
 	@Test
-	public void deleteByIdShouldNotReturnNull() throws ServiceException {
-		customerService.deleteById(id);
-		assertNotNull("deleteByIdShouldReturnNull", mockCustomerRepository.findById(id));
+	public void findByIdShouldNotReturnNull() throws ServiceException {
+		assertNotNull("findByIdShouldReturnNull", customerService.findById(id));
 	}
 }
