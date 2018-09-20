@@ -67,7 +67,7 @@ public class VesselServiceImplTest {
 	}
 
 	@Test
-	public void deleteByShouldReturnNull() throws ServiceException {
+	public void deleteByIdShouldNotReturnNull() throws ServiceException {
 		vesselService.deleteById(id);
 		assertNotNull("deleteByIdShouldReturnNull", vesselService.findById(id));
 	}

@@ -67,7 +67,7 @@ public class JobServiceImplTest {
 	}
 
 	@Test
-	public void deleteByShouldReturnNull() throws ServiceException {
+	public void deleteByShouldNotReturnNull() throws ServiceException {
 		jobService.deleteById(id);
 		assertNotNull("deleteByIdShouldReturnNull", mockJobRepository.findById(id));
 	}

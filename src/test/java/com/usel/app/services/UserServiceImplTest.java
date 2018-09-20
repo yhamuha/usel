@@ -73,7 +73,7 @@ public class UserServiceImplTest {
 	}
 	
 	@Test
-	public void deleteByIdShouldReturnNull() throws ServiceException {
+	public void deleteByIdShouldNotReturnNull() throws ServiceException {
 		userService.deleteById(id);
 		assertNotNull("deleteByIdShouldReturnNull", mockUserRepository.findById(id));
 	}

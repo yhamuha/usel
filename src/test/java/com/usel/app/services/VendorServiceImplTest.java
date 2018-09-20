@@ -67,7 +67,7 @@ public class VendorServiceImplTest {
 	}
 	
 	@Test
-		public void deleteByShouldReturnNull() throws ServiceException {
+		public void deleteByIdShouldNotReturnNull() throws ServiceException {
 			vendorService.deleteById(id);
 			assertNotNull("deleteByIdShouldReturnNull", mockVendorRepository.findById(id));
 	}
