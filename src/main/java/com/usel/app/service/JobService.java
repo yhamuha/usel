@@ -22,8 +22,8 @@ public interface JobService {
 		/**
 		* <p>
 		* This method saving Jobs (POST)
-		* @param 	job
-		* @return 	void 
+		* @param 	Job
+		* @return 	Job 
 		* </p> 
 		* @throws ServiceException
 		* 			If any errors are encountered in the repository layer
@@ -34,9 +34,9 @@ public interface JobService {
 		/**
 		 * <p>
 		 * This method are getting particular Job (GET{id})
-		 * @param 	jobId
+		 * @param 	int jobId
 	     *          The id of the particular {@link Job}.
-	     * @return 	job
+	     * @return 	Optional<Job>
 	     * </p> 
 	     * @throws ServiceException
 	     * 			If any errors are encountered in the repository layer 
@@ -47,7 +47,7 @@ public interface JobService {
 		/**
 		* <p>
 		* Update particular job (UPDATE)
-		* @param	job
+		* @param	Job
 		*          	The particular Job {@link Job}.
 		* @return 	Job
 		* </p> 
@@ -60,7 +60,7 @@ public interface JobService {
 		/**
 		 * <p>
 		 * This method delete job by id (DELETE{id})
-		 * @param 	jobId
+		 * @param 	int jobId
 		 * 			The id of the particular {@link Job}.
 	     * @return 	void 
 	     * </p> 

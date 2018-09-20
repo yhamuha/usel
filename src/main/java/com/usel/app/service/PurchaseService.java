@@ -22,8 +22,8 @@ public interface PurchaseService {
 		/**
 		* <p>
 		* This method saving purchases (POST)
-		* @param 	purchase
-		* @return 	void 
+		* @param 	Purchase
+		* @return 	Purchase 
 		* </p> 
 		* @throws ServiceException
 		* 			If any errors are encountered in the repository layer
@@ -34,9 +34,9 @@ public interface PurchaseService {
 		/**
 		 * <p>
 		 * This method are getting particular purchase (GET{id})
-		 * @param 	purchaseId
+		 * @param 	int purchaseId
 	     *          The id of the particular {@link Purchase}.
-	     * @return 	purchase
+	     * @return 	Optional<Purchase>
 	     * </p> 
 	     * @throws ServiceException
 	     * 			If any errors are encountered in the repository layer 
@@ -47,7 +47,7 @@ public interface PurchaseService {
 		/**
 		* <p>
 		* Update particular purchase (UPDATE)
-		* @param	purchase
+		* @param	Purchase
 		*          	The particular Purchase {@link Purchase}.
 		* @return 	Purchase
 		* </p> 
@@ -60,7 +60,7 @@ public interface PurchaseService {
 		/**
 		 * <p>
 		 * This method delete purchase by id (DELETE{id})
-		 * @param 	purchaseId
+		 * @param 	int purchaseId
 		 * 			The id of the particular {@link Purchase}.
 	     * @return 	void 
 	     * </p> 

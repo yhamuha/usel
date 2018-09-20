@@ -22,8 +22,8 @@ public interface VendorService {
 		/**
 		* <p>
 		* This method saving vendors (POST)
-		* @param 	vendor
-		* @return 	void 
+		* @param 	Vendor
+		* @return 	Vendor 
 		* </p> 
 		* @throws ServiceException
 		* 			If any errors are encountered in the repository layer
@@ -34,9 +34,9 @@ public interface VendorService {
 		/**
 		 * <p>
 		 * This method are getting particular vendor (GET{id})
-		 * @param 	vendorId
+		 * @param 	int vendorId
 	     *          The id of the particular {@link Vendor}.
-	     * @return 	vendor
+	     * @return 	Optional<Vendor>
 	     * </p> 
 	     * @throws ServiceException
 	     * 			If any errors are encountered in the repository layer 
@@ -47,7 +47,7 @@ public interface VendorService {
 		/**
 		* <p>
 		* Update particular vendor (UPDATE)
-		* @param	vendor
+		* @param	Vendor
 		*          	The particular Vendor {@link Vendor}.
 		* @return 	Vendor
 		* </p> 
@@ -60,7 +60,7 @@ public interface VendorService {
 		/**
 		 * <p>
 		 * This method delete Vendor by id (DELETE{id})
-		 * @param 	vendorId
+		 * @param 	int vendorId
 		 * 			The id of the particular {@link Vendor}.
 	     * @return 	void 
 	     * </p> 

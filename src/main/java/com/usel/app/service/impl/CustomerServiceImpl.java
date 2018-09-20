@@ -39,6 +39,7 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public void deleteById(int customerId) throws ServiceException {
+		customerRepository.deleteById(customerId);
 	}
 
 

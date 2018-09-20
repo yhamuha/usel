@@ -39,6 +39,7 @@ public class JobServiceImpl implements JobService{
 
 	@Override
 	public void deleteById(int jobId) throws ServiceException {
+		jobRepository.deleteById(jobId);
 	}
 
 }

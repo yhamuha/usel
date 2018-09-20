@@ -38,6 +38,7 @@ public class VendorServiceImpl implements VendorService {
 
 	@Override
 	public void deleteById(int vendorId) throws ServiceException {
+		vendorRepository.deleteById(vendorId);
 	}
 
 }

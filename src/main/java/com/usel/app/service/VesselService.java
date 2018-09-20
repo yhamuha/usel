@@ -22,8 +22,8 @@ public interface VesselService {
 		/**
 		* <p>
 		* This method saving vessels (POST)
-		* @param 	vessel
-		* @return 	void 
+		* @param 	Vessel
+		* @return 	Vessel 
 		* </p> 
 		* @throws ServiceException
 		* 			If any errors are encountered in the repository layer
@@ -34,9 +34,9 @@ public interface VesselService {
 		/**
 		 * <p>
 		 * This method are getting particular vessel (GET{id})
-		 * @param 	vesselId
+		 * @param 	int vesselId
 	     *          The id of the particular {@link Vessel}.
-	     * @return 	vessel
+	     * @return 	Optional<Vessel>
 	     * </p> 
 	     * @throws ServiceException
 	     * 			If any errors are encountered in the repository layer 
@@ -47,7 +47,7 @@ public interface VesselService {
 		/**
 		* <p>
 		* Update particular vessel (UPDATE)
-		* @param	vessel
+		* @param	Vessel
 		*          	The particular Vessel {@link Vessel}.
 		* @return 	Vessel
 		* </p> 
@@ -60,7 +60,7 @@ public interface VesselService {
 		/**
 		 * <p>
 		 * This method delete Vessel by id (DELETE{id})
-		 * @param 	vesselId
+		 * @param 	int vesselId
 		 * 			The id of the particular {@link Vessel}.
 	     * @return 	void 
 	     * </p> 

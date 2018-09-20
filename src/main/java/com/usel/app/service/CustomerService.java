@@ -22,8 +22,8 @@ public interface CustomerService {
 		/**
 		* <p>
 		* This method saving customers (POST)
-		* @param 	customer
-		* @return 	void 
+		* @param 	Customer
+		* @return 	Customer 
 		* </p> 
 		* @throws ServiceException
 		* 			If any errors are encountered in the repository layer
@@ -34,9 +34,9 @@ public interface CustomerService {
 		/**
 		 * <p>
 		 * This method are getting particular customer (GET{id})
-		 * @param 	customerId
+		 * @param 	int customerId
 	     *          The id of {@link Customer}.
-	     * @return 	customer
+	     * @return 	Optional<Customer>
 	     * </p> 
 	     * @throws ServiceException
 	     * 			If any errors are encountered in the repository layer 
@@ -47,7 +47,7 @@ public interface CustomerService {
 		/**
 		* <p>
 		* Update particular customer (UPDATE)
-		* @param	customer
+		* @param	Customer
 		*          	The particular Customer {@link Customer}.
 		* @return 	Customer
 		* </p> 
@@ -60,7 +60,7 @@ public interface CustomerService {
 		/**
 		 * <p>
 		 * This method delete customer by id (DELETE{id})
-		 * @param 	customerId
+		 * @param 	int customerId
 		 * 			The id of the particular {@link Customer}.
 	     * @return 	void 
 	     * </p> 

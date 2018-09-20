@@ -40,6 +40,7 @@ public class PurchaseServiceImpl implements PurchaseService{
 
 	@Override
 	public void deleteById(int purchaseId) throws ServiceException {
+		purchaseRepository.deleteById(purchaseId);
 	}
 
 }

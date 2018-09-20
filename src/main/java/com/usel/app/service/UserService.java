@@ -23,8 +23,8 @@ public interface UserService {
 		/**
 		* <p>
 		* This method saving users (POST)
-		* @param 	user
-		* @return 	void 
+		* @param 	User
+		* @return 	User 
 		* </p> 
 		* @throws ServiceException
 		* 			If any errors are encountered in the repository layer
@@ -35,9 +35,9 @@ public interface UserService {
 		/**
 		 * <p>
 		 * This method are getting particular user (GET{id})
-		 * @param 	userId
+		 * @param 	int userId
 	     *          The id of the particular {@link User}.
-	     * @return 	purchase
+	     * @return 	Optional<User>
 	     * </p> 
 	     * @throws ServiceException
 	     * 			If any errors are encountered in the repository layer 
@@ -48,7 +48,7 @@ public interface UserService {
 		/**
 		* <p>
 		* Update particular user (UPDATE)
-		* @param	user
+		* @param	User
 		*          	The particular User {@link User}.
 		* @return 	User
 		* </p> 
@@ -61,7 +61,7 @@ public interface UserService {
 		/**
 		 * <p>
 		 * This method delete user by id (DELETE{id})
-		 * @param 	userId
+		 * @param 	int userId
 		 * 			The id of the particular {@link User}.
 	     * @return 	void 
 	     * </p> 

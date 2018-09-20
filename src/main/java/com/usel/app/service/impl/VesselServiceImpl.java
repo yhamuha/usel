@@ -39,6 +39,7 @@ public class VesselServiceImpl implements VesselService{
 
 	@Override
 	public void deleteById(int vesselId) throws ServiceException {
+		vesselRepository.deleteById(vesselId);
 	}
 
 }
