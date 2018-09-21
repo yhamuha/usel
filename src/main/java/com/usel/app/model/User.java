@@ -40,7 +40,7 @@ public class User {
 	private String shortName;
 
 	@Column(name = "IS_ENABLED")
-	public boolean isEnabled;
+	private boolean isEnabled;
 
 	@Column(name = "CREATED_ID")
 	private boolean createdAt;
