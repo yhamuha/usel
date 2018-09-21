@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -38,7 +37,6 @@ public class VesselServiceImplTest {
 		MockitoAnnotations.initMocks(this);
 		Vessel vessel = new Vessel();
 		when(mockVesselRepository.save(vessel)).thenReturn(vessel);
-		when(mockVesselRepository.findById(id)).thenReturn(Optional.of(vessel));
 		when(mockVesselRepository.findAll()).thenReturn(listVessels);
 		when(mockVesselRepository.saveAndFlush(vessel)).thenReturn(vessel);
 	}
@@ -63,6 +61,12 @@ public class VesselServiceImplTest {
 
 	@Test
 	public void findByIdShouldNotReturnNull() throws ServiceException {
-		assertNotNull("findByIdShouldReturnNull", vesselService.findById(id));
+		assertNotNull(vesselService.findById(id));
+	}
+	
+	@Test
+	public void deleteByIdInvokeOnceDeleteByIdRepositoryMethod() throws ServiceException {
+		vesselService.deleteById(id);
+		verify(mockVesselRepository, times(1)).deleteById(id);
 	}
 }

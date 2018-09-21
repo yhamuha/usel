@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -38,7 +37,6 @@ public class JobServiceImplTest {
 		MockitoAnnotations.initMocks(this);
 		Job job = new Job();
 		when(mockJobRepository.save(job)).thenReturn(job);
-		when(mockJobRepository.findById(id)).thenReturn(Optional.of(job));
 		when(mockJobRepository.findAll()).thenReturn(listJobs);
 		when(mockJobRepository.saveAndFlush(job)).thenReturn(job);
 	}
@@ -63,6 +61,12 @@ public class JobServiceImplTest {
 
 	@Test
 	public void findByIdShouldNotReturnNull() throws ServiceException {
-		assertNotNull("findByIdShouldReturnNull", jobService.findById(id));
+		assertNotNull(jobService.findById(id));
+	}
+	
+	@Test
+	public void deleteByIdInvokeOnceDeleteByIdRepositoryMethod() throws ServiceException {
+		jobService.deleteById(id);
+		verify(mockJobRepository, times(1)).deleteById(id);
 	}
 }

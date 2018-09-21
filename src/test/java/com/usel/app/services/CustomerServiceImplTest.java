@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -38,7 +37,6 @@ public class CustomerServiceImplTest {
 		MockitoAnnotations.initMocks(this);
 		Customer customer = new Customer();
 		when(mockCustomerRepository.save(customer)).thenReturn(customer);
-		when(mockCustomerRepository.findById(id)).thenReturn(Optional.of(customer));
 		when(mockCustomerRepository.findAll()).thenReturn(listCustomers);
 		when(mockCustomerRepository.saveAndFlush(customer)).thenReturn(customer);
 	}
@@ -63,6 +61,12 @@ public class CustomerServiceImplTest {
 
 	@Test
 	public void findByIdShouldNotReturnNull() throws ServiceException {
-		assertNotNull("findByIdShouldReturnNull", customerService.findById(id));
+		assertNotNull(customerService.findById(id));
+	}
+	
+	@Test
+	public void deleteByIdInvokeOnceDeleteByIdRepositoryMethod() throws ServiceException {
+		customerService.deleteById(id);
+		verify(mockCustomerRepository, times(1)).deleteById(id);
 	}
 }

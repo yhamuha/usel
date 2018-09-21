@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +36,6 @@ public class UserServiceImplTest {
 		MockitoAnnotations.initMocks(this);
 		User user = new User();
 		when(mockUserRepository.save(user)).thenReturn(user);
-		when(mockUserRepository.findById(id)).thenReturn(Optional.of(user));
 		when(mockUserRepository.findAll()).thenReturn(listUsers);
 		when(mockUserRepository.saveAndFlush(user)).thenReturn(user);
 	}
@@ -55,12 +53,6 @@ public class UserServiceImplTest {
 	}
 	
 	@Test
-	public void getUserByIdShouldInvokeOnceUserRepositoryFindByIdMethod() throws ServiceException {
-		userService.findById(id);
-		verify(mockUserRepository, times(1)).findById(id);
-	}
-	
-	@Test
 	public void  updateShouldInvokeOnceUserRepositorySaveAndFlushMethod() throws ServiceException {
 		userService.update(user);
 		verify(mockUserRepository, times(1)).saveAndFlush(user);
@@ -71,4 +63,9 @@ public class UserServiceImplTest {
 		assertNotNull("findByIdShouldReturnNull", userService.findById(id));
 	}
 	
+	@Test
+	public void deleteByIdInvokeOnceDeleteByIdRepositoryMethod() throws ServiceException {
+		userService.deleteById(id);
+		verify(mockUserRepository, times(1)).deleteById(id);
+	}
 }

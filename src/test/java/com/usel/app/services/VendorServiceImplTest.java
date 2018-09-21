@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -38,7 +37,6 @@ public class VendorServiceImplTest {
 		MockitoAnnotations.initMocks(this);
 		Vendor vendor = new Vendor();
 		when(mockVendorRepository.save(vendor)).thenReturn(vendor);
-		when(mockVendorRepository.findById(id)).thenReturn(Optional.of(vendor));
 		when(mockVendorRepository.findAll()).thenReturn(listVendor);
 		when(mockVendorRepository.saveAndFlush(vendor)).thenReturn(vendor);
 	}
@@ -63,6 +61,12 @@ public class VendorServiceImplTest {
 	
 	@Test
 	public void findByIdShouldNotReturnNull() throws ServiceException {
-		assertNotNull("findByIdShouldReturnNull", vendorService.findById(id));
+		assertNotNull(vendorService.findById(id));
+	}
+	
+	@Test
+	public void deleteByIdInvokeOnceDeleteByIdRepositoryMethod() throws ServiceException {
+		vendorService.deleteById(id);
+		verify(mockVendorRepository, times(1)).deleteById(id);
 	}
 }
