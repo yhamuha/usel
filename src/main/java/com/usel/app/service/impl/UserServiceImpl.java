@@ -41,4 +41,9 @@ public class UserServiceImpl implements UserService{
 	public void deleteById(int userId) throws ServiceException {
 		userRepository.deleteById(userId);
 	}
+	
+	@Override
+	public boolean exist(String email) {
+		return userRepository.existsByEmail(email);
+	}
 }

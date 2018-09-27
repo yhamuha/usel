@@ -36,20 +36,20 @@ buildscript {
 	dependencies {
 
   		// Spring Boot
-  		compile "org.springframework.boot:spring-boot-starter-actuator"
-  		compile "org.springframework.boot:spring-boot-starter-web"
+  		compile 'org.springframework.boot:spring-boot-starter-actuator'
+  		compile 'org.springframework.boot:spring-boot-starter-web'
   		// Spring Boot Logging
-  		compile "org.springframework.boot:spring-boot-starter-logging"
+  		compile 'org.springframework.boot:spring-boot-starter-logging'
   		// Spring Test (incl JUnit)
   		testCompile 'org.springframework.boot:spring-boot-starter-test'
   		// JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)
-  		compile "org.springframework.boot:spring-boot-starter-data-jpa"
+  		compile 'org.springframework.boot:spring-boot-starter-data-jpa'
   		// Use MySQL Connector-J
   		compile 'mysql:mysql-connector-java'
   		// Amazon AWS
   		compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.281'
     	// Mockito
-    	testCompile "org.mockito:mockito-core:2.+"
+    	testCompile 'org.mockito:mockito-core:2.+'
     	// Log4j
     	//compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
 		compile 'log4j:log4j:1.2.17'
@@ -59,6 +59,6 @@ buildscript {
 	flyway {
     	url = 'jdbc:mysql://localhost:3306/usel'
     	user = 'root'
-    	password = 'nbtsa0880'
+    	password = 'root'
 	}	
 

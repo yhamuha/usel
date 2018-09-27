@@ -51,7 +51,7 @@ public class UserController {
 		User createdUser;
 		
 		try {
-			if (userService.exists(user)){
+			if (userService.exist(user)){
 			    LOG.info("a user with name " + user.getName() + " already exists");
 			    return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 			}

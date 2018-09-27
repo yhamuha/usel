@@ -48,10 +48,10 @@ public class UserControllerTest {
 	@Before
     public void setUp() {
         mvc = standaloneSetup(userController).build();
-        user = new User();
+        User user = new User();
         user.setId(1);
-        user.setName("First Name");
-        user.setLastName("Last Name");
+        user.setName("FirstName");
+        user.setLastName("LastName");
         user.setShortName("FL");
         user.setPassword("qwerty");
         user.setPoId(2040);

@@ -1,6 +1,7 @@
 package com.usel.app.repository;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +13,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import com.usel.app.model.User;
 import com.usel.app.repository.UserRepository;
 
@@ -39,5 +39,15 @@ public class UserRepositoryTest {
 		entityManager.persist(user);
 
 		assertFalse(userRepository.findAll().isEmpty());
+	}
+	
+	@Test
+	public void whenExistsByEmailThenReturnTrue() {
+		User user = new User();
+		user.setEmail("test@gmail.com");
+		
+		entityManager.persist(user);
+
+		assertTrue(userRepository.existsByEmail("test@gmail.com"));
 	}
 }

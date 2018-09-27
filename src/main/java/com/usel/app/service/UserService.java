@@ -70,4 +70,17 @@ public interface UserService {
 	     *    		while saving data.
 		 **/
 		void deleteById(int userId) throws ServiceException;
+		
+		/**
+		 * <p>
+		 * This method check for User existsByEmail
+		 * @param 	String email
+		 * 			The email of the particular {@link User}.
+	     * @return 	boolean 
+	     * </p> 
+	     * @throws ServiceException
+	     *   		If any errors are encountered in the repository layer
+	     *    		while saving data.
+		 **/
+		boolean exist(String email) throws ServiceException;
 }

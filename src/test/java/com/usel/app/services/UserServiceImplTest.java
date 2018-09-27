@@ -68,4 +68,10 @@ public class UserServiceImplTest {
 		userService.deleteById(id);
 		verify(mockUserRepository, times(1)).deleteById(id);
 	}
+	
+	@Test
+	public void existInvokeOnceExistByEmailRepositoryMethod() throws ServiceException {
+		userService.exist("email");
+		verify(mockUserRepository, times(1)).existsByEmail("email");
+	}
 }
