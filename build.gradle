@@ -10,7 +10,6 @@ buildscript {
   	
   	dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        //classpath 'org.postgresql:postgresql:42.1.4'
     }
 }
 	plugins {

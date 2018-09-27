@@ -51,13 +51,13 @@ public class UserController {
 		User createdUser;
 		
 		try {
-			if (userService.exist(user)){
-			    LOG.info("a user with name " + user.getName() + " already exists");
+			if (userService.exist(user.getEmail())){
+			    LOG.info("a user with name " + user.getEmail() + " already exists");
 			    return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 			}
 			createdUser = userService.create(user);
 		} catch (ServiceException e) {
-			LOG.error("a user with name " + user.getName() + " create failed", e);
+			LOG.error("a user with name " + user.getEmail() + " create failed", e);
 			return new ResponseEntity<Void>(HttpStatus.SERVICE_UNAVAILABLE);
 		}
 		

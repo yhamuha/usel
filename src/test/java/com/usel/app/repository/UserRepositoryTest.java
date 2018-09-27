@@ -23,6 +23,8 @@ import com.usel.app.repository.UserRepository;
 @AutoConfigureTestDatabase(replace=Replace.NONE)
 public class UserRepositoryTest {
 	
+	String email = "test@gmail.com";
+	
 	@Autowired
     private TestEntityManager entityManager;
 	
@@ -33,7 +35,7 @@ public class UserRepositoryTest {
 	public void whenFindAllThenReturnNotEmptyList() {
 		User user = new User();
 		user.setName("TestUser");
-		user.setEmail("test@gmail.com");
+		user.setEmail(email);
 		user.setPassword("testpass");
 		
 		entityManager.persist(user);
@@ -44,10 +46,10 @@ public class UserRepositoryTest {
 	@Test
 	public void whenExistsByEmailThenReturnTrue() {
 		User user = new User();
-		user.setEmail("test@gmail.com");
+		user.setEmail(email);
 		
 		entityManager.persist(user);
 
-		assertTrue(userRepository.existsByEmail("test@gmail.com"));
+		assertTrue(userRepository.existsByEmail(email));
 	}
 }
