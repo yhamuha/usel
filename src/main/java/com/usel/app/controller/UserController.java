@@ -30,6 +30,7 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<User>> getAll() {
 		LOG.info("getting all users");
+		System.out.println("---------TEST----");
 		List<User> users = null;
 		try {
 			users = userService.findAll();
@@ -48,6 +49,7 @@ public class UserController {
 	@PostMapping
 	public ResponseEntity<Void> create(@RequestBody User user, UriComponentsBuilder ucBuilder) {
 		LOG.info("creating new user: {}", user);
+		System.out.println("---------TEST----");
 		User createdUser;
 		
 		try {
