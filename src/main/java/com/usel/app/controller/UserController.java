@@ -30,7 +30,7 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<User>> getAll() {
 		LOG.info("getting all users");
-		System.out.println("---------TEST----");
+		
 		List<User> users = null;
 		try {
 			users = userService.findAll();
@@ -47,24 +47,26 @@ public class UserController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	@PostMapping
-	public ResponseEntity<Void> create(@RequestBody User user, UriComponentsBuilder ucBuilder) {
-		LOG.info("creating new user: {}", user);
-		System.out.println("---------TEST----");
+	public ResponseEntity<User> create(@RequestBody User user, UriComponentsBuilder ucBuilder) {
+		LOG.info("creating new user: {}", user.getEmail());
+
+		System.out.println("CHECK POINT 3");
+		
 		User createdUser;
 		
 		try {
 			if (userService.exist(user.getEmail())){
 			    LOG.info("a user with name " + user.getEmail() + " already exists");
-			    return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+			    return new ResponseEntity<User>(HttpStatus.CONFLICT);
 			}
 			createdUser = userService.create(user);
 		} catch (ServiceException e) {
 			LOG.error("a user with name " + user.getEmail() + " create failed", e);
-			return new ResponseEntity<Void>(HttpStatus.SERVICE_UNAVAILABLE);
+			return new ResponseEntity<User>(HttpStatus.SERVICE_UNAVAILABLE);
 		}
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/users/{id}").buildAndExpand(createdUser.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<User>(headers, HttpStatus.CREATED);
 	}
 }

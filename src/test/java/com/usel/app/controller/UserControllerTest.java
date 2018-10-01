@@ -42,10 +42,10 @@ public class UserControllerTest {
 	UserService userService;
 	
 	User user;
-	String userId;
-	String email = "test@gmail.com";
-	String fakeEmail = "no_test@gmail.com";
 	List<User> users;
+	String userId;
+	String fakeEmail = "no_test@gmail.com";
+	String email = "test@gmail.com";
 	
 	@Before
     public void setUp() {
@@ -54,11 +54,13 @@ public class UserControllerTest {
         user.setId(1);
         user.setName("FirstName");
         user.setLastName("LastName");
-        user.setEmail(email);
+        user.setEmail("test@gmail.com");
         user.setPassword("qwerty");
         user.setShortName("FL");
         user.setPoId(2040);
         users = new ArrayList<>();
+        
+        System.out.println(user.toString());
     }
 	
 	// @Test
@@ -66,7 +68,7 @@ public class UserControllerTest {
 		this.users.add(this.user);
 		this.users.add(this.user);
 		when(userService.findAll()).thenReturn(users);
-		
+
 		mockMvc.perform(get("/users"))
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -94,25 +96,26 @@ public class UserControllerTest {
 	
 	@Test
 	public void testCreateUserSuccess() throws Exception {
+		
+		System.out.println("CHECK POINT 1");
+		System.out.println(user.toString());
+		
 		when(userService.exist(fakeEmail)).thenReturn(false); 
         when(userService.create(user)).thenReturn(user); 
         
         mockMvc.perform(post("/users")                  
         		.contentType(MediaType.APPLICATION_JSON) 
-        		.content(Utils.asJsonString(email)))	
-                                                        
+        		.content(Utils.asJsonString(user.getEmail())))
 				.andExpect(status().isCreated())  
 				.andExpect(header().string("location", containsString("http://localhost:8080/users/" + user.getId())));
-                                                       
 	
-		verify(userService, times(1)).exist(email); 
-		                                            
+		verify(userService, times(1)).exist(user.getEmail()); 
 		verify(userService, times(1)).create(user); 
 	}
 	
 	// @Test
 	public void createShouldReturnStatusConflictWhenUserExists() throws Exception {
-		when(userService.exist(email)).thenReturn(true);
+		when(userService.exist(user.getEmail())).thenReturn(true);
         
 		mockMvc.perform(post("/users")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -127,7 +130,7 @@ public class UserControllerTest {
         
         mockMvc.perform(post("/users")
         		.contentType(MediaType.APPLICATION_JSON)
-        		.content(Utils.asJsonString(email)))	
+        		.content(Utils.asJsonString(user.getEmail())))	
 				.andExpect(status().is(503));
 	}
 }
