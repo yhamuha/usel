@@ -50,7 +50,7 @@ public class UserControllerTest {
 	@Before
     public void setUp() {
 		mockMvc = standaloneSetup(userController).build();
-        User user = new User();
+        this.user = new User();
         user.setId(1);
         user.setName("FirstName");
         user.setLastName("LastName");
@@ -60,7 +60,7 @@ public class UserControllerTest {
         user.setPoId(2040);
         users = new ArrayList<>();
         
-        System.out.println(user.toString());
+        System.out.println("User in @Before" + user.toString());
     }
 	
 	// @Test
@@ -98,10 +98,12 @@ public class UserControllerTest {
 	public void testCreateUserSuccess() throws Exception {
 		
 		System.out.println("CHECK POINT 1");
-		System.out.println(user.toString());
+		System.out.println("User in POINT 1" + user.toString());
 		
 		when(userService.exist(fakeEmail)).thenReturn(false); 
         when(userService.create(user)).thenReturn(user); 
+        
+        System.out.println("How to send to method()" + Utils.asJsonString(this.user));
         
         mockMvc.perform(post("/users")                  
         		.contentType(MediaType.APPLICATION_JSON) 
