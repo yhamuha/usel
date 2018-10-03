@@ -51,15 +51,15 @@ public class UserControllerTest {
     public void setUp() {
 		mockMvc = standaloneSetup(userController).build();
         this.user = new User();
-        user.setId(1);
         user.setName("FirstName");
         user.setLastName("LastName");
         user.setEmail("test@gmail.com");
         user.setPassword("qwerty");
         user.setShortName("FL");
         user.setPoId(2040);
-        users = new ArrayList<>();
         
+        users = new ArrayList<User>();
+
         System.out.println("User in @Before" + user.toString());
     }
 	
@@ -107,8 +107,8 @@ public class UserControllerTest {
         
         mockMvc.perform(post("/users")                  
         		.contentType(MediaType.APPLICATION_JSON) 
-        		.content(Utils.asJsonString(user.getEmail())))
-				.andExpect(status().isCreated())  
+        		.content(Utils.asJsonString(this.user)))
+        		.andExpect(status().isCreated())  
 				.andExpect(header().string("location", containsString("http://localhost:8080/users/" + user.getId())));
 	
 		verify(userService, times(1)).exist(user.getEmail()); 
