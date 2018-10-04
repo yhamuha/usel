@@ -18,8 +18,8 @@ import javax.persistence.Table;
 @Table(name = "CUSTOMERS")
 public class Customer {
 
-	@OneToMany(mappedBy = "job")
-	private List<Job> jobs = new LinkedList<Job>();
+	@OneToMany(mappedBy = "customer")
+	private List<Customer> customers = new LinkedList<Customer>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "VESSEL_ID")
@@ -46,59 +46,42 @@ public class Customer {
 	@Column(name = "VESSEL_ID")
 	private int vesselId;
 
-	@Column(name = "JOB_ID")
-	private int jobId;
-
 	public Customer() {
-		
 	}
 	
-	public Customer(int id, String name, int customerPo, boolean createdAt, boolean updatedAt, int vesselId, int jobId) {
+	public Customer(int id, String name, int customerPo, boolean createdAt, boolean updatedAt, int vesselId, int customerId) {
 		this.id = id;
 		this.name=name;
 		this.ownPo=customerPo;
 		this.createdAt=createdAt;
 		this.updatedAt=updatedAt;
 		this.vesselId=vesselId;
-		this.jobId=jobId;
 	}
 
-	public List<Job> getJobs() {
-		return jobs;
+	public List<Customer> getJobs() {
+		return customers;
 	}
 
-	public void setJobs(List<Job> jobs) {
-		this.jobs = jobs;
-	}
-
-	public Vessel getVessel() {
-		return vessel;
-	}
-
-	public void setVessel(Vessel vessel) {
-		this.vessel = vessel;
+	public void setCustomers(List<Customer> customers) {
+		this.customers = customers;
 	}
 
 	public int getId() {
 		return id;
 	}
-
+	
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getOwnPo() {
-		return ownPo;
-	}
-
+	
 	public void setOwnPo(int ownPo) {
 		this.ownPo = ownPo;
 	}
@@ -106,7 +89,7 @@ public class Customer {
 	public boolean isCreatedAt() {
 		return createdAt;
 	}
-
+	
 	public void setCreatedAt(boolean createdAt) {
 		this.createdAt = createdAt;
 	}
@@ -114,7 +97,7 @@ public class Customer {
 	public boolean isUpdatedAt() {
 		return updatedAt;
 	}
-
+	
 	public void setUpdatedAt(boolean updatedAt) {
 		this.updatedAt = updatedAt;
 	}
@@ -122,24 +105,29 @@ public class Customer {
 	public int getVesselId() {
 		return vesselId;
 	}
-
+	
 	public void setVesselId(int vesselId) {
 		this.vesselId = vesselId;
 	}
 
-	public int getJobId() {
-		return jobId;
-	}
-
-	public void setJobId(int jobId) {
-		this.jobId = jobId;
-	}
-
 	@Override
 	public String toString() {
-		return "Customer [jobs=" + jobs + ", vessel=" + vessel + ", id=" + id + ", name=" + name + ", customerPo="
-				+ ownPo + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", vesselId=" + vesselId
-				+ ", jobId=" + jobId + "]";
+		return "Customer [customers=" + customers + ", vessel=" + vessel + ", id=" + id + ", name=" + name + ", customerPo="
+				+ ownPo + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", vesselId=" + vesselId + "]";
 	}
-
+	
+	@Override
+	public boolean equals(Object o) {
+        if(o == null) {
+            return false;
+        }
+        if (o == this) {
+           return true;
+        }
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+        Customer e = (Customer) o;
+        return (this.getId() == e.getId());
+    }
 }

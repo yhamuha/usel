@@ -148,4 +148,19 @@ public class Purchase {
 				+ ", jobId=" + jobId + ", vendorId=" + vendorId + "]";
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+        if(o == null) {
+            return false;
+        }
+        if (o == this) {
+           return true;
+        }
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+        Purchase e = (Purchase) o;
+        return (this.getPo() == e.getPo());
+    }
+	
 }

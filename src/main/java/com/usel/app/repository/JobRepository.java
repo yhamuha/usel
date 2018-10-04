@@ -6,5 +6,5 @@ import com.usel.app.model.Job;
 
 @Repository
 public interface JobRepository extends JpaRepository<Job, Integer> {
-
+	public boolean existsById(int id);
 }

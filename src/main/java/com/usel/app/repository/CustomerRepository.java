@@ -6,4 +6,5 @@ import com.usel.app.model.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+	public boolean existsById(int id);
 }

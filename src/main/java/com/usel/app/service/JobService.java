@@ -69,6 +69,19 @@ public interface JobService {
 	     *    		while saving data.
 		 **/
 		void deleteById(int jobId) throws ServiceException;
+		
+		/**
+		 * <p>
+		 * This method check for Job existsById
+		 * @param 	int id
+		 * 			The id of the particular {@link Job}.
+	     * @return 	boolean 
+	     * </p> 
+	     * @throws ServiceException
+	     *   		If any errors are encountered in the repository layer
+	     *    		while saving data.
+		 **/
+		boolean exist(int id) throws ServiceException;
 	}
 	
 

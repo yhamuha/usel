@@ -49,13 +49,11 @@ public class UserController {
 	@PostMapping
 	public ResponseEntity<User> create(@RequestBody User user, UriComponentsBuilder ucBuilder) {
 		LOG.info("creating new user: {}", user.getEmail());
-
 		User createdUser;
 		
 		try {
 			if (userService.exist(user.getEmail())){
 			    LOG.info("a user with name " + user.getEmail() + " already exists");
-			    System.out.println("CHECK POINT 3 into TRY"); 
 			    return new ResponseEntity<User>(HttpStatus.CONFLICT);
 			}
 			createdUser = userService.create(user);

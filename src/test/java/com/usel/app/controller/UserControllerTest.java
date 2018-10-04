@@ -53,17 +53,14 @@ public class UserControllerTest {
         this.user = new User();
         user.setName("FirstName");
         user.setLastName("LastName");
-        user.setEmail("test@gmail.com");
+        user.setEmail(email);
         user.setPassword("qwerty");
         user.setShortName("FL");
         user.setPoId(2040);
-        
         users = new ArrayList<User>();
-
-        System.out.println("User in @Before" + user.toString());
     }
 	
-	// @Test
+	@Test
 	public void testGetAllSuccess() throws Exception {
 		this.users.add(this.user);
 		this.users.add(this.user);
@@ -78,7 +75,7 @@ public class UserControllerTest {
 		verifyNoMoreInteractions(userService);
 	}
 	
-	// @Test
+	@Test
 	public void getAllShouldReturnStatusNoContentWhenUserListEmpty() throws Exception {
 		when(userService.findAll()).thenReturn(users);
 		
@@ -86,7 +83,7 @@ public class UserControllerTest {
 			.andExpect(status().isNoContent());
 	}
 	
-	// @Test
+	@Test
 	public void getAllShouldReturnStatusServiceTemporarilyUnavailableWhenUserServiceFailed() throws Exception {
 		when(userService.findAll()).thenThrow(new ServiceException("Problem with DB connection"));
 		
@@ -97,42 +94,36 @@ public class UserControllerTest {
 	@Test
 	public void testCreateUserSuccess() throws Exception {
 		
-		System.out.println("CHECK POINT 1");
-		System.out.println("User in POINT 1" + user.toString());
-		
 		when(userService.exist(fakeEmail)).thenReturn(false); 
         when(userService.create(user)).thenReturn(user); 
         
-        System.out.println("How to send to method()" + Utils.asJsonString(this.user));
-        
         mockMvc.perform(post("/users")                  
         		.contentType(MediaType.APPLICATION_JSON) 
-        		.content(Utils.asJsonString(this.user)))
+        		.content(Utils.asJsonString(user)))
         		.andExpect(status().isCreated())  
-				.andExpect(header().string("location", containsString("http://localhost:8080/users/" + user.getId())));
+				.andExpect(header().string("location", containsString("http://localhost/users/" + user.getId())));
 	
 		verify(userService, times(1)).exist(user.getEmail()); 
 		verify(userService, times(1)).create(user); 
 	}
 	
-	// @Test
+	@Test
 	public void createShouldReturnStatusConflictWhenUserExists() throws Exception {
 		when(userService.exist(user.getEmail())).thenReturn(true);
-        
 		mockMvc.perform(post("/users")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(Utils.asJsonString(user)))	
 				.andExpect(status().isConflict());
 	}
 	
-	// @Test
+	@Test
 	public void createShouldReturnStatusServiceTemporarilyUnavailableWhenUserServiceFailed() throws Exception {
 		when(userService.exist(fakeEmail)).thenReturn(false);
         when(userService.create(user)).thenThrow(new ServiceException("Problem with DB connection"));
         
         mockMvc.perform(post("/users")
         		.contentType(MediaType.APPLICATION_JSON)
-        		.content(Utils.asJsonString(user.getEmail())))	
+        		.content(Utils.asJsonString(user)))	
 				.andExpect(status().is(503));
 	}
 }

@@ -162,4 +162,19 @@ public class Job {
 				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", poId=" + poId + "]";
 	}
 
+	@Override
+	public boolean equals(Object o) {
+        if(o == null) {
+            return false;
+        }
+        if (o == this) {
+           return true;
+        }
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+        Job e = (Job) o;
+        return (this.getId() == e.getId());
+    }
+	
 }

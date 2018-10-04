@@ -69,5 +69,17 @@ public interface PurchaseService {
 	     *    		while saving data.
 		 **/
 		void deleteById(int purchaseId) throws ServiceException;
-
+		
+		/**
+		 * <p>
+		 * This method check for Purchase existsByPO
+		 * @param 	int po
+		 * 			The PO of the particular {@link Purchase}.
+	     * @return 	boolean 
+	     * </p> 
+	     * @throws ServiceException
+	     *   		If any errors are encountered in the repository layer
+	     *    		while saving data.
+		 **/
+		boolean exist(int po) throws ServiceException;
 	}

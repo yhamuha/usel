@@ -42,5 +42,9 @@ public class PurchaseServiceImpl implements PurchaseService{
 	public void deleteById(int purchaseId) throws ServiceException {
 		purchaseRepository.deleteById(purchaseId);
 	}
-
+	
+	@Override
+	public boolean exist(int po) {
+		return purchaseRepository.existsByPO(po);
+	}
 }

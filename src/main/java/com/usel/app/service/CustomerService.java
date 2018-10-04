@@ -69,6 +69,19 @@ public interface CustomerService {
 	     *    		while saving data.
 		 **/
 		void deleteById(int customerId) throws ServiceException;
+		
+		/**
+		 * <p>
+		 * This method check for Customer existsById
+		 * @param 	int id
+		 * 			The id of the particular {@link Customer}.
+	     * @return 	boolean 
+	     * </p> 
+	     * @throws ServiceException
+	     *   		If any errors are encountered in the repository layer
+	     *    		while saving data.
+		 **/
+		boolean exist(int id) throws ServiceException;
 	}
 	
 

@@ -86,5 +86,20 @@ public class Vendor {
 		return "Vendor [vendors=" + vendors + ", id=" + id + ", name=" + name + ", createdAt=" + createdAt
 				+ ", updatedAt=" + updatedAt + "]";
 	}
+
+	@Override
+	public boolean equals(Object o) {
+        if(o == null) {
+            return false;
+        }
+        if (o == this) {
+           return true;
+        }
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+        Vendor e = (Vendor) o;
+        return (this.getId() == e.getId());
+    }
 	
 }

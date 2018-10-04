@@ -71,11 +71,11 @@ public class User {
 	public List<User> getUsers() {
 		return users;
 	}
-
+	
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -83,7 +83,7 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -95,11 +95,11 @@ public class User {
 	public String getLastName() {
 		return lastName;
 	}
-
+	
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
+	
 	public String getEmail() {
 		return email;
 	}
@@ -162,5 +162,20 @@ public class User {
 				+ ", password=" + password + ", shortName=" + shortName + ", isEnabled=" + isEnabled + ", createdAt="
 				+ createdAt + ", updatedAt=" + updatedAt + ", poId=" + poId + "]";
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+        if(o == null) {
+            return false;
+        }
+        if (o == this) {
+           return true;
+        }
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+        User e = (User) o;
+        return (this.getId() == e.getId());
+    }
 
 }

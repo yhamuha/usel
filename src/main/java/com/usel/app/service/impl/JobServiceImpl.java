@@ -41,5 +41,10 @@ public class JobServiceImpl implements JobService{
 	public void deleteById(int jobId) throws ServiceException {
 		jobRepository.deleteById(jobId);
 	}
+	
+	@Override
+	public boolean exist(int id) {
+		return jobRepository.existsById(id);
+	}
 
 }

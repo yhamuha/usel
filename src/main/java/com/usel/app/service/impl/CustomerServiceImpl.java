@@ -42,5 +42,9 @@ public class CustomerServiceImpl implements CustomerService{
 		customerRepository.deleteById(customerId);
 	}
 
+	@Override
+	public boolean exist(int id) {
+		return customerRepository.existsById(id);
+	}
 
 }
