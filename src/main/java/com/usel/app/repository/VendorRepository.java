@@ -6,4 +6,5 @@ import com.usel.app.model.Vendor;
 
 @Repository
 public interface VendorRepository extends JpaRepository<Vendor, Integer> {
+	public boolean existsById(int id);
 }

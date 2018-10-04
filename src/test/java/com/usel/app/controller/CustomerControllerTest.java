@@ -52,11 +52,10 @@ public class CustomerControllerTest {
         customer.setName("FirstName");
         customer.setOwnPo(4020);
         customer.setVesselId(2);
-        
         customers = new ArrayList<Customer>();
     }
 	
-	//@Test
+	@Test
 	public void testGetAllSuccess() throws Exception {
 		this.customers.add(this.customer);
 		this.customers.add(this.customer);
@@ -71,7 +70,7 @@ public class CustomerControllerTest {
 		verifyNoMoreInteractions(customerService);
 	}
 	
-	//@Test
+	@Test
 	public void getAllShouldReturnStatusNoContentWhenCustomerListEmpty() throws Exception {
 		when(customerService.findAll()).thenReturn(customers);
 		
@@ -79,7 +78,7 @@ public class CustomerControllerTest {
 			.andExpect(status().isNoContent());
 	}
 	
-	//@Test
+	@Test
 	public void getAllShouldReturnStatusServiceTemporarilyUnavailableWhenCustomerServiceFailed() throws Exception {
 		when(customerService.findAll()).thenThrow(new ServiceException("Problem with DB connection"));
 		
@@ -87,7 +86,7 @@ public class CustomerControllerTest {
 		   .andExpect(status().is(503));
 	}
 	
-	//@Test
+	@Test
 	public void testCreateCustomerSuccess() throws Exception {
 		
 		when(customerService.exist(fakeId)).thenReturn(false); 
@@ -103,7 +102,7 @@ public class CustomerControllerTest {
 		verify(customerService, times(1)).create(customer); 
 	}
 	
-	//@Test
+	@Test
 	public void createShouldReturnStatusConflictWhenCustomerExists() throws Exception {
 		when(customerService.exist(customer.getId())).thenReturn(true);
 		mockMvc.perform(post("/customers")

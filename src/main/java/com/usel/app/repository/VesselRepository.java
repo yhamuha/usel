@@ -6,4 +6,5 @@ import com.usel.app.model.Vessel;
 
 @Repository
 public interface VesselRepository extends JpaRepository<Vessel, Integer> {
+	public boolean existsById(int id);
 }

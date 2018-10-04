@@ -42,4 +42,9 @@ public class VesselServiceImpl implements VesselService{
 		vesselRepository.deleteById(vesselId);
 	}
 
+	@Override
+	public boolean exist(int id) {
+		return vesselRepository.existsById(id);
+	}
+	
 }

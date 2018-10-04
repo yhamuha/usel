@@ -70,4 +70,17 @@ public interface VendorService {
 		 **/
 		void deleteById(int vendorId) throws ServiceException;
 		
+		/**
+		 * <p>
+		 * This method check for Vendor existsById
+		 * @param 	int id
+		 * 			The id of the particular {@link Vendor}.
+	     * @return 	boolean 
+	     * </p> 
+	     * @throws ServiceException
+	     *   		If any errors are encountered in the repository layer
+	     *    		while saving data.
+		 **/
+		boolean exist(int id) throws ServiceException;
+		
 	}

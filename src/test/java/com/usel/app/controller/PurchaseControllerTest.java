@@ -44,19 +44,16 @@ public class PurchaseControllerTest {
 	Purchase purchase;
 	List<Purchase> purchases;
 	String purchaseId;
-	String fakeEmail = "no_test@gmail.com";
-	String email = "test@gmail.com";
+	int fakePO = -1;
 	
 	@Before
     public void setUp() {
 		mockMvc = standaloneSetup(purchaseController).build();
         this.purchase = new Purchase();
-        purchase.setName("FirstName");
-        purchase.setLastName("LastName");
-        purchase.setEmail(email);
-        purchase.setPassword("qwerty");
-        purchase.setShortName("FL");
-        purchase.setPoId(2040);
+        purchase.setFinalPoNumber("AP 2296 - 0450");
+        purchase.setUserId(2);
+        purchase.setJobId(2);
+        purchase.setVendorId(2);
         purchases = new ArrayList<Purchase>();
     }
 	
@@ -94,22 +91,22 @@ public class PurchaseControllerTest {
 	@Test
 	public void testCreatePurchaseSuccess() throws Exception {
 		
-		when(purchaseService.exist(fakeEmail)).thenReturn(false); 
+		when(purchaseService.exist(fakePO)).thenReturn(false); 
         when(purchaseService.create(purchase)).thenReturn(purchase); 
         
         mockMvc.perform(post("/purchases")                  
         		.contentType(MediaType.APPLICATION_JSON) 
         		.content(Utils.asJsonString(purchase)))
         		.andExpect(status().isCreated())  
-				.andExpect(header().string("location", containsString("http://localhost/purchases/" + purchase.getId())));
+				.andExpect(header().string("location", containsString("http://localhost/purchases/" + purchase.getPo())));
 	
-		verify(purchaseService, times(1)).exist(purchase.getEmail()); 
+		verify(purchaseService, times(1)).exist(purchase.getPo()); 
 		verify(purchaseService, times(1)).create(purchase); 
 	}
 	
 	@Test
 	public void createShouldReturnStatusConflictWhenPurchaseExists() throws Exception {
-		when(purchaseService.exist(purchase.getEmail())).thenReturn(true);
+		when(purchaseService.exist(purchase.getPo())).thenReturn(true);
 		mockMvc.perform(post("/purchases")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(Utils.asJsonString(purchase)))	
@@ -118,7 +115,7 @@ public class PurchaseControllerTest {
 	
 	@Test
 	public void createShouldReturnStatusServiceTemporarilyUnavailableWhenPurchaseServiceFailed() throws Exception {
-		when(purchaseService.exist(fakeEmail)).thenReturn(false);
+		when(purchaseService.exist(fakePO)).thenReturn(false);
         when(purchaseService.create(purchase)).thenThrow(new ServiceException("Problem with DB connection"));
         
         mockMvc.perform(post("/purchases")

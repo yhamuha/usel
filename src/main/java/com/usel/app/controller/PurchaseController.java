@@ -48,22 +48,22 @@ public class PurchaseController {
 	@RequestMapping(method = RequestMethod.POST)
 	@PostMapping
 	public ResponseEntity<Purchase> create(@RequestBody Purchase purchase, UriComponentsBuilder ucBuilder) {
-		LOG.info("creating new purchase: {}", purchase.getEmail());
+		LOG.info("creating new purchase: {}", purchase.getPo());
 		Purchase createdPurchase;
 		
 		try {
-			if (purchaseService.exist(purchase.getEmail())){
-			    LOG.info("a purchase with name " + purchase.getEmail() + " already exists");
+			if (purchaseService.exist(purchase.getPo())){
+			    LOG.info("a purchase with name " + purchase.getPo() + " already exists");
 			    return new ResponseEntity<Purchase>(HttpStatus.CONFLICT);
 			}
 			createdPurchase = purchaseService.create(purchase);
 		} catch (ServiceException e) {
-			LOG.error("a purchase with name " + purchase.getEmail() + " create failed", e);
+			LOG.error("a purchase with name " + purchase.getPo() + " create failed", e);
 			return new ResponseEntity<Purchase>(HttpStatus.SERVICE_UNAVAILABLE);
 		}
 		
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/purchases/{id}").buildAndExpand(createdPurchase.getId()).toUri());
+		headers.setLocation(ucBuilder.path("/purchases/{id}").buildAndExpand(createdPurchase.getPo()).toUri());
         return new ResponseEntity<Purchase>(headers, HttpStatus.CREATED);
 	}
 }

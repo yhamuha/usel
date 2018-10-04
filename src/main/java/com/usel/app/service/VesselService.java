@@ -70,4 +70,17 @@ public interface VesselService {
 		 **/
 		void deleteById(int vesselId) throws ServiceException;
 		
+		/**
+		 * <p>
+		 * This method check for Vessel existsById
+		 * @param 	int id
+		 * 			The id of the particular {@link Vessel}.
+	     * @return 	boolean 
+	     * </p> 
+	     * @throws ServiceException
+	     *   		If any errors are encountered in the repository layer
+	     *    		while saving data.
+		 **/
+		boolean exist(int id) throws ServiceException;
+		
 	}

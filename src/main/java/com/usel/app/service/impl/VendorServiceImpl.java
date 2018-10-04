@@ -41,4 +41,8 @@ public class VendorServiceImpl implements VendorService {
 		vendorRepository.deleteById(vendorId);
 	}
 
+	@Override
+	public boolean exist(int id) {
+		return vendorRepository.existsById(id);
+	}
 }
