@@ -1,21 +1,14 @@
 package com.usel.app.model;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "VESSELS")
 public class Vessel {
-
-	@OneToMany(mappedBy = "vessel")
-	private List<Vessel> vessel = new LinkedList<Vessel>();
 
 	@Id
 	@Column(name = "ID")
@@ -43,14 +36,6 @@ public class Vessel {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.customerId = customerId;
-	}
-
-	public List<Vessel> getVessel() {
-		return vessel;
-	}
-
-	public void setVessel(List<Vessel> vessel) {
-		this.vessel = vessel;
 	}
 
 	public int getId() {
@@ -95,7 +80,7 @@ public class Vessel {
 
 	@Override
 	public String toString() {
-		return "Vessel [vessel=" + vessel + ", id=" + id + ", name=" + name + ", createdAt=" + createdAt
+		return "Vessel ["  + ", id=" + id + ", name=" + name + ", createdAt=" + createdAt
 				+ ", updatedAt=" + updatedAt + ", customerId=" + customerId + "]";
 	}
 	

@@ -1,8 +1,5 @@
 package com.usel.app.model;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,15 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "JOBS")
 public class Job {
-
-	@OneToMany(mappedBy = "job")
-	private List<Job> jobs = new LinkedList<Job>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CUSTOMER_ID")
@@ -66,13 +59,6 @@ public class Job {
 		this.createdAt=createdAt;
 		this.updatedAt=updatedAt;
 		this.poId=poId;
-	}
-	public List<Job> getJobs() {
-		return jobs;
-	}
-
-	public void setJobs(List<Job> jobs) {
-		this.jobs = jobs;
 	}
 
 	public Customer getCustomer() {
@@ -157,7 +143,7 @@ public class Job {
 
 	@Override
 	public String toString() {
-		return "Job [jobs=" + jobs + ", customer=" + customer + ", id=" + id + ", description=" + description
+		return "Job [" + ", customer=" + customer + ", id=" + id + ", description=" + description
 				+ ", dueDate=" + dueDate + ", mSSale=" + mSSale + ", status=" + status + ", customerId=" + customerId
 				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", poId=" + poId + "]";
 	}

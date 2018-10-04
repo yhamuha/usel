@@ -1,13 +1,9 @@
 package com.usel.app.model;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -16,9 +12,6 @@ import javax.persistence.Table;
 @Table(name = "USERS")
 public class User {
 
-	@OneToMany(mappedBy = "user")
-	private List<User> users = new LinkedList<User>();
-	
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue
@@ -68,14 +61,6 @@ public class User {
 		this.poId = poId;
 	}
 
-	public List<User> getUsers() {
-		return users;
-	}
-	
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-	
 	public int getId() {
 		return id;
 	}
@@ -158,7 +143,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [users=" + users + ", id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email
+		return "User [" + ", id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email
 				+ ", password=" + password + ", shortName=" + shortName + ", isEnabled=" + isEnabled + ", createdAt="
 				+ createdAt + ", updatedAt=" + updatedAt + ", poId=" + poId + "]";
 	}

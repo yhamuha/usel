@@ -1,8 +1,5 @@
 package com.usel.app.model;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,16 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "CUSTOMERS")
 public class Customer {
 
-	@OneToMany(mappedBy = "customer")
-	private List<Customer> customers = new LinkedList<Customer>();
-	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "VESSEL_ID")
 	private Vessel vessel;
@@ -56,14 +49,6 @@ public class Customer {
 		this.createdAt=createdAt;
 		this.updatedAt=updatedAt;
 		this.vesselId=vesselId;
-	}
-
-	public List<Customer> getJobs() {
-		return customers;
-	}
-
-	public void setCustomers(List<Customer> customers) {
-		this.customers = customers;
 	}
 
 	public int getId() {
@@ -112,7 +97,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [customers=" + customers + ", vessel=" + vessel + ", id=" + id + ", name=" + name + ", customerPo="
+		return "Customer [" + ", vessel=" + vessel + ", id=" + id + ", name=" + name + ", customerPo="
 				+ ownPo + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", vesselId=" + vesselId + "]";
 	}
 	
