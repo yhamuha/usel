@@ -1,21 +1,17 @@
-amazonProperties: 
-  endpointUrl: https://s3.us-east-2.amazonaws.com
-  bucketName: surveyor-software-storage
-  accessKey: AKIAJU5VMMPZ2ZER7QRT
-  secretKey: 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
-  
+
 spring:
   profiles: test
   datasource:
     driver-class-name: com.mysql.jdbc.jdbc2.optional.MysqlDataSource
-    url: jdbc:mysql://localhost:3306/usel  
+    url: jdbc:mysql://localhost:3306/usel?useSSL=false  
     username: root 
     password: nbtsa0880  
-    
-#spring.jpa:
-#    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
-#    hibernate.ddl-auto: validate
-#    show_sql: true
-    
 
-        
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      show-sql: true
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+ 
+    
+  
