@@ -5,31 +5,36 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.data.annotation.LastModifiedDate;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "USERS")
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
+allowGetters = true)
+
 public class User {
 
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue
 	private int id;
-
-	@Column(name = "NAME")
+	
+	@Column(name = "NAME", nullable = false)
 	private String name;
-
-	@Column(name = "LAST_NAME")
+	
+	@Column(name = "LAST_NAME", nullable = false)
 	private String lastName;
 
-	@Column(name = "EMAIL")
+	@Column(name = "EMAIL", nullable = false)
 	private String email;
 
-	@Column(name = "PASSWORD")
+	@Column(name = "PASSWORD", nullable = false)
 	private String password;
-
-	@Column(name = "SHORT_NAME")
+	
+	@Column(name = "SHORT_NAME", nullable = false)
 	private String shortName;
 
 	@Column(name = "IS_ENABLED")
@@ -38,7 +43,9 @@ public class User {
 	@Column(name = "CREATED_ID")
 	private boolean createdAt;
 
-	@Column(name = "UPDATED_ID")
+	@Column(name = "UPDATED_AT", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
 	private boolean updatedAt;
 
 	@Column(name = "PO_ID")

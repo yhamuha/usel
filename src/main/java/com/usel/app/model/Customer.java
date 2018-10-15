@@ -9,9 +9,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.data.annotation.LastModifiedDate;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "CUSTOMERS")
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
+allowGetters = true)
+
 public class Customer {
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -23,7 +30,7 @@ public class Customer {
 	@GeneratedValue
 	private int id;
 
-	@Column(name = "NAME")
+	@Column(name = "NAME", nullable = false)
 	private String name;
 	
 	@Basic (optional = false)
@@ -33,7 +40,9 @@ public class Customer {
 	@Column(name = "CREATED_AT")
 	private boolean createdAt;
 
-	@Column(name = "UPDATED_AT")
+	@Column(name = "UPDATED_AT", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
 	private boolean updatedAt;
 
 	@Column(name = "VESSEL_ID")
