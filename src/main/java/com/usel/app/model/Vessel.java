@@ -5,15 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.springframework.data.annotation.LastModifiedDate;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "VESSELS")
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
-allowGetters = true)
 
 public class Vessel {
 
@@ -29,8 +23,6 @@ public class Vessel {
 	private boolean createdAt;
 
 	@Column(name = "UPDATED_AT", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
 	private boolean updatedAt;
 
 	@Column(name = "CUSTOMER_ID")

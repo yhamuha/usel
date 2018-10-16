@@ -8,15 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.springframework.data.annotation.LastModifiedDate;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "JOBS")
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
-allowGetters = true)
 
 public class Job {
 
@@ -33,7 +27,6 @@ public class Job {
 	private String description;
 
 	@Column(name = "DUE_DATE")
-	@Temporal(TemporalType.TIMESTAMP)
 	private String dueDate;
 
 	@Column(name = "M_S_SALE")
@@ -42,15 +35,10 @@ public class Job {
 	@Column(name = "STATUS")
 	private boolean status;
 	
-	@Column(name = "CUSTOMER_ID")
-	private int customerId;
-
 	@Column(name = "CREATED_AT")
 	private boolean createdAt;
 
 	@Column(name = "UPDATED_AT", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
 	private boolean updatedAt;
 
 	@Column(name = "PO_ID")
@@ -65,7 +53,6 @@ public class Job {
 		this.dueDate=dueDate;
 		this.mSSale=mSSale;
 		this.status=status;
-		this.customerId=customerId;
 		this.createdAt=createdAt;
 		this.updatedAt=updatedAt;
 		this.poId=poId;
@@ -119,14 +106,6 @@ public class Job {
 		this.status = status;
 	}
 
-	public int getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
-
 	public boolean isCreatedAt() {
 		return createdAt;
 	}
@@ -154,7 +133,7 @@ public class Job {
 	@Override
 	public String toString() {
 		return "Job [" + ", customer=" + customer + ", id=" + id + ", description=" + description
-				+ ", dueDate=" + dueDate + ", mSSale=" + mSSale + ", status=" + status + ", customerId=" + customerId
+				+ ", dueDate=" + dueDate + ", mSSale=" + mSSale + ", status=" + status 
 				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", poId=" + poId + "]";
 	}
 
