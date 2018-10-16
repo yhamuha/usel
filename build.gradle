@@ -49,6 +49,8 @@ buildscript {
 		compile 'log4j:log4j:1.2.17'
 		// https://mvnrepository.com/artifact/org.hibernate/hibernate-gradle-plugin
 		compile group: 'org.hibernate', name: 'hibernate-gradle-plugin', version: '4.2.20.Final'
+		// https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api
+		compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.2.Final'
 		// Spring Test (incl JUnit)
   		testCompile 'org.springframework.boot:spring-boot-starter-test'
 		// Mockito

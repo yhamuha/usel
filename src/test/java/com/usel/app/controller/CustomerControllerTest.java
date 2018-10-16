@@ -51,7 +51,6 @@ public class CustomerControllerTest {
         this.customer = new Customer();
         customer.setName("FirstName");
         customer.setOwnPo(4020);
-        customer.setVesselId(2);
         customers = new ArrayList<Customer>();
     }
 	

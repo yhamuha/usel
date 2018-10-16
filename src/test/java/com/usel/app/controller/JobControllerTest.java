@@ -53,7 +53,6 @@ public class JobControllerTest {
         job.setDescription("Generator test");
         job.setDueDate("10/5/18");
         job.setmSSale("");
-        job.setCustomerId(2);
         job.setPoId(2);
         jobs = new ArrayList<Job>();
     }

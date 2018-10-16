@@ -51,9 +51,6 @@ public class PurchaseControllerTest {
 		mockMvc = standaloneSetup(purchaseController).build();
         this.purchase = new Purchase();
         purchase.setFinalPoNumber("AP 2296 - 0450");
-        purchase.setUserId(2);
-        purchase.setJobId(2);
-        purchase.setVendorId(2);
         purchases = new ArrayList<Purchase>();
     }
 	
