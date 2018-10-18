@@ -1,13 +1,21 @@
 package com.usel.app.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.data.annotation.LastModifiedDate;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "USERS")
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
+allowGetters = true)
 
 public class User {
 
@@ -38,7 +46,9 @@ public class User {
 	private boolean createdAt;
 
 	@Column(name = "UPDATED_AT", nullable = false)
-	private boolean updatedAt;
+	@Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+	private Date updatedAt;
 
 	@Column(name = "PO_ID")
 	private int poId;
@@ -47,7 +57,7 @@ public class User {
 	}
 	
 	public User(int id, String name, String lastName, String email, String password, String shortName, boolean isEnabled, 
-			    boolean createdAt, boolean updatedAt, int poId) {
+			    boolean createdAt, Date updatedAt, int poId) {
 		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
@@ -124,11 +134,11 @@ public class User {
 		this.createdAt = createdAt;
 	}
 
-	public boolean isUpdatedAt() {
+	public Date isUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(boolean updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
@@ -142,11 +152,11 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [" + ", id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + ", shortName=" + shortName + ", isEnabled=" + isEnabled + ", createdAt="
-				+ createdAt + ", updatedAt=" + updatedAt + ", poId=" + poId + "]";
+		return "User [id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email + ", password="
+				+ password + ", shortName=" + shortName + ", isEnabled=" + isEnabled + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + ", poId=" + poId + "]";
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
         if(o == null) {

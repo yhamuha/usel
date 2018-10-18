@@ -12,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import com.usel.app.model.Job;
 import com.usel.app.repository.JobRepository;
 
@@ -32,7 +31,7 @@ public class JobRepositoryTest {
 	public void whenFindAllThenReturnNotEmptyList() {
 		Job job = new Job();
 		job.setDescription("Job description");
-		job.setDueDate("05/18/18");
+		job.setDueDate("10-18-2018");
 		job.setmSSale("Test mSSale value");
 		job.setStatus(true);
 		

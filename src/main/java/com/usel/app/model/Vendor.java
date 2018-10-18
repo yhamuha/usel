@@ -1,13 +1,21 @@
 package com.usel.app.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.data.annotation.LastModifiedDate;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "VENDORS")
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
+allowGetters = true)
 
 public class Vendor {
 
@@ -23,12 +31,14 @@ public class Vendor {
 	private boolean createdAt;
 
 	@Column(name = "UPDATED_AT", nullable = false)
-	private boolean updatedAt;
+	@Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+	private Date updatedAt;
 
 	public Vendor() {
 	}
 	
-	public Vendor(int id, String name, boolean createdAt, boolean updatedAt) {
+	public Vendor(int id, String name, boolean createdAt, Date updatedAt) {
 		this.id = id;
 		this.name = name;
 		this.createdAt = createdAt;
@@ -59,11 +69,11 @@ public class Vendor {
 		this.createdAt = createdAt;
 	}
 
-	public boolean isUpdatedAt() {
+	public Date isUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(boolean updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 

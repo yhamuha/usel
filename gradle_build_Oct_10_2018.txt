@@ -1,0 +1,48 @@
+Starting a Gradle Daemon (subsequent builds will be faster)
+
+> Task :test
+
+com.usel.app.repository.CustomerRepositoryTest > whenFindAllThenReturnNotEmptyList FAILED
+    java.lang.IllegalStateException
+        Caused by: org.springframework.beans.factory.BeanCreationException
+            Caused by: javax.persistence.PersistenceException
+                Caused by: org.hibernate.tool.schema.spi.SchemaManagementException
+
+com.usel.app.repository.JobRepositoryTest > whenFindAllThenReturnNotEmptyList FAILED
+    java.lang.IllegalStateException
+        Caused by: org.springframework.beans.factory.BeanCreationException
+            Caused by: javax.persistence.PersistenceException
+                Caused by: org.hibernate.tool.schema.spi.SchemaManagementException
+
+com.usel.app.repository.PurchaseRepositoryTest > whenFindAllThenReturnNotEmptyList FAILED
+    java.lang.IllegalStateException
+        Caused by: java.lang.IllegalStateException
+            Caused by: java.io.FileNotFoundException
+
+com.usel.app.repository.UserRepositoryTest > whenFindAllThenReturnNotEmptyList FAILED
+    java.lang.IllegalStateException
+        Caused by: org.springframework.beans.factory.BeanCreationException
+            Caused by: javax.persistence.PersistenceException
+                Caused by: org.hibernate.tool.schema.spi.SchemaManagementException
+
+com.usel.app.repository.VendorRepositoryTest > whenFindAllThenReturnNotEmptyList FAILED
+    java.lang.IllegalStateException
+        Caused by: org.springframework.beans.factory.BeanCreationException
+            Caused by: javax.persistence.PersistenceException
+                Caused by: org.hibernate.tool.schema.spi.SchemaManagementException
+
+com.usel.app.repository.VesselRepositoryTest > whenFindAllThenReturnNotEmptyList FAILED
+    java.lang.IllegalStateException
+        Caused by: org.springframework.beans.factory.BeanCreationException
+            Caused by: javax.persistence.PersistenceException
+                Caused by: org.hibernate.tool.schema.spi.SchemaManagementException
+2018-10-17 09:08:14.787  INFO 34624 --- [      Thread-18] o.s.c.support.GenericApplicationContext  : Closing org.springframework.context.support.GenericApplicationContext@64cb1090: startup date [Wed Oct 17 09:08:13 PDT 2018]; root of context hierarchy
+2018-10-17 09:08:14.787  INFO 34624 --- [      Thread-15] o.s.c.support.GenericApplicationContext  : Closing org.springframework.context.support.GenericApplicationContext@6f5d5adc: startup date [Wed Oct 17 09:08:12 PDT 2018]; root of context hierarchy
+2018-10-17 09:08:14.788  INFO 34624 --- [      Thread-20] o.s.c.support.GenericApplicationContext  : Closing org.springframework.context.support.GenericApplicationContext@5d343e91: startup date [Wed Oct 17 09:08:14 PDT 2018]; root of context hierarchy
+2018-10-17 09:08:14.788  INFO 34624 --- [      Thread-17] o.s.c.support.GenericApplicationContext  : Closing org.springframework.context.support.GenericApplicationContext@4a2741dd: startup date [Wed Oct 17 09:08:13 PDT 2018]; root of context hierarchy
+2018-10-17 09:08:14.788  INFO 34624 --- [      Thread-16] o.s.c.support.GenericApplicationContext  : Closing org.springframework.context.support.GenericApplicationContext@3871cb1e: startup date [Wed Oct 17 09:08:13 PDT 2018]; root of context hierarchy
+2018-10-17 09:08:14.787  INFO 34624 --- [      Thread-19] o.s.c.support.GenericApplicationContext  : Closing org.springframework.context.support.GenericApplicationContext@4d694a85: startup date [Wed Oct 17 09:08:13 PDT 2018]; root of context hierarchy
+2018-10-17 09:08:14.787  INFO 34624 --- [      Thread-14] o.s.c.support.GenericApplicationContext  : Closing org.springframework.context.support.GenericApplicationContext@34c73f45: startup date [Wed Oct 17 09:08:11 PDT 2018]; root of context hierarchy
+
+> Task :test FAILED
+5 actionable tasks: 4 executed, 1 up-to-date

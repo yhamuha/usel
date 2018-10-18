@@ -1,5 +1,6 @@
 package com.usel.app.model;
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,9 +9,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.data.annotation.LastModifiedDate;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "JOBS")
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
+allowGetters = true)
 
 public class Job {
 
@@ -35,11 +42,16 @@ public class Job {
 	@Column(name = "STATUS")
 	private boolean status;
 	
+	@Column(name = "CUSTOMER_ID")
+	private int customerId;
+	
 	@Column(name = "CREATED_AT")
 	private boolean createdAt;
 
 	@Column(name = "UPDATED_AT", nullable = false)
-	private boolean updatedAt;
+	@Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+	private Date updatedAt;
 
 	@Column(name = "PO_ID")
 	private int poId;
@@ -47,12 +59,13 @@ public class Job {
 	public Job() {
 	}
 
-	public Job(int id, String description, String dueDate, String mSSale, boolean status, int customerId, boolean createdAt, boolean updatedAt, int poId) {
+	public Job(int id, String description, String dueDate, String mSSale, boolean status, int customerId, boolean createdAt, Date updatedAt, int poId) {
 		this.id=id;
 		this.description=description;
 		this.dueDate=dueDate;
 		this.mSSale=mSSale;
 		this.status=status;
+		this.customerId=customerId;
 		this.createdAt=createdAt;
 		this.updatedAt=updatedAt;
 		this.poId=poId;
@@ -106,6 +119,13 @@ public class Job {
 		this.status = status;
 	}
 
+	public int getCustomerId() {
+		return customerId;
+	}
+ 	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
+	
 	public boolean isCreatedAt() {
 		return createdAt;
 	}
@@ -114,11 +134,11 @@ public class Job {
 		this.createdAt = createdAt;
 	}
 
-	public boolean isUpdatedAt() {
+	public Date isUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(boolean updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
@@ -132,9 +152,14 @@ public class Job {
 
 	@Override
 	public String toString() {
-		return "Job [" + ", customer=" + customer + ", id=" + id + ", description=" + description
-				+ ", dueDate=" + dueDate + ", mSSale=" + mSSale + ", status=" + status 
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", poId=" + poId + "]";
+		return "Job [customer=" + customer + ", id=" + id + ", description=" + description + ", dueDate=" + dueDate
+				+ ", mSSale=" + mSSale + ", status=" + status + ", customerId=" + customerId + ", createdAt="
+				+ createdAt + ", updatedAt=" + updatedAt + ", poId=" + poId + ", getCustomer()=" + getCustomer()
+				+ ", getId()=" + getId() + ", getDescription()=" + getDescription() + ", getDueDate()=" + getDueDate()
+				+ ", getmSSale()=" + getmSSale() + ", isStatus()=" + isStatus() + ", getCustomerId()=" + getCustomerId()
+				+ ", isCreatedAt()=" + isCreatedAt() + ", isUpdatedAt()=" + isUpdatedAt() + ", getPoId()=" + getPoId()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 	@Override

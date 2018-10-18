@@ -1,5 +1,6 @@
 package com.usel.app.model;
 
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,9 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.data.annotation.LastModifiedDate;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "CUSTOMERS")
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
+allowGetters = true)
 
 public class Customer {
 
@@ -35,17 +42,23 @@ public class Customer {
 	private boolean createdAt;
 
 	@Column(name = "UPDATED_AT", nullable = false)
-	private boolean updatedAt;
+	@Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+	private Date updatedAt;
 
+	@Column(name = "VESSEL_ID")
+	private int vesselId;
+	
 	public Customer() {
 	}
 	
-	public Customer(int id, String name, int customerPo, boolean createdAt, boolean updatedAt, int vesselId, int customerId) {
+	public Customer(int id, String name, int customerPo, boolean createdAt, Date updatedAt, int vesselId, int customerId) {
 		this.id = id;
 		this.name=name;
 		this.ownPo=customerPo;
 		this.createdAt=createdAt;
 		this.updatedAt=updatedAt;
+		this.vesselId=vesselId;
 	}
 
 	public int getId() {
@@ -76,20 +89,28 @@ public class Customer {
 		this.createdAt = createdAt;
 	}
 
-	public boolean isUpdatedAt() {
+	public Date isUpdatedAt() {
 		return updatedAt;
 	}
 	
-	public void setUpdatedAt(boolean updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+	
+	public int getVesselId() {
+		return vesselId;
+	}
+	
+	public void setVesselId(int vesselId) {
+		this.vesselId = vesselId;
 	}
 
 	@Override
 	public String toString() {
-		return "Customer [" + ", vessel=" + vessel + ", id=" + id + ", name=" + name + ", customerPo="
-				+ ownPo + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+		return "Customer [vessel=" + vessel + ", id=" + id + ", name=" + name + ", ownPo=" + ownPo + ", createdAt="
+				+ createdAt + ", updatedAt=" + updatedAt + ", vesselId=" + vesselId + "]";
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
         if(o == null) {
