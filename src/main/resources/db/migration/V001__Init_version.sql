@@ -6,6 +6,7 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+SET sql_mode='STRICT_TRANS_TABLES,NO_ZERO_DATE,NO_ZERO_IN_DATE';
 
 -- -----------------------------------------------------
 -- Schema usel
@@ -34,14 +35,14 @@ CREATE TABLE IF NOT EXISTS `usel`.`Vessels` (
 CREATE TABLE IF NOT EXISTS `usel`.`Customers` (
   `id` INT NOT NULL,
   `name` VARCHAR(30) NOT NULL,
-  `ownPo` VARCHAR(30) NOT NULL,
-  `createdAt` TINYINT NULL,
-  `updatedAt` TINYINT NULL,
-  `vesselId` INT NOT NULL,
-  PRIMARY KEY (`id`, `vesselId`),
-  INDEX `vessel_fk_idx` (`vesselId` ASC),
+  `own_po` INT NOT NULL,
+  `created_at` DATE NULL,
+  `updated_at` DATE NULL,
+  `vessel_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `vessel_id`),
+  INDEX `vessel_fk_idx` (`vessel_id` ASC),
   CONSTRAINT `vessel_fk`
-    FOREIGN KEY (`vesselId`)
+    FOREIGN KEY (`vessel_id`)
     REFERENCES `usel`.`Vessels` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE);

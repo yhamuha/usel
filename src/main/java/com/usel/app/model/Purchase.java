@@ -49,25 +49,26 @@ public class Purchase {
     @LastModifiedDate
 	private Date updatedAt;
 	
-	@Column(name = "USER_ID")
-	private int userId;
- 	@Column(name = "JOB_ID")
-	private int jobId;
+	/*@Column(name = "USER_ID")
+	private int userId;*/
 	
-	@Column(name = "VENDOR_ID")
-	private int vendorId;
+ 	/*@Column(name = "JOB_ID")
+	private int jobId;*/
+	
+	/*@Column(name = "VENDOR_ID")
+	private int vendorId;*/
 	
 	public Purchase() {
 	}
 	
-	public Purchase(int po, String finalPoNumber, boolean createdAt, Date updatedAt, int userId, int jobId, int vendorId) {
+	public Purchase(int po, String finalPoNumber, boolean createdAt, Date updatedAt/*, int userId*/ /*, int jobId*//*, int vendorId*/) {
 		this.po = po;
 		this.finalPoNumber = finalPoNumber;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		this.userId = userId;
-		this.jobId = jobId;
-		this.vendorId = vendorId;
+		//this.userId = userId;
+		//this.jobId = jobId;
+		//this.vendorId = vendorId;
 	}
 
 	public Vendor getVendor() {
@@ -126,34 +127,37 @@ public class Purchase {
 		this.updatedAt = updatedAt;
 	}
 
-	public int getUserId() {
+	/*public int getUserId() {
 		return userId;
 	}
  	public void setUserId(int userId) {
 		this.userId = userId;
-	}
- 	public int getJobId() {
+	}*/
+ 	
+ 	/*public int getJobId() {
 		return jobId;
 	}
- 	public void setJobId(int jobId) {
+ 	
+	public void setJobId(int jobId) {
 		this.jobId = jobId;
-	}
- 	public int getVendorId() {
+	}*/
+ 	
+ 	/*public int getVendorId() {
 		return vendorId;
 	}
  	public void setVendorId(int vendorId) {
 		this.vendorId = vendorId;
-	}
+	}*/
 	
 	@Override
 	public String toString() {
 		return "Purchase [vendor=" + vendor + ", user=" + user + ", job=" + job + ", po=" + po + ", finalPoNumber="
-				+ finalPoNumber + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", userId=" + userId
-				+ ", jobId=" + jobId + ", vendorId=" + vendorId + ", getVendor()=" + getVendor() + ", getUser()="
+				+ finalPoNumber + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt /*+ ", userId=" + userId*/
+				/*+ ", jobId=" + jobId */+ /*", vendorId=" + vendorId +*/ ", getVendor()=" + getVendor() + ", getUser()="
 				+ getUser() + ", getJob()=" + getJob() + ", getPo()=" + getPo() + ", getFinalPoNumber()="
 				+ getFinalPoNumber() + ", isCreatedAt()=" + isCreatedAt() + ", isUpdatedAt()=" + isUpdatedAt()
-				+ ", getUserId()=" + getUserId() + ", getJobId()=" + getJobId() + ", getVendorId()=" + getVendorId()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				/*+ ", getUserId()=" + getUserId()*/ + /*", getJobId()=" + getJobId() +*/ /*", getVendorId()=" + getVendorId()
+				+*/ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
 				+ "]";
 	}
 
