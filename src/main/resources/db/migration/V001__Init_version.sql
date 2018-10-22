@@ -21,7 +21,7 @@ USE `usel` ;
 -- -----------------------------------------------------
 -- Table `usel`.`Vessels`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usel`.`Vessels` (
+CREATE TABLE IF NOT EXISTS `usel`.`vessels` (
   `id` INT NOT NULL,
   `name` VARCHAR(15) NOT NULL,
   `createdAt` TINYINT NULL,
@@ -32,17 +32,17 @@ CREATE TABLE IF NOT EXISTS `usel`.`Vessels` (
 -- -----------------------------------------------------
 -- Table `usel`.`Customers`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usel`.`Customers` (
+CREATE TABLE IF NOT EXISTS `usel`.`customers` (
   `id` INT NOT NULL,
   `name` VARCHAR(30) NOT NULL,
-  `own_po` INT NOT NULL,
-  `created_at` DATE NULL,
-  `updated_at` DATE NULL,
-  `vessel_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `vessel_id`),
-  INDEX `vessel_fk_idx` (`vessel_id` ASC),
+  `ownPo` INT NOT NULL,
+  `createdAt` DATE NULL,
+  `updatedAt` DATE NULL,
+  `vesselId` INT NOT NULL,
+  PRIMARY KEY (`id`, `vesselId`),
+  INDEX `vessel_fk_idx` (`vesselId` ASC),
   CONSTRAINT `vessel_fk`
-    FOREIGN KEY (`vessel_id`)
+    FOREIGN KEY (`vesselId`)
     REFERENCES `usel`.`Vessels` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE);
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `usel`.`Customers` (
 -- -----------------------------------------------------
 -- Table `usel`.`Jobs`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usel`.`Jobs` (
+CREATE TABLE IF NOT EXISTS `usel`.`jobs` (
   `id` INT NOT NULL,
   `description` VARCHAR(120) NOT NULL,
   `dueDate` DATE NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `usel`.`Jobs` (
 -- -----------------------------------------------------
 -- Table `usel`.`Vendors`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usel`.`Vendors` (
+CREATE TABLE IF NOT EXISTS `usel`.`vendors` (
   `id` INT NOT NULL,
   `name` VARCHAR(20) NOT NULL,
   `createdAt` TINYINT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `usel`.`Vendors` (
 -- -----------------------------------------------------
 -- Table `usel`.`Users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usel`.`Users` (
+CREATE TABLE IF NOT EXISTS `usel`.`users` (
   `id` INT NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `lastName` VARCHAR(45) NOT NULL,
@@ -100,7 +100,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `usel`.`Purchases`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usel`.`Purchases` (
+CREATE TABLE IF NOT EXISTS `usel`.`purchases` (
   `po` INT NOT NULL AUTO_INCREMENT,
   `finalPoNumber` INT NOT NULL,
   `createdAt` TINYINT NULL,
