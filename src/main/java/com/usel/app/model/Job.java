@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,15 +27,16 @@ public class Job {
 	private Customer customer;
 
 	@Id
-	@Column(name = "ID")
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private int id;
-
+	
 	@Column(name = "DESCRIPTION", nullable = false)
 	private String description;
 
 	@Column(name = "DUE_DATE")
-	private String dueDate;
+	@Temporal(TemporalType.DATE)
+	private Date dueDate;
 
 	@Column(name = "M_S_SALE")
 	private String mSSale;
@@ -42,14 +44,15 @@ public class Job {
 	@Column(name = "STATUS")
 	private boolean status;
 	
-	/*@Column(name = "CUSTOMER_ID")
-	private int customerId;*/
+	@Column(name = "CUSTOMER_ID")
+	private int customerId;
 	
-	@Column(name = "CREATED_AT")
-	private boolean createdAt;
+	@Column(name = "created_at")
+	@Temporal(TemporalType.DATE)
+	private Date createdAt;
 
-	@Column(name = "UPDATED_AT", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "updatedAt")
+	@Temporal(TemporalType.DATE)
     @LastModifiedDate
 	private Date updatedAt;
 
@@ -59,13 +62,13 @@ public class Job {
 	public Job() {
 	}
 
-	public Job(int id, String description, String dueDate, String mSSale, boolean status/*, int customerId*/, boolean createdAt, Date updatedAt, int poId) {
+	public Job(int id, String description, Date dueDate, String mSSale, boolean status, int customerId, Date createdAt, Date updatedAt, int poId) {
 		this.id=id;
 		this.description=description;
 		this.dueDate=dueDate;
 		this.mSSale=mSSale;
 		this.status=status;
-		//this.customerId=customerId;
+		this.customerId=customerId;
 		this.createdAt=createdAt;
 		this.updatedAt=updatedAt;
 		this.poId=poId;
@@ -95,11 +98,11 @@ public class Job {
 		this.description = description;
 	}
 
-	public String getDueDate() {
+	public Date getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(String dueDate) {
+	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
 
@@ -119,18 +122,18 @@ public class Job {
 		this.status = status;
 	}
 
-	/*public int getCustomerId() {
+	public int getCustomerId() {
 		return customerId;
 	}
  	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
-	}*/
+	}
 	
-	public boolean isCreatedAt() {
+	public Date isCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(boolean createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
@@ -153,10 +156,10 @@ public class Job {
 	@Override
 	public String toString() {
 		return "Job [customer=" + customer + ", id=" + id + ", description=" + description + ", dueDate=" + dueDate
-				+ ", mSSale=" + mSSale + ", status=" + status /*+ ", customerId=" + customerId*/ + ", createdAt="
+				+ ", mSSale=" + mSSale + ", status=" + status + ", customerId=" + customerId + ", createdAt="
 				+ createdAt + ", updatedAt=" + updatedAt + ", poId=" + poId + ", getCustomer()=" + getCustomer()
 				+ ", getId()=" + getId() + ", getDescription()=" + getDescription() + ", getDueDate()=" + getDueDate()
-				+ ", getmSSale()=" + getmSSale() + ", isStatus()=" + isStatus() /*+ ", getCustomerId()=" + getCustomerId()*/
+				+ ", getmSSale()=" + getmSSale() + ", isStatus()=" + isStatus() + ", getCustomerId()=" + getCustomerId()
 				+ ", isCreatedAt()=" + isCreatedAt() + ", isUpdatedAt()=" + isUpdatedAt() + ", getPoId()=" + getPoId()
 				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
 				+ "]";

@@ -2,6 +2,8 @@ package com.usel.app.repository;
 
 import static org.junit.Assert.assertFalse;
 
+import java.util.Date;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +32,9 @@ public class JobRepositoryTest {
 	@Test
 	public void whenFindAllThenReturnNotEmptyList() {
 		Job job = new Job();
+		Date date = new Date();
 		job.setDescription("Job description");
-		job.setDueDate("10-18-2018");
+		job.setDueDate(date);
 		job.setmSSale("Test mSSale value");
 		job.setStatus(true);
 		

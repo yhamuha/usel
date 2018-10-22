@@ -1,10 +1,10 @@
 package com.usel.app.model;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,25 +20,26 @@ allowGetters = true)
 public class Vendor {
 
 	@Id
-	@Column(name = "ID")
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private int id;
 
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
-	@Column(name = "CREATED_AT")
-	private boolean createdAt;
+	@Column(name = "created_at")
+	@Temporal(TemporalType.DATE)
+	private Date createdAt;
 
-	@Column(name = "UPDATED_AT", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "updatedAt")
+	@Temporal(TemporalType.DATE)
     @LastModifiedDate
 	private Date updatedAt;
 
 	public Vendor() {
 	}
 	
-	public Vendor(int id, String name, boolean createdAt, Date updatedAt) {
+	public Vendor(int id, String name, Date createdAt, Date updatedAt) {
 		this.id = id;
 		this.name = name;
 		this.createdAt = createdAt;
@@ -61,11 +62,11 @@ public class Vendor {
 		this.name = name;
 	}
 
-	public boolean isCreatedAt() {
+	public Date isCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(boolean createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
@@ -79,8 +80,7 @@ public class Vendor {
 
 	@Override
 	public String toString() {
-		return "Vendor [" + ", id=" + id + ", name=" + name + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + "]";
+		return "Vendor [id=" + id + ", name=" + name + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 
 	@Override

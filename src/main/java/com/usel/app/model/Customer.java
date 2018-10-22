@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -19,8 +18,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table (name = "customers")
-/*@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
-allowGetters = true)*/
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
+allowGetters = true)
 
 public class Customer {
 
@@ -29,48 +28,39 @@ public class Customer {
 	private Vessel vessel;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-	@GeneratedValue/*(strategy=GenerationType.SEQUENCE, generator="course")
-    @TableGenerator(
-            name="course",
-            table="GENERATOR_TABLE",
-            pkColumnName = "key",
-            valueColumnName = "next",
-            pkColumnValue="course",
-            allocationSize=30
-        )  */
-	//(strategy = GenerationType.SEQUENCE)
 	private int id;
 
-	//@Column(name = "name", nullable = false)
+	@Column(name = "name")
 	private String name;
 	
-	//@Basic (optional = false)
-	//@Column(name = "own_po", length = 50)
+	@Basic (optional = false)
+	@Column(name = "own_po", length = 50)
 	private int ownPo;
 
-	//@Column(name = "created_at", nullable = false)
+	@Column(name = "created_at")
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 
-	//@Column(name = "updatedAt", nullable = false)
+	@Column(name = "updatedAt")
 	@Temporal(TemporalType.DATE)
     @LastModifiedDate
 	private Date updatedAt;
 
-	//@Column(name = "vessel_id")
-	//private int vesselId;
+	@Column(name = "vessel_id")
+	private int vesselId;
 	
 	public Customer() {
 	}
 	
-	public Customer(int id, String name, int customerPo, Date createdAt, Date updatedAt/*, int vesselId*/, int customerId) {
+	public Customer(int id, String name, int customerPo, Date createdAt, Date updatedAt, int vesselId, int customerId) {
 		this.id = id;
 		this.name=name;
 		this.ownPo=customerPo;
 		this.createdAt=createdAt;
 		this.updatedAt=updatedAt;
-		//this.vesselId=vesselId;
+		this.vesselId=vesselId;
 	}
 
 	public int getId() {
@@ -109,18 +99,18 @@ public class Customer {
 		this.updatedAt = updatedAt;
 	}
 	
-	/*public int getVesselId() {
+	public int getVesselId() {
 		return vesselId;
 	}
 	
 	public void setVesselId(int vesselId) {
 		this.vesselId = vesselId;
-	}*/
+	}
 
 	@Override
 	public String toString() {
 		return "Customer [vessel=" + vessel + ", id=" + id + ", name=" + name + ", ownPo=" + ownPo + ", createdAt="
-				+ createdAt + ", updatedAt=" + updatedAt /*+ ", vesselId=" + vesselId*/ + "]";
+				+ createdAt + ", updatedAt=" + updatedAt + ", vesselId=" + vesselId + "]";
 	}
 
 	@Override

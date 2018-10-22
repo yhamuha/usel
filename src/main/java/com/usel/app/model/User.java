@@ -1,10 +1,10 @@
 package com.usel.app.model;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,10 +20,10 @@ allowGetters = true)
 public class User {
 
 	@Id
-	@Column(name = "ID")
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private int id;
-	
+
 	@Column(name = "NAME", nullable = false)
 	private String name;
 	
@@ -42,11 +42,12 @@ public class User {
 	@Column(name = "IS_ENABLED")
 	private boolean isEnabled;
 
-	@Column(name = "CREATED_ID")
-	private boolean createdAt;
+	@Column(name = "created_at")
+	@Temporal(TemporalType.DATE)
+	private Date createdAt;
 
-	@Column(name = "UPDATED_AT", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "updatedAt")
+	@Temporal(TemporalType.DATE)
     @LastModifiedDate
 	private Date updatedAt;
 
@@ -57,7 +58,7 @@ public class User {
 	}
 	
 	public User(int id, String name, String lastName, String email, String password, String shortName, boolean isEnabled, 
-			    boolean createdAt, Date updatedAt, int poId) {
+			    Date createdAt, Date updatedAt, int poId) {
 		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
@@ -126,11 +127,11 @@ public class User {
 		this.isEnabled = isEnabled;
 	}
 
-	public boolean isCreatedAt() {
+	public Date isCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(boolean createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 

@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,41 +35,42 @@ public class Purchase {
 	private Job job;
 
 	@Id
-	@Column(name = "PO")
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "po")
 	private int po;
 
 	@Column(name = "FINAL_PO_NUMBER", nullable = false)
 	private String finalPoNumber;
 
-	@Column(name = "CREATED_AT")
-	private boolean createdAt;
+	@Column(name = "created_at")
+	@Temporal(TemporalType.DATE)
+	private Date createdAt;
 
-	@Column(name = "UPDATED_AT", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "updatedAt")
+	@Temporal(TemporalType.DATE)
     @LastModifiedDate
 	private Date updatedAt;
 	
-	/*@Column(name = "USER_ID")
-	private int userId;*/
+	@Column(name = "USER_ID")
+	private int userId;
 	
- 	/*@Column(name = "JOB_ID")
-	private int jobId;*/
+ 	@Column(name = "JOB_ID")
+	private int jobId;
 	
-	/*@Column(name = "VENDOR_ID")
-	private int vendorId;*/
+	@Column(name = "VENDOR_ID")
+	private int vendorId;
 	
 	public Purchase() {
 	}
 	
-	public Purchase(int po, String finalPoNumber, boolean createdAt, Date updatedAt/*, int userId*/ /*, int jobId*//*, int vendorId*/) {
+	public Purchase(int po, String finalPoNumber, Date createdAt, Date updatedAt, int userId , int jobId, int vendorId) {
 		this.po = po;
 		this.finalPoNumber = finalPoNumber;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		//this.userId = userId;
-		//this.jobId = jobId;
-		//this.vendorId = vendorId;
+		this.userId = userId;
+		this.jobId = jobId;
+		this.vendorId = vendorId;
 	}
 
 	public Vendor getVendor() {
@@ -111,11 +113,11 @@ public class Purchase {
 		this.finalPoNumber = finalPoNumber;
 	}
 
-	public boolean isCreatedAt() {
+	public Date isCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(boolean createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
@@ -127,37 +129,37 @@ public class Purchase {
 		this.updatedAt = updatedAt;
 	}
 
-	/*public int getUserId() {
+	public int getUserId() {
 		return userId;
 	}
  	public void setUserId(int userId) {
 		this.userId = userId;
-	}*/
+	}
  	
- 	/*public int getJobId() {
+ 	public int getJobId() {
 		return jobId;
 	}
  	
 	public void setJobId(int jobId) {
 		this.jobId = jobId;
-	}*/
+	}
  	
- 	/*public int getVendorId() {
+ 	public int getVendorId() {
 		return vendorId;
 	}
  	public void setVendorId(int vendorId) {
 		this.vendorId = vendorId;
-	}*/
+	}
 	
 	@Override
 	public String toString() {
 		return "Purchase [vendor=" + vendor + ", user=" + user + ", job=" + job + ", po=" + po + ", finalPoNumber="
-				+ finalPoNumber + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt /*+ ", userId=" + userId*/
-				/*+ ", jobId=" + jobId */+ /*", vendorId=" + vendorId +*/ ", getVendor()=" + getVendor() + ", getUser()="
+				+ finalPoNumber + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", userId=" + userId
+				+ ", jobId=" + jobId + ", vendorId=" + vendorId + ", getVendor()=" + getVendor() + ", getUser()="
 				+ getUser() + ", getJob()=" + getJob() + ", getPo()=" + getPo() + ", getFinalPoNumber()="
 				+ getFinalPoNumber() + ", isCreatedAt()=" + isCreatedAt() + ", isUpdatedAt()=" + isUpdatedAt()
-				/*+ ", getUserId()=" + getUserId()*/ + /*", getJobId()=" + getJobId() +*/ /*", getVendorId()=" + getVendorId()
-				+*/ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ ", getUserId()=" + getUserId() + ", getJobId()=" + getJobId() + ", getVendorId()=" + getVendorId()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
 				+ "]";
 	}
 
