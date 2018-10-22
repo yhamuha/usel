@@ -41,7 +41,7 @@ public class Job {
 	@Column(name = "M_S_SALE")
 	private String mSSale;
 
-	@Column(name = "STATUS")
+	@Column(name = "STATUS", nullable = false)
 	private boolean status;
 	
 	@Column(name = "CUSTOMER_ID")

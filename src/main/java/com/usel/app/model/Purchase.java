@@ -42,22 +42,22 @@ public class Purchase {
 	@Column(name = "FINAL_PO_NUMBER", nullable = false)
 	private String finalPoNumber;
 
-	@Column(name = "created_at")
+	@Column(name = "created_at", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 
-	@Column(name = "updatedAt")
+	@Column(name = "updatedAt", nullable = false)
 	@Temporal(TemporalType.DATE)
     @LastModifiedDate
 	private Date updatedAt;
 	
-	@Column(name = "USER_ID")
+	@Column(name = "USER_ID", nullable = false)
 	private int userId;
 	
- 	@Column(name = "JOB_ID")
+ 	@Column(name = "JOB_ID", nullable = false)
 	private int jobId;
 	
-	@Column(name = "VENDOR_ID")
+	@Column(name = "VENDOR_ID", nullable = false)
 	private int vendorId;
 	
 	public Purchase() {

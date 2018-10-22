@@ -27,16 +27,16 @@ public class Vessel {
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
-	@Column(name = "created_at")
+	@Column(name = "created_at", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 
-	@Column(name = "updatedAt")
+	@Column(name = "updatedAt", nullable = false)
 	@Temporal(TemporalType.DATE)
     @LastModifiedDate
 	private Date updatedAt;
 
-	@Column(name = "CUSTOMER_ID")
+	@Column(name = "CUSTOMER_ID", nullable = false)
 	private int customerId;
 
 	public Vessel() {

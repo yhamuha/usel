@@ -32,23 +32,23 @@ public class Customer {
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "name")
+	@Column(name = "name", nullable = false)
 	private String name;
 	
 	@Basic (optional = false)
 	@Column(name = "own_po", length = 50)
 	private int ownPo;
 
-	@Column(name = "created_at")
+	@Column(name = "created_at", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 
-	@Column(name = "updatedAt")
+	@Column(name = "updatedAt", nullable = false)
 	@Temporal(TemporalType.DATE)
     @LastModifiedDate
 	private Date updatedAt;
 
-	@Column(name = "vessel_id")
+	@Column(name = "vessel_id", nullable = false)
 	private int vesselId;
 	
 	public Customer() {

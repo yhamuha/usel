@@ -39,19 +39,19 @@ public class User {
 	@Column(name = "SHORT_NAME", nullable = false)
 	private String shortName;
 
-	@Column(name = "IS_ENABLED")
+	@Column(name = "IS_ENABLED", nullable = false)
 	private boolean isEnabled;
 
-	@Column(name = "created_at")
+	@Column(name = "created_at", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 
-	@Column(name = "updatedAt")
+	@Column(name = "updatedAt", nullable = false)
 	@Temporal(TemporalType.DATE)
     @LastModifiedDate
 	private Date updatedAt;
 
-	@Column(name = "PO_ID")
+	@Column(name = "PO_ID", nullable = false)
 	private int poId;
 
 	public User() {

@@ -27,11 +27,11 @@ public class Vendor {
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
-	@Column(name = "created_at")
+	@Column(name = "created_at", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 
-	@Column(name = "updatedAt")
+	@Column(name = "updatedAt", nullable = false)
 	@Temporal(TemporalType.DATE)
     @LastModifiedDate
 	private Date updatedAt;
