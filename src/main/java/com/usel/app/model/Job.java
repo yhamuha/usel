@@ -23,7 +23,7 @@ allowGetters = true)
 public class Job {
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CUSTOMER_ID")
+	@JoinColumn(name = "CUSTOMER_ID", insertable=false, updatable=false)
 	private Customer customer;
 
 	@Id
@@ -44,8 +44,8 @@ public class Job {
 	@Column(name = "STATUS", nullable = false)
 	private boolean status;
 	
-	@Column(name = "CUSTOMER_ID")
-	private int customerId;
+	/*@Column(name = "CUSTOMER_ID")
+	private int customerId;*/
 	
 	@Column(name = "created_at")
 	@Temporal(TemporalType.DATE)
@@ -62,13 +62,13 @@ public class Job {
 	public Job() {
 	}
 
-	public Job(int id, String description, Date dueDate, String mSSale, boolean status, int customerId, Date createdAt, Date updatedAt, int poId) {
+	public Job(int id, String description, Date dueDate, String mSSale, boolean status, /*int customerId,*/ Date createdAt, Date updatedAt, int poId) {
 		this.id=id;
 		this.description=description;
 		this.dueDate=dueDate;
 		this.mSSale=mSSale;
 		this.status=status;
-		this.customerId=customerId;
+		//this.customerId=customerId;
 		this.createdAt=createdAt;
 		this.updatedAt=updatedAt;
 		this.poId=poId;
@@ -122,12 +122,12 @@ public class Job {
 		this.status = status;
 	}
 
-	public int getCustomerId() {
+	/*public int getCustomerId() {
 		return customerId;
 	}
  	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
-	}
+	}*/
 	
 	public Date isCreatedAt() {
 		return createdAt;
@@ -156,10 +156,10 @@ public class Job {
 	@Override
 	public String toString() {
 		return "Job [customer=" + customer + ", id=" + id + ", description=" + description + ", dueDate=" + dueDate
-				+ ", mSSale=" + mSSale + ", status=" + status + ", customerId=" + customerId + ", createdAt="
+				+ ", mSSale=" + mSSale + ", status=" + status /*+ ", customerId=" + customerId*/ + ", createdAt="
 				+ createdAt + ", updatedAt=" + updatedAt + ", poId=" + poId + ", getCustomer()=" + getCustomer()
 				+ ", getId()=" + getId() + ", getDescription()=" + getDescription() + ", getDueDate()=" + getDueDate()
-				+ ", getmSSale()=" + getmSSale() + ", isStatus()=" + isStatus() + ", getCustomerId()=" + getCustomerId()
+				+ ", getmSSale()=" + getmSSale() + ", isStatus()=" + isStatus() /*+ ", getCustomerId()=" + getCustomerId()*/
 				+ ", isCreatedAt()=" + isCreatedAt() + ", isUpdatedAt()=" + isUpdatedAt() + ", getPoId()=" + getPoId()
 				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
 				+ "]";

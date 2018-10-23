@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
 allowGetters = true)
 
-public class Customer {
+public class Customer{
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "vessel_id", insertable=false, updatable=false)
