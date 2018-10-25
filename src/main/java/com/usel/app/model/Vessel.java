@@ -13,18 +13,18 @@ import org.springframework.data.annotation.LastModifiedDate;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "VESSELS")
+@Table(name = "vessels")
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
 allowGetters = true)
 
 public class Vessel {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "NAME", nullable = false)
+	@Column(name = "name", nullable = false)
 	private String name;
 
 	@Column(name = "created_at", nullable = false)
@@ -36,18 +36,18 @@ public class Vessel {
     @LastModifiedDate
 	private Date updatedAt;
 
-	@Column(name = "CUSTOMER_ID", nullable = false)
-	private int customerId;
+	//@Column(name = "CUSTOMER_ID", nullable = false)
+	//private int customerId;
 
 	public Vessel() {
 	}
 	
-	public Vessel(int id, String name, Date createdAt, Date updatedAt, int customerId) {
+	public Vessel(int id, String name, Date createdAt, Date updatedAt/*, int customerId*/) {
 		this.id = id;
 		this.name = name;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		this.customerId = customerId;
+		//this.customerId = customerId;
 	}
 
 	public int getId() {
@@ -82,18 +82,18 @@ public class Vessel {
 		this.updatedAt = updatedAt;
 	}
 
-	public int getCustomerId() {
+	/*public int getCustomerId() {
 		return customerId;
 	}
 
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
-	}
+	}*/
 
 	@Override
 	public String toString() {
 		return "Vessel [id=" + id + ", name=" + name + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
-				+ ", customerId=" + customerId + "]";
+				/*+ ", customerId=" + customerId*/ + "]";
 	}
 
 	@Override

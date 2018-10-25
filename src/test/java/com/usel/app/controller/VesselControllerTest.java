@@ -50,7 +50,7 @@ public class VesselControllerTest {
 		mockMvc = standaloneSetup(vesselController).build();
         this.vessel = new Vessel();
         vessel.setName("Kodiak");
-        vessel.setCustomerId(2);
+        //vessel.setCustomerId(2);
         vessels = new ArrayList<Vessel>();
     }
 	

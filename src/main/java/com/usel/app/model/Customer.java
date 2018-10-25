@@ -28,7 +28,7 @@ public class Customer{
 	private Vessel vessel;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 
@@ -48,19 +48,19 @@ public class Customer{
     @LastModifiedDate
 	private Date updatedAt;
 
-	@Column(name = "vessel_id", nullable = false)
-	private int vesselId;
+	/*@Column(name = "vessel_id", nullable = false)
+	private int vesselId;*/
 	
 	public Customer() {
 	}
 	
-	public Customer(int id, String name, int customerPo, Date createdAt, Date updatedAt, int vesselId, int customerId) {
+	public Customer(int id, String name, int customerPo, Date createdAt, Date updatedAt/*, int vesselId*/, int customerId) {
 		this.id = id;
 		this.name=name;
 		this.ownPo=customerPo;
 		this.createdAt=createdAt;
 		this.updatedAt=updatedAt;
-		this.vesselId=vesselId;
+		//this.vesselId=vesselId;
 	}
 
 	public int getId() {
@@ -99,18 +99,18 @@ public class Customer{
 		this.updatedAt = updatedAt;
 	}
 	
-	public int getVesselId() {
+	/*public int getVesselId() {
 		return vesselId;
 	}
 	
 	public void setVesselId(int vesselId) {
 		this.vesselId = vesselId;
-	}
+	}*/
 
 	@Override
 	public String toString() {
 		return "Customer [vessel=" + vessel + ", id=" + id + ", name=" + name + ", ownPo=" + ownPo + ", createdAt="
-				+ createdAt + ", updatedAt=" + updatedAt + ", vesselId=" + vesselId + "]";
+				+ createdAt + ", updatedAt=" + updatedAt /*+ ", vesselId=" + vesselId*/ + "]";
 	}
 
 	@Override

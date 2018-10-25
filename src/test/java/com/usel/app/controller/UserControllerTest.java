@@ -56,7 +56,7 @@ public class UserControllerTest {
         user.setEmail(email);
         user.setPassword("qwerty");
         user.setShortName("FL");
-        user.setPoId(2040);
+        //user.setPoId(2040);
         users = new ArrayList<User>();
     }
 	

@@ -9,38 +9,42 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.LastModifiedDate;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "users")
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
 allowGetters = true)
 
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "NAME", nullable = false)
+	@Column(name = "name", nullable = false)
 	private String name;
 	
-	@Column(name = "LAST_NAME", nullable = false)
+	@Column(name = "last_name", nullable = false)
 	private String lastName;
 
-	@Column(name = "EMAIL", nullable = false)
+	@Column(name = "email", nullable = false)
 	private String email;
 
-	@Column(name = "PASSWORD", nullable = false)
+	@Column(name = "password", nullable = false)
 	private String password;
 	
-	@Column(name = "SHORT_NAME", nullable = false)
+	@Column(name = "short_name", nullable = false)
 	private String shortName;
 
-	@Column(name = "IS_ENABLED", nullable = false)
-	private boolean isEnabled;
+	@Column(name = "is_enabled", nullable = false, columnDefinition = "TINYINT")
+    @Type(type = "org.hibernate.type.NumericBooleanType" )
+    private boolean isEnabled;
 
 	@Column(name = "created_at", nullable = false)
 	@Temporal(TemporalType.DATE)
@@ -51,14 +55,14 @@ public class User {
     @LastModifiedDate
 	private Date updatedAt;
 
-	@Column(name = "PO_ID", nullable = false)
-	private int poId;
+	//@Column(name = "PO_ID", nullable = false)
+	//private int poId;
 
 	public User() {
 	}
 	
 	public User(int id, String name, String lastName, String email, String password, String shortName, boolean isEnabled, 
-			    Date createdAt, Date updatedAt, int poId) {
+			    Date createdAt, Date updatedAt/*, int poId*/) {
 		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
@@ -68,7 +72,7 @@ public class User {
 		this.isEnabled = isEnabled;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		this.poId = poId;
+		//this.poId = poId;
 	}
 
 	public int getId() {
@@ -143,19 +147,19 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
 
-	public int getPoId() {
+	/*public int getPoId() {
 		return poId;
 	}
 
 	public void setPoId(int poId) {
 		this.poId = poId;
-	}
+	}*/
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email + ", password="
 				+ password + ", shortName=" + shortName + ", isEnabled=" + isEnabled + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + ", poId=" + poId + "]";
+				+ ", updatedAt=" + updatedAt /*+ ", poId=" + poId*/ + "]";
 	}
 
 	@Override

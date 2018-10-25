@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Rule;
@@ -50,10 +51,11 @@ public class JobControllerTest {
     public void setUp() {
 		mockMvc = standaloneSetup(jobController).build();
         this.job = new Job();
+        Date date = new Date();
         job.setDescription("Generator test");
-        job.setDueDate("10/5/18");
+        job.setDueDate(date);
         job.setmSSale("");
-        job.setPoId(2);
+        //job.setPoId(2);
         jobs = new ArrayList<Job>();
     }
 	

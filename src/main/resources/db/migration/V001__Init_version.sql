@@ -22,7 +22,7 @@ USE `usel` ;
 -- Table `usel`.`Vessels`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `usel`.`vessels` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(15) NOT NULL,
   `createdAt` TINYINT NULL,
   `updatedAt` TINYINT NULL,
@@ -33,16 +33,16 @@ CREATE TABLE IF NOT EXISTS `usel`.`vessels` (
 -- Table `usel`.`Customers`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `usel`.`customers` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(30) NOT NULL,
   `ownPo` INT NOT NULL,
   `createdAt` DATE NULL,
   `updatedAt` DATE NULL,
-  `vesselId` INT NOT NULL,
-  PRIMARY KEY (`id`, `vesselId`),
-  INDEX `vessel_fk_idx` (`vesselId` ASC),
+  `vessel_id` INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `vessel_fk_idx` (`vessel_id` ASC),
   CONSTRAINT `vessel_fk`
-    FOREIGN KEY (`vesselId`)
+    FOREIGN KEY (`vessel_id`)
     REFERENCES `usel`.`Vessels` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE);
@@ -52,18 +52,18 @@ CREATE TABLE IF NOT EXISTS `usel`.`customers` (
 -- Table `usel`.`Jobs`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `usel`.`jobs` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `description` VARCHAR(120) NOT NULL,
   `dueDate` DATE NOT NULL,
   `mSSale` VARCHAR(20) NOT NULL,
-  `status` TINYINT NOT NULL,
+  `status` TINYINT(1) NOT NULL,
   `createdAt` TINYINT NULL,
   `updatedAt` TINYINT NULL,
-  `customerId` INT NOT NULL,
-  PRIMARY KEY (`id`, `customerId`),
-  INDEX `customer_fk_idx` (`customerId` ASC),
+  `customer_id` INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `customer_fk_idx` (`customer_id` ASC),
   CONSTRAINT `customer_fk`
-    FOREIGN KEY (`customerId`)
+    FOREIGN KEY (`customer_id`)
     REFERENCES `usel`.`Customers` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `usel`.`jobs` (
 -- Table `usel`.`Vendors`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `usel`.`vendors` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(20) NOT NULL,
   `createdAt` TINYINT NULL,
   `updatedAt` TINYINT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `usel`.`vendors` (
 -- Table `usel`.`Users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `usel`.`users` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `lastName` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,

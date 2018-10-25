@@ -42,10 +42,12 @@ public class UserRepositoryTest {
 		assertFalse(userRepository.findAll().isEmpty());
 	}
 	
-	//@Test
+	@Test
 	public void whenExistsByEmailThenReturnTrue() {
 		User user = new User();
+		user.setName("TestUser");
 		user.setEmail(email);
+		user.setPassword("testpass");
 		
 		entityManager.persist(user);
 

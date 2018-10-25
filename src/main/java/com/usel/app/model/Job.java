@@ -16,32 +16,32 @@ import org.springframework.data.annotation.LastModifiedDate;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "JOBS")
+@Table(name = "jobs")
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
 allowGetters = true)
 
 public class Job {
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CUSTOMER_ID", insertable=false, updatable=false)
+	@JoinColumn(name = "customer_id", insertable=false, updatable=false)
 	private Customer customer;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "DESCRIPTION", nullable = false)
+	@Column(name = "description", nullable = false)
 	private String description;
 
-	@Column(name = "DUE_DATE")
+	@Column(name = "due_date")
 	@Temporal(TemporalType.DATE)
 	private Date dueDate;
 
-	@Column(name = "M_S_SALE")
+	@Column(name = "m_s_sale")
 	private String mSSale;
 
-	@Column(name = "STATUS", nullable = false)
+	@Column(name = "status", nullable = false)
 	private boolean status;
 	
 	/*@Column(name = "CUSTOMER_ID")
@@ -56,13 +56,13 @@ public class Job {
     @LastModifiedDate
 	private Date updatedAt;
 
-	@Column(name = "PO_ID")
-	private int poId;
+	//@Column(name = "PO_ID")
+	//private int poId;
 
 	public Job() {
 	}
 
-	public Job(int id, String description, Date dueDate, String mSSale, boolean status, /*int customerId,*/ Date createdAt, Date updatedAt, int poId) {
+	public Job(int id, String description, Date dueDate, String mSSale, boolean status/*, int customerId*/, Date createdAt, Date updatedAt/*, int poId*/) {
 		this.id=id;
 		this.description=description;
 		this.dueDate=dueDate;
@@ -71,7 +71,7 @@ public class Job {
 		//this.customerId=customerId;
 		this.createdAt=createdAt;
 		this.updatedAt=updatedAt;
-		this.poId=poId;
+		//this.poId=poId;
 	}
 
 	public Customer getCustomer() {
@@ -145,22 +145,22 @@ public class Job {
 		this.updatedAt = updatedAt;
 	}
 
-	public int getPoId() {
+	/*public int getPoId() {
 		return poId;
 	}
 
 	public void setPoId(int poId) {
 		this.poId = poId;
-	}
+	}*/
 
 	@Override
 	public String toString() {
 		return "Job [customer=" + customer + ", id=" + id + ", description=" + description + ", dueDate=" + dueDate
 				+ ", mSSale=" + mSSale + ", status=" + status /*+ ", customerId=" + customerId*/ + ", createdAt="
-				+ createdAt + ", updatedAt=" + updatedAt + ", poId=" + poId + ", getCustomer()=" + getCustomer()
+				+ createdAt + ", updatedAt=" + updatedAt /*+ ", poId=" + poId*/ + ", getCustomer()=" + getCustomer()
 				+ ", getId()=" + getId() + ", getDescription()=" + getDescription() + ", getDueDate()=" + getDueDate()
 				+ ", getmSSale()=" + getmSSale() + ", isStatus()=" + isStatus() /*+ ", getCustomerId()=" + getCustomerId()*/
-				+ ", isCreatedAt()=" + isCreatedAt() + ", isUpdatedAt()=" + isUpdatedAt() + ", getPoId()=" + getPoId()
+				+ ", isCreatedAt()=" + isCreatedAt() + ", isUpdatedAt()=" + isUpdatedAt() /*+ ", getPoId()=" + getPoId()*/
 				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
 				+ "]";
 	}

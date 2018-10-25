@@ -13,18 +13,18 @@ import org.springframework.data.annotation.LastModifiedDate;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "VENDORS")
+@Table(name = "vendors")
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
 allowGetters = true)
 
 public class Vendor {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "NAME", nullable = false)
+	@Column(name = "name", nullable = false)
 	private String name;
 
 	@Column(name = "created_at", nullable = false)

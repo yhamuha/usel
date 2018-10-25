@@ -16,30 +16,31 @@ import org.springframework.data.annotation.LastModifiedDate;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "PURCHASES")
+@Table(name = "purchases")
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
 allowGetters = true)
 
 public class Purchase {
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "VENDOR_ID", insertable=false, updatable=false)
+	@JoinColumn(name = "vendor_id", insertable=false, updatable=false)
 	private Vendor vendor;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_ID", insertable=false, updatable=false)
+	@JoinColumn(name = "user_id", insertable=false, updatable=false)
 	private User user;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "JOB_ID", insertable=false, updatable=false)
+	@JoinColumn(name = "job_id", insertable=false, updatable=false)
 	private Job job;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "po")
 	private int po;
 
-	@Column(name = "FINAL_PO_NUMBER", nullable = false)
+	@Column(name = "final_po_number", nullable = false)
 	private String finalPoNumber;
 
 	@Column(name = "created_at", nullable = false)
@@ -63,8 +64,8 @@ public class Purchase {
 	public Purchase() {
 	}
 	
-	public Purchase(int po, String finalPoNumber, Date createdAt, Date updatedAt /*int userId ,*/ /*int jobId,*//* int vendorId*/) {
-		this.po = po;
+	public Purchase(/*int po,*/ String finalPoNumber, Date createdAt, Date updatedAt /*int userId ,*/ /*int jobId,*//* int vendorId*/) {
+		//this.po = po;
 		this.finalPoNumber = finalPoNumber;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
@@ -153,7 +154,7 @@ public class Purchase {
 	
 	@Override
 	public String toString() {
-		return "Purchase [vendor=" + vendor + ", user=" + user + ", job=" + job + ", po=" + po + ", finalPoNumber="
+		return "Purchase [vendor=" + vendor + ", user=" + user + ", job=" + job /*+ ", po=" + po*/ + ", finalPoNumber="
 				+ finalPoNumber + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt /*+ ", userId=" + userId*/
 				/*+ ", jobId=" + jobId*/ /*+ ", vendorId=" + vendorId*/ + ", getVendor()=" + getVendor() + ", getUser()="
 				+ getUser() + ", getJob()=" + getJob() + ", getPo()=" + getPo() + ", getFinalPoNumber()="
@@ -163,6 +164,8 @@ public class Purchase {
 				+ "]";
 	}
 
+	
+	
 	@Override
 	public boolean equals(Object o) {
         if(o == null) {

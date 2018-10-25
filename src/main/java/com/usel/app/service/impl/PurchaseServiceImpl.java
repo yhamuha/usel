@@ -45,6 +45,6 @@ public class PurchaseServiceImpl implements PurchaseService{
 	
 	@Override
 	public boolean exist(int po) {
-		return purchaseRepository.existsByPO(po);
+		return purchaseRepository.existsByPo(po);
 	}
 }

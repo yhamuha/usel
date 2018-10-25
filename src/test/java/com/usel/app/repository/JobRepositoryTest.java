@@ -37,6 +37,7 @@ public class JobRepositoryTest {
 		job.setDueDate(date);
 		job.setmSSale("Test mSSale value");
 		job.setStatus(true);
+		//job.setCustomerId(0001);
 		
 		entityManager.persist(job);
 

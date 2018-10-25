@@ -17,7 +17,7 @@ import com.usel.app.model.Purchase;
 import com.usel.app.repository.PurchaseRepository;
 
 @RunWith(SpringRunner.class)
-@TestPropertySource(locations = "classpath:application.properties")
+@TestPropertySource(locations = "classpath:application.yml")
 @DataJpaTest
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = Replace.NONE)
