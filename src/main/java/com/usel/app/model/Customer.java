@@ -1,15 +1,16 @@
 package com.usel.app.model;
 
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,9 +24,15 @@ allowGetters = true)
 
 public class Customer{
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "vessel_id", insertable=false, updatable=false)
-	private Vessel vessel;
+	@ManyToOne
+	@JoinColumn (name="customer_id", nullable = false, insertable=false, updatable=false)
+	private Purchase purchase;
+	
+	@OneToMany(mappedBy = "customer") 
+	private Set<Job> jobs;
+	
+	@OneToMany(mappedBy = "customer") 
+	private Set<Vessel> vessels;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,24 +50,23 @@ public class Customer{
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 
-	@Column(name = "updatedAt", nullable = false)
+	@Column(name = "updated_at", nullable = false)
 	@Temporal(TemporalType.DATE)
     @LastModifiedDate
 	private Date updatedAt;
-
-	/*@Column(name = "vessel_id", nullable = false)
-	private int vesselId;*/
 	
+	@Column (name = "customer_id", nullable = false)
+	private int customerId;
+
 	public Customer() {
 	}
 	
-	public Customer(int id, String name, int customerPo, Date createdAt, Date updatedAt/*, int vesselId*/, int customerId) {
+	public Customer(int id, String name, int customerPo, Date createdAt, Date updatedAt) {
 		this.id = id;
 		this.name=name;
 		this.ownPo=customerPo;
 		this.createdAt=createdAt;
 		this.updatedAt=updatedAt;
-		//this.vesselId=vesselId;
 	}
 
 	public int getId() {
@@ -99,18 +105,18 @@ public class Customer{
 		this.updatedAt = updatedAt;
 	}
 	
-	/*public int getVesselId() {
-		return vesselId;
+	public void setVessel(Set<Vessel> vessels) {
+		this.vessels = vessels;
 	}
 	
-	public void setVesselId(int vesselId) {
-		this.vesselId = vesselId;
-	}*/
-
+	public void setJob(Set<Job> jobs) {
+		this.jobs = jobs;
+	}
+	
 	@Override
 	public String toString() {
-		return "Customer [vessel=" + vessel + ", id=" + id + ", name=" + name + ", ownPo=" + ownPo + ", createdAt="
-				+ createdAt + ", updatedAt=" + updatedAt /*+ ", vesselId=" + vesselId*/ + "]";
+		return "Customer [vessel=" + vessels + ", job=" + jobs + ", id=" + id + ", name="
+				+ name + ", ownPo=" + ownPo + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 
 	@Override
@@ -127,4 +133,5 @@ public class Customer{
         Customer e = (Customer) o;
         return (this.getId() == e.getId());
     }
+
 }

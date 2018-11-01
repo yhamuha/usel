@@ -2,6 +2,10 @@ package com.usel.app.repository;
 
 import static org.junit.Assert.assertFalse;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.usel.app.model.Customer;
+import com.usel.app.model.Job;
+import com.usel.app.model.Vessel;
 import com.usel.app.repository.CustomerRepository;
 
 @RunWith(SpringRunner.class)
@@ -27,7 +33,7 @@ public class CustomerRepositoryTest {
 	@Autowired
 	CustomerRepository customerRepository;
 	
-	@Test
+	//@Test
 	public void whenFindAllThenReturnNotEmptyList() {
 		Customer customer = new Customer();
 		
@@ -36,6 +42,33 @@ public class CustomerRepositoryTest {
 		
 		entityManager.persist(customer);
 
+		assertFalse(customerRepository.findAll().isEmpty());
+	}
+	
+	@Test
+	public void whenSetupVesselAndJobThenReturnNotEmptyList() {
+		
+		Vessel vessel = new Vessel();
+		vessel.setName("Kodiak");	
+		Set<Vessel> hashVessel = new HashSet<Vessel>();
+		hashVessel.add(vessel);
+		//change
+		Job job = new Job();
+		Date date = new Date();
+		job.setDescription("Job description");
+		job.setDueDate(date);
+		job.setmSSale("Test mSSale value");
+		job.setStatus(true);
+		
+		Set<Job> hashJob = new HashSet<Job>();
+		hashJob.add(job);
+		
+		Customer customer = new Customer();
+		customer.setJob(hashJob);
+		customer.setVessel(hashVessel);
+		
+		entityManager.persist(customer);
+		
 		assertFalse(customerRepository.findAll().isEmpty());
 	}
 }
