@@ -6,10 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.LastModifiedDate;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -21,8 +22,11 @@ allowGetters = true)
 
 public class User {
 
+	@ManyToOne
+	@JoinColumn (name="user_id", nullable = false, insertable=false, updatable=false)
+	private Purchase purchase;
+	
 	@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
@@ -50,19 +54,19 @@ public class User {
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 
-	@Column(name = "updatedAt", nullable = false)
+	@Column(name = "updated_at", nullable = false)
 	@Temporal(TemporalType.DATE)
     @LastModifiedDate
 	private Date updatedAt;
-
-	//@Column(name = "PO_ID", nullable = false)
-	//private int poId;
+	
+	@Column (name = "user_id", nullable = false)
+	private int userId;
 
 	public User() {
 	}
 	
 	public User(int id, String name, String lastName, String email, String password, String shortName, boolean isEnabled, 
-			    Date createdAt, Date updatedAt/*, int poId*/) {
+			    Date createdAt, Date updatedAt) {
 		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
@@ -72,7 +76,6 @@ public class User {
 		this.isEnabled = isEnabled;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		//this.poId = poId;
 	}
 
 	public int getId() {
@@ -147,19 +150,11 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
 
-	/*public int getPoId() {
-		return poId;
-	}
-
-	public void setPoId(int poId) {
-		this.poId = poId;
-	}*/
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email + ", password="
 				+ password + ", shortName=" + shortName + ", isEnabled=" + isEnabled + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt /*+ ", poId=" + poId*/ + "]";
+				+ ", updatedAt=" + updatedAt + "]";
 	}
 
 	@Override
