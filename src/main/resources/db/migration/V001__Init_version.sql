@@ -11,6 +11,10 @@ SET sql_mode='STRICT_TRANS_TABLES,NO_ZERO_DATE,NO_ZERO_IN_DATE';
 -- -----------------------------------------------------
 -- Schema usel
 -- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema usel
+-- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `usel` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
 USE `usel` ;
 
@@ -20,16 +24,9 @@ USE `usel` ;
 CREATE TABLE IF NOT EXISTS `usel`.`vessels` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(15) NOT NULL,
-  `created_at` DATE NULL,
-  `updated_at` DATE NULL,
-  `customer_id`INT NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `customer_id` (`customer_id`),
-  CONSTRAINT `vessels_idx_fk` 
-  FOREIGN KEY (`id`) 
-  REFERENCES `customers` (`id`))
-  ENGINE = InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-  
+  `createdAt` TINYINT NULL,
+  `updatedAt` TINYINT NULL,
+  PRIMARY KEY (`id`));
 
 
 -- -----------------------------------------------------
@@ -38,18 +35,17 @@ CREATE TABLE IF NOT EXISTS `usel`.`vessels` (
 CREATE TABLE IF NOT EXISTS `usel`.`customers` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(30) NOT NULL,
-  `own_po` INT NOT NULL,
-  `created_at` DATE NULL,
-  `updated_at` DATE NULL,
+  `ownPo` INT NOT NULL,
+  `createdAt` DATE NULL,
+  `updatedAt` DATE NULL,
   `vessel_id` INT NULL,
-  `purchase_id`INT NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `purchase_id` (`purchase_id`),
-  CONSTRAINT `customers_idx_fk` 
-  FOREIGN KEY (`purchase_id`) 
-  REFERENCES `purchases` (`po`))
-  ENGINE = InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-  
+  INDEX `vessel_fk_idx` (`vessel_id` ASC),
+  CONSTRAINT `vessel_fk`
+    FOREIGN KEY (`vessel_id`)
+    REFERENCES `usel`.`Vessels` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE);
 
 
 -- -----------------------------------------------------
@@ -59,33 +55,29 @@ CREATE TABLE IF NOT EXISTS `usel`.`jobs` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `description` VARCHAR(120) NOT NULL,
   `dueDate` DATE NOT NULL,
-  `mSSale` VARCHAR(45) NOT NULL,
+  `mSSale` VARCHAR(20) NOT NULL,
   `status` TINYINT(1) NOT NULL,
-  `created_at` DATE NULL,
-  `updated_at` DATE NULL,
-  `customer_id` INT NOT NULL,
+  `createdAt` TINYINT NULL,
+  `updatedAt` TINYINT NULL,
+  `customer_id` INT NULL,
   PRIMARY KEY (`id`),
-  KEY `customer_id` (`customer_id`),
-  CONSTRAINT `jobs_idx_fk` 
-  FOREIGN KEY (`id`) 
-  REFERENCES `customers` (`id`))
-  ENGINE = InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-  
+  INDEX `customer_fk_idx` (`customer_id` ASC),
+  CONSTRAINT `customer_fk`
+    FOREIGN KEY (`customer_id`)
+    REFERENCES `usel`.`Customers` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
 -- -----------------------------------------------------
 -- Table `usel`.`Vendors`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `usel`.`vendors` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(20) NOT NULL,
-  `created_at` DATE NULL,
-  `updated_at` DATE NULL,
-  `purchase_id`INT NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `purchase_id` (`purchase_id`),
-  CONSTRAINT `vendors_idx_fk` 
-  FOREIGN KEY (`purchase_id`) 
-  REFERENCES `purchases` (`po`))
-  ENGINE = InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `createdAt` TINYINT NULL,
+  `updatedAt` TINYINT NULL,
+  PRIMARY KEY (`id`));
 
 
 -- -----------------------------------------------------
@@ -94,20 +86,15 @@ CREATE TABLE IF NOT EXISTS `usel`.`vendors` (
 CREATE TABLE IF NOT EXISTS `usel`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  `last_name` VARCHAR(45) NOT NULL,
+  `lastName` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
-  `short_name` VARCHAR(3) NOT NULL,
-  `is_enabled` TINYINT(1) NULL,
-  `created_at` DATE NULL,
-  `updated_at` DATE NULL,
-  `purchase_id`INT NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `purchase_id` (`purchase_id`),
-  CONSTRAINT `users_idx_fk` 
-  FOREIGN KEY (`purchase_id`) 
-  REFERENCES `purchases` (`po`))
-  ENGINE = InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `shortName` VARCHAR(3) NOT NULL,
+  `isEnabled` TINYINT NULL,
+  `createdAt` TINYINT NULL,
+  `updatedAt` TINYINT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -115,11 +102,31 @@ CREATE TABLE IF NOT EXISTS `usel`.`users` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `usel`.`purchases` (
   `po` INT NOT NULL AUTO_INCREMENT,
-  `final_po_number` VARCHAR(15) NOT NULL,
-  `created_at` DATE NULL,
-  `updated_at` DATE NULL,
-  PRIMARY KEY (`po`))
-  ENGINE = InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `finalPoNumber` INT NOT NULL,
+  `createdAt` TINYINT NULL,
+  `updatedAt` TINYINT NULL,
+  `userId` INT NOT NULL,
+  `jobId` INT NOT NULL,
+  `vendorId` INT NOT NULL,
+  PRIMARY KEY (`po`),
+  INDEX `vendor_fk_idx` (`vendorId` ASC),
+  INDEX `user_fk_idx` (`userId` ASC),
+  INDEX `job_fk_idx` (`jobId` ASC),
+  CONSTRAINT `vendor_fk`
+    FOREIGN KEY (`vendorId`)
+    REFERENCES `usel`.`Vendors` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `user_fk`
+    FOREIGN KEY (`userId`)
+    REFERENCES `usel`.`Users` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `job_fk`
+    FOREIGN KEY (`jobId`)
+    REFERENCES `usel`.`Jobs` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

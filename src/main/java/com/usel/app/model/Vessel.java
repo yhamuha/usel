@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,10 +19,6 @@ allowGetters = true)
 
 public class Vessel {
 
-	@ManyToOne
-	@JoinColumn (name="vessel_id", nullable = false, insertable=false, updatable=false)
-	private Customer customer;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -37,22 +31,23 @@ public class Vessel {
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 
-	@Column(name = "updated_at", nullable = false)
+	@Column(name = "updatedAt", nullable = false)
 	@Temporal(TemporalType.DATE)
     @LastModifiedDate
 	private Date updatedAt;
-	
-	@Column (name = "vessel_id", nullable = false)
-	private int vesselId;
+
+	//@Column(name = "CUSTOMER_ID", nullable = false)
+	//private int customerId;
 
 	public Vessel() {
 	}
 	
-	public Vessel(int id, String name, Date createdAt, Date updatedAt) {
+	public Vessel(int id, String name, Date createdAt, Date updatedAt/*, int customerId*/) {
 		this.id = id;
 		this.name = name;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		//this.customerId = customerId;
 	}
 
 	public int getId() {
@@ -87,9 +82,18 @@ public class Vessel {
 		this.updatedAt = updatedAt;
 	}
 
+	/*public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}*/
+
 	@Override
 	public String toString() {
-		return "Vessel [id=" + id + ", name=" + name + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+		return "Vessel [id=" + id + ", name=" + name + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+				/*+ ", customerId=" + customerId*/ + "]";
 	}
 
 	@Override

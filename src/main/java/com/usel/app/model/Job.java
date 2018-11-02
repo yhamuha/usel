@@ -3,6 +3,7 @@ package com.usel.app.model;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,9 +21,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 allowGetters = true)
 
 public class Job {
-	
-	@ManyToOne
-	@JoinColumn (name="job_id", nullable = false, insertable=false, updatable=false)
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customer_id", insertable=false, updatable=false)
 	private Customer customer;
 
 	@Id
@@ -43,17 +44,20 @@ public class Job {
 	@Column(name = "status", nullable = false)
 	private boolean status;
 	
+	/*@Column(name = "CUSTOMER_ID")
+	private int customerId;*/
+	
 	@Column(name = "created_at")
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 
-	@Column(name = "updated_at")
+	@Column(name = "updatedAt")
 	@Temporal(TemporalType.DATE)
     @LastModifiedDate
 	private Date updatedAt;
-	
-	@Column (name = "job_id", nullable = false)
-	private int jobId;
+
+	//@Column(name = "PO_ID")
+	//private int poId;
 
 	public Job() {
 	}
@@ -64,8 +68,18 @@ public class Job {
 		this.dueDate=dueDate;
 		this.mSSale=mSSale;
 		this.status=status;
+		//this.customerId=customerId;
 		this.createdAt=createdAt;
 		this.updatedAt=updatedAt;
+		//this.poId=poId;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public int getId() {
@@ -108,6 +122,13 @@ public class Job {
 		this.status = status;
 	}
 
+	/*public int getCustomerId() {
+		return customerId;
+	}
+ 	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}*/
+	
 	public Date isCreatedAt() {
 		return createdAt;
 	}
@@ -124,10 +145,23 @@ public class Job {
 		this.updatedAt = updatedAt;
 	}
 
+	/*public int getPoId() {
+		return poId;
+	}
+
+	public void setPoId(int poId) {
+		this.poId = poId;
+	}*/
+
 	@Override
 	public String toString() {
-		return "Job [id=" + id + ", description=" + description + ", dueDate=" + dueDate
-				+ ", mSSale=" + mSSale + ", status=" + status + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+		return "Job [customer=" + customer + ", id=" + id + ", description=" + description + ", dueDate=" + dueDate
+				+ ", mSSale=" + mSSale + ", status=" + status /*+ ", customerId=" + customerId*/ + ", createdAt="
+				+ createdAt + ", updatedAt=" + updatedAt /*+ ", poId=" + poId*/ + ", getCustomer()=" + getCustomer()
+				+ ", getId()=" + getId() + ", getDescription()=" + getDescription() + ", getDueDate()=" + getDueDate()
+				+ ", getmSSale()=" + getmSSale() + ", isStatus()=" + isStatus() /*+ ", getCustomerId()=" + getCustomerId()*/
+				+ ", isCreatedAt()=" + isCreatedAt() + ", isUpdatedAt()=" + isUpdatedAt() /*+ ", getPoId()=" + getPoId()*/
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
 				+ "]";
 	}
 

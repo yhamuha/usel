@@ -1,13 +1,14 @@
 package com.usel.app.model;
 
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,16 +22,20 @@ allowGetters = true)
 
 public class Purchase {
 
-	@OneToMany(mappedBy = "purchase") 
-	private Set<User> users;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "vendor_id", insertable=false, updatable=false)
+	private Vendor vendor;
 	
-	@OneToMany(mappedBy = "purchase") 
-	private Set<Vendor> vendors;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", insertable=false, updatable=false)
+	private User user;
 	
-	@OneToMany(mappedBy = "purchase") 
-	private Set<Customer> customers;
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "job_id", insertable=false, updatable=false)
+	private Job job;
+
 	@Id
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "po")
 	private int po;
@@ -42,42 +47,55 @@ public class Purchase {
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 
-	@Column(name = "updated_at", nullable = false)
+	@Column(name = "updatedAt", nullable = false)
 	@Temporal(TemporalType.DATE)
     @LastModifiedDate
 	private Date updatedAt;
 	
+	/*@Column(name = "USER_ID", nullable = false)
+	private int userId;*/
+	
+ 	/*@Column(name = "JOB_ID", nullable = false)
+	private int jobId;*/
+	
+	/*@Column(name = "VENDOR_ID", nullable = false)
+	private int vendorId;*/
+	
 	public Purchase() {
 	}
 	
-	public Purchase(String finalPoNumber, Date createdAt, Date updatedAt) {
+	public Purchase(/*int po,*/ String finalPoNumber, Date createdAt, Date updatedAt /*int userId ,*/ /*int jobId,*//* int vendorId*/) {
+		//this.po = po;
 		this.finalPoNumber = finalPoNumber;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		//this.userId = userId;
+		//this.jobId = jobId;
+		//this.vendorId = vendorId;
 	}
 
-	public Set<Vendor> getVendor() {
-		return vendors;
+	public Vendor getVendor() {
+		return vendor;
 	}
 
-	public void setVendor(Set<Vendor> vendors) {
-		this.vendors = vendors;
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
 	}
 
-	public Set<User> getUser() {
-		return users;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUser(Set<User> users) {
-		this.users = users;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public Set<Customer> getCustomer() {
-		return customers;
+	public Job getJob() {
+		return job;
 	}
 
-	public void setCustomer(Set<Customer> customers) {
-		this.customers = customers;
+	public void setJob(Job job) {
+		this.job = job;
 	}
 
 	public int getPo() {
@@ -112,12 +130,42 @@ public class Purchase {
 		this.updatedAt = updatedAt;
 	}
 
+	/*public int getUserId() {
+		return userId;
+	}
+ 	public void setUserId(int userId) {
+		this.userId = userId;
+	}*/
+ 	
+ 	/*public int getJobId() {
+		return jobId;
+	}
+ 	
+	public void setJobId(int jobId) {
+		this.jobId = jobId;
+	}*/
+ 	
+ 	/*public int getVendorId() {
+		return vendorId;
+	}
+ 	public void setVendorId(int vendorId) {
+		this.vendorId = vendorId;
+	}*/
+	
 	@Override
 	public String toString() {
-		return "Purchase [vendor=" + vendors + ", user=" + users + ", customer=" + customers + ", po=" + po
-				+ ", finalPoNumber=" + finalPoNumber + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+		return "Purchase [vendor=" + vendor + ", user=" + user + ", job=" + job /*+ ", po=" + po*/ + ", finalPoNumber="
+				+ finalPoNumber + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt /*+ ", userId=" + userId*/
+				/*+ ", jobId=" + jobId*/ /*+ ", vendorId=" + vendorId*/ + ", getVendor()=" + getVendor() + ", getUser()="
+				+ getUser() + ", getJob()=" + getJob() + ", getPo()=" + getPo() + ", getFinalPoNumber()="
+				+ getFinalPoNumber() + ", isCreatedAt()=" + isCreatedAt() + ", isUpdatedAt()=" + isUpdatedAt()
+				/*+ ", getUserId()=" + getUserId()*/ /*+ ", getJobId()=" + getJobId()*/ /*+ ", getVendorId()=" + getVendorId()*/
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
+	
+	
 	@Override
 	public boolean equals(Object o) {
         if(o == null) {
