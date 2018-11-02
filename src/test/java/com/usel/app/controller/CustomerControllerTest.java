@@ -109,7 +109,7 @@ public class CustomerControllerTest {
 				.content(Utils.asJsonString(customer)))	
 				.andExpect(status().isConflict());
 	}
-	
+
 	@Test
 	public void createShouldReturnStatusServiceTemporarilyUnavailableWhenCustomerServiceFailed() throws Exception {
 		when(customerService.exist(fakeId)).thenReturn(false);

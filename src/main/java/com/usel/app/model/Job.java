@@ -17,13 +17,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "jobs")
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
-allowGetters = true)
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
 
 public class Job {
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "customer_id", insertable=false, updatable=false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "cust_id", insertable=false, updatable=false)
 	private Customer customer;
 
 	@Id
@@ -62,8 +61,8 @@ public class Job {
 	public Job() {
 	}
 
-	public Job(int id, String description, Date dueDate, String mSSale, boolean status/*, int customerId*/, Date createdAt, Date updatedAt/*, int poId*/) {
-		this.id=id;
+	public Job(/*int id,*/ String description, Date dueDate, String mSSale, boolean status/*, int customerId*/, Date createdAt, Date updatedAt/*, int poId*/) {
+		//this.id=id;
 		this.description=description;
 		this.dueDate=dueDate;
 		this.mSSale=mSSale;
@@ -74,13 +73,13 @@ public class Job {
 		//this.poId=poId;
 	}
 
-	public Customer getCustomer() {
+	/*public Customer getCustomer() {
 		return customer;
 	}
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
-	}
+	}*/
 
 	public int getId() {
 		return id;
@@ -156,28 +155,69 @@ public class Job {
 	@Override
 	public String toString() {
 		return "Job [customer=" + customer + ", id=" + id + ", description=" + description + ", dueDate=" + dueDate
-				+ ", mSSale=" + mSSale + ", status=" + status /*+ ", customerId=" + customerId*/ + ", createdAt="
-				+ createdAt + ", updatedAt=" + updatedAt /*+ ", poId=" + poId*/ + ", getCustomer()=" + getCustomer()
-				+ ", getId()=" + getId() + ", getDescription()=" + getDescription() + ", getDueDate()=" + getDueDate()
-				+ ", getmSSale()=" + getmSSale() + ", isStatus()=" + isStatus() /*+ ", getCustomerId()=" + getCustomerId()*/
-				+ ", isCreatedAt()=" + isCreatedAt() + ", isUpdatedAt()=" + isUpdatedAt() /*+ ", getPoId()=" + getPoId()*/
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ ", mSSale=" + mSSale + ", status=" + status + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
 				+ "]";
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
+		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((mSSale == null) ? 0 : mSSale.hashCode());
+		result = prime * result + (status ? 1231 : 1237);
+		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
+		return result;
 	}
 
 	@Override
-	public boolean equals(Object o) {
-        if(o == null) {
-            return false;
-        }
-        if (o == this) {
-           return true;
-        }
-        if (getClass() != o.getClass()) {
-            return false;
-        }
-        Job e = (Job) o;
-        return (this.getId() == e.getId());
-    }
-	
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Job other = (Job) obj;
+		if (createdAt == null) {
+			if (other.createdAt != null)
+				return false;
+		} else if (!createdAt.equals(other.createdAt))
+			return false;
+		if (customer == null) {
+			if (other.customer != null)
+				return false;
+		} else if (!customer.equals(other.customer))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (dueDate == null) {
+			if (other.dueDate != null)
+				return false;
+		} else if (!dueDate.equals(other.dueDate))
+			return false;
+		if (id != other.id)
+			return false;
+		if (mSSale == null) {
+			if (other.mSSale != null)
+				return false;
+		} else if (!mSSale.equals(other.mSSale))
+			return false;
+		if (status != other.status)
+			return false;
+		if (updatedAt == null) {
+			if (other.updatedAt != null)
+				return false;
+		} else if (!updatedAt.equals(other.updatedAt))
+			return false;
+		return true;
+	}
+
 }

@@ -1,26 +1,29 @@
 package com.usel.app.model;
 
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.LastModifiedDate;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "users")
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
-allowGetters = true)
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
 
 public class User {
 
+	/*@OneToMany(mappedBy = "purchases")
+	private Set<Purchase> purchases;*/
+	
 	@Id
 	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,9 +64,9 @@ public class User {
 	public User() {
 	}
 	
-	public User(int id, String name, String lastName, String email, String password, String shortName, boolean isEnabled, 
+	public User(/*int id,*/ String name, String lastName, String email, String password, String shortName, boolean isEnabled, 
 			    Date createdAt, Date updatedAt/*, int poId*/) {
-		this.id = id;
+		//this.id = id;
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
@@ -157,24 +160,76 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email + ", password="
-				+ password + ", shortName=" + shortName + ", isEnabled=" + isEnabled + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt /*+ ", poId=" + poId*/ + "]";
+		return "User [" /*+ "purchases=" + purchases*/ + ", id=" + id + ", name=" + name + ", lastName=" + lastName + ", email="
+				+ email + ", password=" + password + ", shortName=" + shortName + ", isEnabled=" + isEnabled
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 
 	@Override
-	public boolean equals(Object o) {
-        if(o == null) {
-            return false;
-        }
-        if (o == this) {
-           return true;
-        }
-        if (getClass() != o.getClass()) {
-            return false;
-        }
-        User e = (User) o;
-        return (this.getId() == e.getId());
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + id;
+		result = prime * result + (isEnabled ? 1231 : 1237);
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((shortName == null) ? 0 : shortName.hashCode());
+		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
+		return result;
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (createdAt == null) {
+			if (other.createdAt != null)
+				return false;
+		} else if (!createdAt.equals(other.createdAt))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (id != other.id)
+			return false;
+		if (isEnabled != other.isEnabled)
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (shortName == null) {
+			if (other.shortName != null)
+				return false;
+		} else if (!shortName.equals(other.shortName))
+			return false;
+		if (updatedAt == null) {
+			if (other.updatedAt != null)
+				return false;
+		} else if (!updatedAt.equals(other.updatedAt))
+			return false;
+		return true;
+	}
+	
 }

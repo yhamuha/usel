@@ -14,11 +14,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "vendors")
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
-allowGetters = true)
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
 
 public class Vendor {
 
+	/*@OneToMany(mappedBy = "purchases")
+	private Set<Purchase> purchases;*/
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -39,8 +41,8 @@ public class Vendor {
 	public Vendor() {
 	}
 	
-	public Vendor(int id, String name, Date createdAt, Date updatedAt) {
-		this.id = id;
+	public Vendor(/*int id,*/ String name, Date createdAt, Date updatedAt) {
+		//this.id = id;
 		this.name = name;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
@@ -80,22 +82,48 @@ public class Vendor {
 
 	@Override
 	public String toString() {
-		return "Vendor [id=" + id + ", name=" + name + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+		return "Vendor [ " /*+ "purchases=" + purchases*/ + ", id=" + id + ", name=" + name + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + "]";
 	}
 
 	@Override
-	public boolean equals(Object o) {
-        if(o == null) {
-            return false;
-        }
-        if (o == this) {
-           return true;
-        }
-        if (getClass() != o.getClass()) {
-            return false;
-        }
-        Vendor e = (Vendor) o;
-        return (this.getId() == e.getId());
-    }
-	
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vendor other = (Vendor) obj;
+		if (createdAt == null) {
+			if (other.createdAt != null)
+				return false;
+		} else if (!createdAt.equals(other.createdAt))
+			return false;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (updatedAt == null) {
+			if (other.updatedAt != null)
+				return false;
+		} else if (!updatedAt.equals(other.updatedAt))
+			return false;
+		return true;
+	}
+
 }

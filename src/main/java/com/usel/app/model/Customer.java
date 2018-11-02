@@ -4,12 +4,9 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,14 +15,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table (name = "customers")
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
-allowGetters = true)
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
 
 public class Customer{
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "vessel_id", insertable=false, updatable=false)
-	private Vessel vessel;
+	/*@OneToMany(mappedBy = "purchases")
+	private Set<Purchase> purchases;
+	
+	@OneToMany(mappedBy = "job")
+	private Set<Job> job;
+	
+	@OneToMany(mappedBy = "vessels")
+	private Set<Vessel> vessels;*/
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,13 +52,17 @@ public class Customer{
 	/*@Column(name = "vessel_id", nullable = false)
 	private int vesselId;*/
 	
+	// private Set<Job> job;
+	
+	// private Set<Vessel> vessel;
+	
 	public Customer() {
 	}
 	
-	public Customer(int id, String name, int customerPo, Date createdAt, Date updatedAt/*, int vesselId*/, int customerId) {
-		this.id = id;
+	public Customer(/*int id,*/ String name, int ownPo, Date createdAt, Date updatedAt/*, int vesselId*//*, int customerId*/) {
+		//this.id = id;
 		this.name=name;
-		this.ownPo=customerPo;
+		this.ownPo=ownPo;
 		this.createdAt=createdAt;
 		this.updatedAt=updatedAt;
 		//this.vesselId=vesselId;
@@ -67,9 +72,9 @@ public class Customer{
 		return id;
 	}
 	
-	public void setId(int id) {
+	/*public void setId(int id) {
 		this.id = id;
-	}
+	}*/
 	
 	public String getName() {
 		return name;
@@ -79,6 +84,9 @@ public class Customer{
 		this.name = name;
 	}
 	
+	public int getOwnPo() {
+		return ownPo;
+	}
 	public void setOwnPo(int ownPo) {
 		this.ownPo = ownPo;
 	}
@@ -99,6 +107,22 @@ public class Customer{
 		this.updatedAt = updatedAt;
 	}
 	
+	/*public Set<Job> getJob(){
+		return job;
+	}
+	
+	public void setJob(Set<Job> job) {
+		this.job = job;
+	}
+	
+	public Set<Vessel> getVessel(){
+		return vessel;
+	}
+	
+	public void setVessel(Set<Vessel> vessel) {
+		this.vessel = vessel;
+	}*/
+	
 	/*public int getVesselId() {
 		return vesselId;
 	}
@@ -109,22 +133,51 @@ public class Customer{
 
 	@Override
 	public String toString() {
-		return "Customer [vessel=" + vessel + ", id=" + id + ", name=" + name + ", ownPo=" + ownPo + ", createdAt="
-				+ createdAt + ", updatedAt=" + updatedAt /*+ ", vesselId=" + vesselId*/ + "]";
+		return "Customer [" /*+ "purchases=" + purchases + ", job=" + job + ", vessels=" + vessels*/ + ", id=" + id + ", name="
+				+ name + ", ownPo=" + ownPo + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 
 	@Override
-	public boolean equals(Object o) {
-        if(o == null) {
-            return false;
-        }
-        if (o == this) {
-           return true;
-        }
-        if (getClass() != o.getClass()) {
-            return false;
-        }
-        Customer e = (Customer) o;
-        return (this.getId() == e.getId());
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ownPo;
+		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		if (createdAt == null) {
+			if (other.createdAt != null)
+				return false;
+		} else if (!createdAt.equals(other.createdAt))
+			return false;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (ownPo != other.ownPo)
+			return false;
+		if (updatedAt == null) {
+			if (other.updatedAt != null)
+				return false;
+		} else if (!updatedAt.equals(other.updatedAt))
+			return false;
+		return true;
+	}
+
 }

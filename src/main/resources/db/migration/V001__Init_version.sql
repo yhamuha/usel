@@ -18,67 +18,6 @@ SET sql_mode='STRICT_TRANS_TABLES,NO_ZERO_DATE,NO_ZERO_IN_DATE';
 CREATE SCHEMA IF NOT EXISTS `usel` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
 USE `usel` ;
 
--- -----------------------------------------------------
--- Table `usel`.`Vessels`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usel`.`vessels` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(15) NOT NULL,
-  `createdAt` TINYINT NULL,
-  `updatedAt` TINYINT NULL,
-  PRIMARY KEY (`id`));
-
-
--- -----------------------------------------------------
--- Table `usel`.`Customers`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usel`.`customers` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(30) NOT NULL,
-  `ownPo` INT NOT NULL,
-  `createdAt` DATE NULL,
-  `updatedAt` DATE NULL,
-  `vessel_id` INT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `vessel_fk_idx` (`vessel_id` ASC),
-  CONSTRAINT `vessel_fk`
-    FOREIGN KEY (`vessel_id`)
-    REFERENCES `usel`.`Vessels` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE);
-
-
--- -----------------------------------------------------
--- Table `usel`.`Jobs`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usel`.`jobs` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `description` VARCHAR(120) NOT NULL,
-  `dueDate` DATE NOT NULL,
-  `mSSale` VARCHAR(20) NOT NULL,
-  `status` TINYINT(1) NOT NULL,
-  `createdAt` TINYINT NULL,
-  `updatedAt` TINYINT NULL,
-  `customer_id` INT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `customer_fk_idx` (`customer_id` ASC),
-  CONSTRAINT `customer_fk`
-    FOREIGN KEY (`customer_id`)
-    REFERENCES `usel`.`Customers` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
--- -----------------------------------------------------
--- Table `usel`.`Vendors`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usel`.`vendors` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(20) NOT NULL,
-  `createdAt` TINYINT NULL,
-  `updatedAt` TINYINT NULL,
-  PRIMARY KEY (`id`));
-
 
 -- -----------------------------------------------------
 -- Table `usel`.`Users`
@@ -98,6 +37,17 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `usel`.`Vendors`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `usel`.`vendors` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(20) NOT NULL,
+  `createdAt` TINYINT NULL,
+  `updatedAt` TINYINT NULL,
+  PRIMARY KEY (`id`));
+
+
+-- -----------------------------------------------------
 -- Table `usel`.`Purchases`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `usel`.`purchases` (
@@ -106,27 +56,81 @@ CREATE TABLE IF NOT EXISTS `usel`.`purchases` (
   `createdAt` TINYINT NULL,
   `updatedAt` TINYINT NULL,
   `userId` INT NOT NULL,
-  `jobId` INT NOT NULL,
+  `customerId` INT NOT NULL,
   `vendorId` INT NOT NULL,
   PRIMARY KEY (`po`),
-  INDEX `vendor_fk_idx` (`vendorId` ASC),
   INDEX `user_fk_idx` (`userId` ASC),
-  INDEX `job_fk_idx` (`jobId` ASC),
-  CONSTRAINT `vendor_fk`
-    FOREIGN KEY (`vendorId`)
-    REFERENCES `usel`.`Vendors` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE,
+  INDEX `customer_fk_idx` (`customerId` ASC),
+  INDEX `vendor_fk_idx` (`vendorId` ASC),
+  
   CONSTRAINT `user_fk`
     FOREIGN KEY (`userId`)
     REFERENCES `usel`.`Users` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
-  CONSTRAINT `job_fk`
-    FOREIGN KEY (`jobId`)
-    REFERENCES `usel`.`Jobs` (`id`)
+  CONSTRAINT `customer_fk`
+    FOREIGN KEY (`customerId`)
+    REFERENCES `usel`.`Customers` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+   CONSTRAINT `vendor_fk`
+    FOREIGN KEY (`vendorId`)
+    REFERENCES `usel`.`Vendors` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE);
+    
+    
+-- -----------------------------------------------------
+-- Table `usel`.`Customers`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `usel`.`customers` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(30) NOT NULL,
+  `ownPo` INT NOT NULL,
+  `createdAt` DATE NULL,
+  `updatedAt` DATE NULL,
+  `vessel_id` INT NULL,
+  PRIMARY KEY (`id`));
+  
+
+-- -----------------------------------------------------
+-- Table `usel`.`Jobs`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `usel`.`jobs` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `description` VARCHAR(120) NOT NULL,
+  `dueDate` DATE NOT NULL,
+  `mSSale` VARCHAR(20) NOT NULL,
+  `status` TINYINT(1) NOT NULL,
+  `createdAt` TINYINT NULL,
+  `updatedAt` TINYINT NULL,
+  `cust_id` INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `cust_fk_idx` (`cust_id` ASC),
+  CONSTRAINT `cust_fk`
+    FOREIGN KEY (`cust_id`)
+    REFERENCES `usel`.`Customers` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE);
+    
+    
+-- -----------------------------------------------------
+-- Table `usel`.`Vessels`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `usel`.`vessels` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(15) NOT NULL,
+  `createdAt` TINYINT NULL,
+  `updatedAt` TINYINT NULL,
+  `customer_id`INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `customer_fk_idx` (`customer_id` ASC),
+  CONSTRAINT `vessel_fk`
+    FOREIGN KEY (`customer_id`)
+    REFERENCES `usel`.`Customers` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE);
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

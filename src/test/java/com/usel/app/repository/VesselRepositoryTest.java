@@ -30,6 +30,7 @@ public class VesselRepositoryTest {
 	@Test
 	public void whenFindAllThenReturnNotEmptyList() {
 		Vessel vessel = new Vessel();
+		
 		vessel.setName("TestName");
 		
 		entityManager.persist(vessel);

@@ -17,22 +17,21 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "purchases")
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
-allowGetters = true)
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
 
 public class Purchase {
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "vendor_id", insertable=false, updatable=false)
-	private Vendor vendor;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id", insertable=false, updatable=false)
 	private User user;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "job_id", insertable=false, updatable=false)
-	private Job job;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "vendor_id", insertable=false, updatable=false)
+	private Vendor vendor;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "customer_id", insertable=false, updatable=false)
+	private Customer customer;
 
 	@Id
 	//@GeneratedValue(strategy = GenerationType.AUTO)
@@ -90,12 +89,12 @@ public class Purchase {
 		this.user = user;
 	}
 
-	public Job getJob() {
-		return job;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setJob(Job job) {
-		this.job = job;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public int getPo() {
@@ -154,31 +153,66 @@ public class Purchase {
 	
 	@Override
 	public String toString() {
-		return "Purchase [vendor=" + vendor + ", user=" + user + ", job=" + job /*+ ", po=" + po*/ + ", finalPoNumber="
-				+ finalPoNumber + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt /*+ ", userId=" + userId*/
-				/*+ ", jobId=" + jobId*/ /*+ ", vendorId=" + vendorId*/ + ", getVendor()=" + getVendor() + ", getUser()="
-				+ getUser() + ", getJob()=" + getJob() + ", getPo()=" + getPo() + ", getFinalPoNumber()="
-				+ getFinalPoNumber() + ", isCreatedAt()=" + isCreatedAt() + ", isUpdatedAt()=" + isUpdatedAt()
-				/*+ ", getUserId()=" + getUserId()*/ /*+ ", getJobId()=" + getJobId()*/ /*+ ", getVendorId()=" + getVendorId()*/
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+		return "Purchase [user=" + user + ", vendor=" + vendor + ", customer=" + customer + ", po=" + po
+				+ ", finalPoNumber=" + finalPoNumber + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 
-	
-	
 	@Override
-	public boolean equals(Object o) {
-        if(o == null) {
-            return false;
-        }
-        if (o == this) {
-           return true;
-        }
-        if (getClass() != o.getClass()) {
-            return false;
-        }
-        Purchase e = (Purchase) o;
-        return (this.getPo() == e.getPo());
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
+		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
+		result = prime * result + ((finalPoNumber == null) ? 0 : finalPoNumber.hashCode());
+		result = prime * result + po;
+		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + ((vendor == null) ? 0 : vendor.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Purchase other = (Purchase) obj;
+		if (createdAt == null) {
+			if (other.createdAt != null)
+				return false;
+		} else if (!createdAt.equals(other.createdAt))
+			return false;
+		if (customer == null) {
+			if (other.customer != null)
+				return false;
+		} else if (!customer.equals(other.customer))
+			return false;
+		if (finalPoNumber == null) {
+			if (other.finalPoNumber != null)
+				return false;
+		} else if (!finalPoNumber.equals(other.finalPoNumber))
+			return false;
+		if (po != other.po)
+			return false;
+		if (updatedAt == null) {
+			if (other.updatedAt != null)
+				return false;
+		} else if (!updatedAt.equals(other.updatedAt))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		if (vendor == null) {
+			if (other.vendor != null)
+				return false;
+		} else if (!vendor.equals(other.vendor))
+			return false;
+		return true;
+	}
 	
 }

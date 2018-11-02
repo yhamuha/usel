@@ -23,7 +23,7 @@ ALTER TABLE purchases CHANGE COLUMN finalPoNumber final_po_number VARCHAR(15) NO
 ALTER TABLE purchases CHANGE COLUMN createdAt created_at DATE;
 ALTER TABLE purchases CHANGE COLUMN updatedAt updated_at DATE;
 ALTER TABLE purchases CHANGE COLUMN userId user_id INT;
-ALTER TABLE purchases CHANGE COLUMN jobId job_id INT;
+ALTER TABLE purchases CHANGE COLUMN customerId customer_id INT;
 ALTER TABLE purchases CHANGE COLUMN vendorId vendor_id INT;
 
 
