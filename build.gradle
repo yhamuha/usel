@@ -38,24 +38,14 @@ buildscript {
 
   		compile 'org.springframework.boot:spring-boot-starter-data-jpa'
   		testCompile 'org.springframework.boot:spring-boot-starter-test'
-  		// Spring Boot
   		compile 'org.springframework.boot:spring-boot-starter-actuator'
   		compile 'org.springframework.boot:spring-boot-starter-web'
-  		// Spring Boot Logging
   		compile 'org.springframework.boot:spring-boot-starter-logging'
   		compile 'org.hibernate:hibernate-core:5.3.6.Final'
-  		// Use MySQL Connector-J
-  		//compile 'mysql:mysql-connector-java'
-    	// Log4j
-    	//compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
 		compile 'log4j:log4j:1.2.17'
-		// https://mvnrepository.com/artifact/org.hibernate/hibernate-gradle-plugin
 		compile group: 'org.hibernate', name: 'hibernate-gradle-plugin', version: '4.2.20.Final'
-		// https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api
 		compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.2.Final'
-		// https://mvnrepository.com/artifact/mysql/mysql-connector-java
 		compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
-		// Mockito
     	testCompile 'org.mockito:mockito-core:2.+'
     	
 	}
