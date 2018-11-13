@@ -1,11 +1,6 @@
 package com.usel.app.repository;
 
 import static org.junit.Assert.assertFalse;
-
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.usel.app.model.Customer;
-import com.usel.app.model.Job;
-import com.usel.app.model.Vessel;
 import com.usel.app.repository.CustomerRepository;
 
 @RunWith(SpringRunner.class)

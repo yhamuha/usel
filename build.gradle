@@ -51,8 +51,8 @@ buildscript {
 	}
 
 	flyway {
-    	url = 'jdbc:mysql://localhost:3306/usel'
-    	user = 'root'
-    	password = 'root'
+    	url = 'jdbc:mysql://192.168.99.100:3306/usel'
+    	user = 'monty'
+    	password = 'secret'
 	}	
 

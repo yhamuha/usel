@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>usel workflow</title>
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap-opaque.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+<link href="css/bootstrap-combobox.css" rel="stylesheet" type="text/css">
+<style>
+body { background-color:#fafafa;}
+.container { margin:50px auto; max-width:400px;}
+h2 { margin:30px auto; font-size:16px;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div style="text-align: center; color: gray">
+    <img src="usel.jpg" class="img-thumbnail" style="width: 200px; height: 100px;">
+    </div>
+    <br>
+    <br>
+    <h5>Select Customer</h5>
+    <select class=" input-large form-control width="524" height="242"/>">
+              <option value="AL" selected="selected"></option>
+              <option value="AK">MAT</option>
+              <option value="AZ">ASC</option>
+              <option value="AR">KAM</option>
+            </select>
+    <br>
+
+    <h5>Select Vessel</h5>
+    <select class="input-large form-control">
+        <option value="AL" selected="selected"></option>
+        <option value="AK">Kodiak</option>
+        <option value="AZ">Jaeger</option>
+        <option value="AR">Tacoma</option>
+        <option value="CA">Dynasty</option>
+    </select>
+    <br>
+
+    <h5>Select Job</h5>
+    <select class="input-large form-control">
+        <option value="AL" selected="selected"></option>
+        <option value="AK">2986</option>
+        <option value="AZ">2987</option>
+        <option value="AR">2988</option>
+        <option value="CA">2999</option>
+    </select>
+        <button type="button" class="btn btn-primary btn-lg btn-block btn-sm">Create a new job</button>
+    <br>
+    <br>
+
+    <h5>Select Vendor</h5>
+    <select class="input-large form-control">
+        <option value="AL" selected="selected"></option>
+        <option value="AK">Platt</option>
+        <option value="AZ">Bosh</option>
+        <option value="AR">Milwaukee</option>
+    </select>
+    <br>
+    <button type="button" class="btn btn-primary btn-lg btn-block btn-sm">Generate PO Number</button>
+    <br>
+        <div style="text-align: center; color: gray">
+        <h1><span class="label label-default area-opaque">AP 2296 - 0450</span></h1>
+        </div>
+    <button type="button" class="btn btn-primary btn-lg btn-block btn-sm">Save</button>
+    <br>
+
+</div>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="js/bootstrap-combobox.js"></script>
+<script>
+$(document).ready(function(){
+          $('.combobox').combobox()
+        });
+</script>
+
+
+</body>
+</html>
