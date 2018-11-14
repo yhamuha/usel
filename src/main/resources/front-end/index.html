@@ -6,12 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>usel workflow</title>
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap-opaque.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap-custom.css.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
 <link href="css/bootstrap-combobox.css" rel="stylesheet" type="text/css">
 <style>
 body { background-color:#fafafa;}
-.container { margin:50px auto; max-width:400px;}
+.container { margin:50px auto; }
 h2 { margin:30px auto; font-size:16px;}
 </style>
 </head>
@@ -20,56 +20,74 @@ h2 { margin:30px auto; font-size:16px;}
 
 <div class="container">
     <div style="text-align: center; color: gray">
-    <img src="usel.jpg" class="img-thumbnail" style="width: 200px; height: 100px;">
+        <img src="usel.jpg" class="img-thumbnail" style="width: 300px; height: 150px;">
     </div>
     <br>
     <br>
-    <h5>Select Customer</h5>
-    <select class=" input-large form-control width="524" height="242"/>">
-              <option value="AL" selected="selected"></option>
-              <option value="AK">MAT</option>
-              <option value="AZ">ASC</option>
-              <option value="AR">KAM</option>
+</div>
+<div class="container">
+    <div class="row ">
+        <div class="col-sm inline-block-custom" style="border:1px; solid: gray;">
+            <h5>Select Customer</h5>
+            <select class="  input-large form-control width="524" height="242">
+            <option value="AL" selected="selected"></option>
+            <option value="AK">MAT</option>
+            <option value="AZ">ASC</option>
+            <option value="AR">KAM</option>
             </select>
-    <br>
-
-    <h5>Select Vessel</h5>
-    <select class="input-large form-control">
-        <option value="AL" selected="selected"></option>
-        <option value="AK">Kodiak</option>
-        <option value="AZ">Jaeger</option>
-        <option value="AR">Tacoma</option>
-        <option value="CA">Dynasty</option>
-    </select>
-    <br>
-
-    <h5>Select Job</h5>
-    <select class="input-large form-control">
-        <option value="AL" selected="selected"></option>
-        <option value="AK">2986</option>
-        <option value="AZ">2987</option>
-        <option value="AR">2988</option>
-        <option value="CA">2999</option>
-    </select>
-        <button type="button" class="btn btn-primary btn-lg btn-block btn-sm">Create a new job</button>
-    <br>
-    <br>
-
-    <h5>Select Vendor</h5>
-    <select class="input-large form-control">
-        <option value="AL" selected="selected"></option>
-        <option value="AK">Platt</option>
-        <option value="AZ">Bosh</option>
-        <option value="AR">Milwaukee</option>
-    </select>
-    <br>
-    <button type="button" class="btn btn-primary btn-lg btn-block btn-sm">Generate PO Number</button>
-    <br>
-        <div style="text-align: center; color: gray">
-        <h1><span class="label label-default area-opaque">AP 2296 - 0450</span></h1>
+            <br>
         </div>
-    <button type="button" class="btn btn-primary btn-lg btn-block btn-sm">Save</button>
-    <br>
+        <div class="col-sm">
+            <h5>Select Vessel</h5>
+            <select class=" input-large form-control">
+                <option value="AL" selected="selected"></option>
+                <option value="AK">Kodiak</option>
+                <option value="AZ">Jaeger</option>
+                <option value="AR">Tacoma</option>
+                <option value="CA">Dynasty</option>
+            </select>
+            <br>
+        </div>
+        <div class="col-sm">
+            <h5>Select Job</h5>
+            <select class=" input-large form-control">
+                <option value="AL" selected="selected"></option>
+                <option value="AK">2986</option>
+                <option value="AZ">2987</option>
+                <option value="AR">2988</option>
+                <option value="CA">2999</option>
+            </select>
+            <br>
+            <div style="text-align: center;">
+                <h5>or</h5>
+            </div>
+            <br>
+            <button type="button" class="btn btn-primary btn-lg btn-block btn-sm">Create a new job</button>
+            <br>
+        </div>
+        <div class="col-sm">
+            <h5>Select Vendor</h5>
+            <select class=" input-large form-control">
+                <option value="AL" selected="selected"></option>
+                <option value="AK">Platt</option>
+                <option value="AZ">Bosh</option>
+                <option value="AR">Milwaukee</option>
+            </select>
+            <br>
+        </div>
+        <div class="col-sm">
+            <h5>Generate PO Number</h5>
+            <!--<button type="button" class="btn btn-primary btn-lg btn-block btn-sm">Apply changes before & Generate PO Number</button>-->
+            <button type="button" class=" btn btn-block btn-primary">Apply & Generate</button>
+
+            <div style="text-align: center; color: gray">
+                <h2><span class="label label-default area-opaque">XX XXXX - XXXX</span></h2>
+            </div>
+            <button type="button" class="btn btn-primary btn-lg btn-block btn-sm">Save Purchase</button>
+            <br>
+        </div>
+    </div>
+</div>
 
 </div>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -79,7 +97,6 @@ $(document).ready(function(){
           $('.combobox').combobox()
         });
 </script>
-
 
 </body>
 </html>
