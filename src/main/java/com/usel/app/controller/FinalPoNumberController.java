@@ -19,31 +19,53 @@ import com.usel.app.model.Customer;
 import com.usel.app.model.Job;
 import com.usel.app.model.Purchase;
 import com.usel.app.model.User;
+import com.usel.app.model.Vendor;
+import com.usel.app.model.Vessel;
 import com.usel.app.service.CustomerService;
 import com.usel.app.service.FinalPoNumberService;
+import com.usel.app.service.PurchaseService;
 import com.usel.app.service.exception.ServiceException;
 
 @RestController
-@RequestMapping("/finalponumber")
+@RequestMapping(value = "/finalponumber/", method = RequestMethod.POST, consumes="application/json")
 public class FinalPoNumberController {
 	
-	private final Logger LOG = LoggerFactory.getLogger(UserController.class);
+	private final Logger LOG = LoggerFactory.getLogger(FinalPoNumberController.class);
 	
-	@RequestMapping(method=RequestMethod.POST,consumes="application/json")
-    @ResponseBody
-    public String generateSaveAndReturn(User user_id, Job job_id, Purchase purchase_id_po ) {
+	@Autowired
+    PurchaseService purchaseService;
 	
-		FinalPoNumberService finalNumberService = null;
-		String response = null;
-		
-			try {
-				response = finalNumberService.generateSaveAndReturnFinalPoNumber(user_id, null, null, job_id, null, purchase_id_po);
-			
-			} catch (ServiceException e) {
-				e.printStackTrace();
+public String generateSaveAndReturnFinalPoNumber(@RequestBody User user, Customer customer, 
+		Vessel vessel, Job job, Vendor vendor, Purchase purchase, UriComponentsBuilder ucBuilder) {
+    
+	LOG.info("Creating Purchase : {}", purchase);
+    
+    FinalPoNumberService finalNumberService = null;
+	String response = null;
+	
+		try {
+			if (purchaseService.exist(purchase.getPo())) {
+				LOG.error("Unable to create. A Purchase with name {} already exist", purchase.getPo());
+				return new ResponseEntity("Unable to create. A Purchase with name " + 
+				purchase.getPo() + " already exist.",HttpStatus.CONFLICT);
 			}
+		} catch (ServiceException e1) {
+			e1.printStackTrace();
+		}
+	
+		try {
+			response = finalNumberService.generateSaveAndReturnFinalPoNumber(user, customer, vessel, job,  vendor);
 			return response;
-		        
-    }
-        
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		HttpHeaders headers = new HttpHeaders();
+		
+		headers.setLocation(ucBuilder.path("").buildAndExpand(user.getId()).toUri());
+		
+	    headers.setLocation(ucBuilder.path("/purchase/{id}").buildAndExpand(purchase.getPo()).toUri());
+	    return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+	}
 }

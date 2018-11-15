@@ -12,27 +12,30 @@ import com.usel.app.service.exception.ServiceException;
 public class FinalPoNumberServiceImpl {
 	
 	
-	public String generateSaveAndReturnFinalPoNumber(User user_id, Customer customer_id, Vessel vessel_id, Job job_id, Vendor vendor_id, Purchase purchase_id_po) throws ServiceException {
-		String finalPoNumber = null;
-		
-		// generate finalPoNumber string
-		finalPoNumber = user_id.getShortName() + " " + job_id.getId() + " - " + purchase_id_po.getPo();
+	public String generateSaveAndReturnFinalPoNumber(User user_id, Customer customer_id, Vessel vessel_id, Job job_id, Vendor vendor_id) throws ServiceException {
 		
 		// save purchase obj
-		// =========================================================
-		// construct Purchase object
-		Purchase purchase = new Purchase();
-		purchase.setUser(user_id);
-		purchase.setCustomer(customer_id);
-			// Vessel into Vessel !?
-			   //purchase.setVessel
-		    // Job into Job !?
-		       //purchase.setJob
-		purchase.setVendor(vendor_id);
+				// =========================================================
+				// construct Purchase object
+				Purchase purchase = new Purchase();
+				purchase.setUser(user_id);
+				purchase.setCustomer(customer_id);
+				// no purchase.setVessel setter
+				// no purchase.setJob setter
+				purchase.setVendor(vendor_id);
+				//set finalPoNumber to null while because we haven't this value now
+				purchase.setFinalPoNumber(null);
+				
+				// save Purchase into DB
+				PurchaseService purchaseService = null;
+				purchaseService.create(purchase);
+		
+		// generate finalPoNumber string
+		String finalPoNumber = user_id.getShortName() + " " + job_id.getId() + " - " + purchase.getPo();
+		
+		// update Purchase.finalPoNumber to Purchase entity
 		purchase.setFinalPoNumber(finalPoNumber);
-		// save Purchase into DB
-		PurchaseService purchaseService = null;
-		purchaseService.create(purchase);
+		purchaseService.update(purchase);
 		
 		//return generated finalPoNumber
 		return finalPoNumber;
