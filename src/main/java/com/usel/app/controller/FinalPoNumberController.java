@@ -2,6 +2,7 @@ package com.usel.app.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,30 @@ import com.usel.app.service.FinalPoNumberService;
 import com.usel.app.service.PurchaseService;
 import com.usel.app.service.exception.ServiceException;
 
+
+								/*@RestController
+								public class FinalPoNumberController {
+									
+									@Autowired
+								    PurchaseService purchaseService;
+									
+									
+												@PostMapping("/finalponumber")
+												public String generateSaveAndReturnFinalPoNumber(@RequestBody Map<String, String> body){
+													int user_id = Integer.parseInt(body.get("user_id"));
+													int customer_id = Integer.parseInt(body.get("customer_id"));
+													int vessel_id = Integer.parseInt(body.get("vessel_id"));
+													int job_id = Integer.parseInt(body.get("job_id"));
+													int vendor_id = Integer.parseInt(body.get("vendor_id"));
+													
+													String response = generateSaveAndReturnFinalPoNumber(user_id, customer_id, vessel_id, job_id, vendor_id);
+													
+													// must return JSON
+													return blogMockedData.createBlog(id, title, content);
+												}
+								}*/
+
+
 @RestController
 @RequestMapping(value = "/finalponumber/", method = RequestMethod.POST, consumes="application/json")
 public class FinalPoNumberController {
@@ -35,8 +60,7 @@ public class FinalPoNumberController {
 	@Autowired
     PurchaseService purchaseService;
 	
-public String generateSaveAndReturnFinalPoNumber(@RequestBody User user, Customer customer, 
-		Vessel vessel, Job job, Vendor vendor, Purchase purchase, UriComponentsBuilder ucBuilder) {
+public String generateSaveAndReturnFinalPoNumber(@RequestBody int user_id, int customer_id, int vessel_id, int job_id, int vendor_id, UriComponentsBuilder ucBuilder) {
     
 	LOG.info("Creating Purchase : {}", purchase);
     

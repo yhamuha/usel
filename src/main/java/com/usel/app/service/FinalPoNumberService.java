@@ -1,10 +1,5 @@
 package com.usel.app.service;
 
-import com.usel.app.model.Customer;
-import com.usel.app.model.Job;
-import com.usel.app.model.User;
-import com.usel.app.model.Vendor;
-import com.usel.app.model.Vessel;
 import com.usel.app.service.exception.ServiceException;
 
 public interface FinalPoNumberService {
@@ -18,5 +13,5 @@ public interface FinalPoNumberService {
      * 			If any errors are encountered in the repository layer 
      * 			while retrieving data.
 	 **/
-	String generateSaveAndReturnFinalPoNumber(User user, Customer customer, Vessel vessel, Job job, Vendor vendor) throws ServiceException;
+	String generateSaveAndReturnFinalPoNumber(int user_id, int customer_id, int vessel_id, int job_id, int vendor_id) throws ServiceException;
 }
