@@ -39,9 +39,9 @@ public class FinalPoNumberServiceImplTest {
 	VendorServiceImpl vendorService;
 	PurchaseServiceImpl purchaseService;
 	FinalPoNumberServiceImpl finalPoNumberService;
-
-	int id;
 	Purchase purchase;
+	
+	int id;
 	int user_id = 1;
 	int customer_id = 1;
 	int vessel_id =1;
@@ -51,25 +51,25 @@ public class FinalPoNumberServiceImplTest {
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		Purchase purchase = new Purchase();
 		when(mockPurchaseRepository.save(purchase)).thenReturn(purchase);
 		when(mockPurchaseRepository.saveAndFlush(purchase)).thenReturn(purchase);
-		
-		// TODO
-		// line below must be uncomment after resolve Optional<> type
-		//when(mockPurchaseRepository.findById(id)).thenReturn(purchase);
-		
-	}
-
-	@Test
-	public void generateSaveAndReturnFinalPoNumberShouldInvokeOnce() throws ServiceException {
-		finalPoNumberService.generateSaveAndReturnFinalPoNumber(user_id, customer_id, vessel_id, job_id, vendor_id);
-		verify(mockPurchaseRepository, times(1)).save(purchase);
 	}
 	
 	@Test
-	public void generateSaveAndReturnFinalPoNumberShouldNotReturnNull() throws ServiceException {
-		assertNotNull(purchaseService.findById(id));
+		public void createPurchaseShouldReturnNotNull() throws ServiceException {
+		assertNotNull(purchaseService.create(purchase));
 	}
+	
+	@Test
+		public void updatePurchaseShouldInvokeOnce() throws ServiceException {
+		purchaseService.update(purchase);
+		verify(mockPurchaseRepository, times(1)).save(purchase);
+		}
+	
+	@Test
+		public void createPurchaseShouldInvokeOnce() throws ServiceException {
+		purchaseService.create(purchase);
+		verify(mockPurchaseRepository, times(1)).save(purchase);
+		}
 	
 }
