@@ -19,16 +19,13 @@ import com.usel.app.model.Vendor;
 import com.usel.app.service.PurchaseService;
 import com.usel.app.service.exception.ServiceException;
 import com.usel.app.service.impl.FinalPoNumberServiceImpl;
+import static org.mockito.Matchers.*;
+import static org.mockito.Matchers.anyString;
 
 @RunWith(SpringRunner.class)
 public class FinalPoNumberServiceImplTest {
 
 	Purchase purchase;
-	int user_id=1;
-	int customer_id=1;
-	int vessel_id=1;
-	int job_id=1;
-	int vendor_id=1;
 	
 	@Mock
 	PurchaseService purchaseService;
@@ -51,27 +48,51 @@ public class FinalPoNumberServiceImplTest {
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
-	//@Test
+	/*@Test
+	public void generateSaveAndReturnFinalPoNumberShouldReturnString() throws ServiceException{
+	
+		int user_id=1;
+		int customer_id=1;
+		int vessel_id=1;
+		int job_id=1;
+		int vendor_id=1;
+		
+	try {
+		String finalPoNumber = null;
+		when (finalPoNumberService.generateSaveAndReturnFinalPoNumber(user_id, 
+				customer_id, vessel_id,	job_id,	vendor_id)).thenReturn(finalPoNumber);
+	} catch (ServiceException e) {
+		e.printStackTrace();
+	}
+	
+	verify(finalPoNumberService.generateSaveAndReturnFinalPoNumber(user_id, customer_id, vessel_id,	job_id,	vendor_id));
+	}*/
+	
+	@Test
 		public void createPurchaseShouldReturnNotNull() throws ServiceException {
 		
-			Date date = new Date();
-			User user = new User("Alex", "Johnson", "aj@gmail.com", "passw", "AJ", true, date, date);
-			Customer customer = new Customer("Customer", 4050, date, date);
-			Vendor vendor = new Vendor("Vendor", date, date);
+			Date dateCreated = new Date();
+			Date dateUpdated = new Date();
+			User user = new User("Alex", "Johnson", "aj@gmail.com", "passw", "AJ", true, dateCreated, dateUpdated);
+			Customer customer = new Customer("Customer", 4050, dateCreated, dateUpdated);
+			Vendor vendor = new Vendor("Vendor", dateCreated, dateUpdated);
 			
 			Purchase purchase = new Purchase();
 			
 			purchase.setUser(user);
 			purchase.setCustomer(customer);
 			purchase.setVendor(vendor);
-			purchase.setCreatedAt(date);
-			purchase.setUpdatedAt(date);
+			purchase.setCreatedAt(dateCreated);
+			purchase.setUpdatedAt(dateUpdated);
 			
+			when(purchaseService.create(purchase)).thenReturn(purchase);
 			assertNotNull(purchaseService.create(purchase));
+			
 	}
-	
+						
 	@Test
 		public void createPurchaseShouldInvokeOnce() throws ServiceException {
 			purchaseService.create(purchase);

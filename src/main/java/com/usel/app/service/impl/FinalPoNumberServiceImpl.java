@@ -26,39 +26,31 @@ public class FinalPoNumberServiceImpl implements FinalPoNumberService{
 	public String generateSaveAndReturnFinalPoNumber(int user_id, int customer_id, int vessel_id, int job_id,
 			int vendor_id) throws ServiceException {
 		
-		// fill up Purchase object with input data		
 				Purchase purchase = new Purchase();
-				Date date = new Date();
-				/*User user = new User();
-				Customer customer = new Customer();
-				Vendor vendor = new Vendor();*/
+
+				Date dateCreated = new Date();
+				Date dateUpdated = new Date();	
 				
-				// TODO
-				// line below must be uncomment after resolve Optional<> type
-				purchase.setUser(userService.findById(user_id));
-				purchase.setCustomer(customerService.findById(customer_id));
-				purchase.setVendor(vendorService.findById(vendor_id));
+				User user = userService.findById(user_id).get();
+				Customer customer = customerService.findById(customer_id).get();
+				Vendor vendor = vendorService.findById(vendor_id).get();
 				
-				// set finalPoNumber to null for this time
+				purchase.setUser(user);
+				purchase.setCustomer(customer);
+				purchase.setVendor(vendor);
 				purchase.setFinalPoNumber(null);
-				purchase.setCreatedAt(date);
-				purchase.setUpdatedAt(date);
+				purchase.setCreatedAt(dateCreated);
+				purchase.setUpdatedAt(dateUpdated);
 				
-				// save to db
 				purchaseService.create(purchase);
 				
-				// after that we can generate finalPoNumber	
 				String finalPoNumber = user_id + " " + job_id + " - " + purchase.getPo();
 				
-				// add final
 				purchase.setFinalPoNumber(finalPoNumber);
 				
-				// update db. insert finalPoNumber
 				purchaseService.update(purchase);
 				
-				//return
 				return finalPoNumber;
 		
-				//return "AP 2296 - 0450";
 	}
 }
