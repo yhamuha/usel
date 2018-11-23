@@ -88,7 +88,7 @@ public class FinalPoNumberServiceImplTest {
 			purchase.setCreatedAt(dateCreated);
 			purchase.setUpdatedAt(dateUpdated);
 			
-			when(purchaseService.create(purchase)).thenReturn(purchase);
+			//when(purchaseService.create(purchase)).thenReturn(purchase);
 			assertNotNull(purchaseService.create(purchase));
 			
 	}
