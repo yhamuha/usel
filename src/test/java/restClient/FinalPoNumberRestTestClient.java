@@ -9,10 +9,10 @@ import com.usel.app.service.impl.FinalPoNumberServiceImpl;
 
 public class FinalPoNumberRestTestClient {
 	
-	private static final String REST_SERVICE_URI = "http://localhost:8080/";
+	private static final String REST_SERVICE_URI = "http://192.168.99.100:8080/";
 	
 	/* POST */
-	private static void finalPoNumber() {
+	public static void finalPoNumber() {
         System.out.println("Testing create finalPoNumber----------");
         RestTemplate restTemplate = new RestTemplate();
         
