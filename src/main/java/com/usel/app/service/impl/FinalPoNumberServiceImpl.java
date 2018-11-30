@@ -25,7 +25,7 @@ public class FinalPoNumberServiceImpl implements FinalPoNumberService{
 	public String generateSaveAndReturnFinalPoNumber(int user_id, int customer_id, int vessel_id, int job_id,
 			int vendor_id) throws ServiceException {
 		
-			Purchase purchase = new Purchase();
+			/*Purchase purchase = new Purchase();
 
 			Date dateCreated = new Date();
 			Date dateUpdated = new Date();	
@@ -47,9 +47,9 @@ public class FinalPoNumberServiceImpl implements FinalPoNumberService{
 												
 			purchase.setFinalPoNumber(finalPoNumber);
 												
-			purchaseService.update(purchase);
+			purchaseService.update(purchase);*/
 				
-																					//String finalPoNumber = user_id + "" + customer_id + "" + vessel_id + "" + job_id + "" + vendor_id;
+			String finalPoNumber = user_id + "" + customer_id + "" + vessel_id + "" + job_id + "" + vendor_id;
 			return finalPoNumber;
 		
 	}

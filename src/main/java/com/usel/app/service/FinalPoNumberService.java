@@ -1,7 +1,10 @@
 package com.usel.app.service;
 
+import org.springframework.stereotype.Service;
+
 import com.usel.app.service.exception.ServiceException;
 
+@Service
 public interface FinalPoNumberService {
 	/**
 	 * <p>

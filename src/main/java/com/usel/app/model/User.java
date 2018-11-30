@@ -13,6 +13,7 @@ import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.LastModifiedDate;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
 @Entity
 @Table(name = "users")
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
