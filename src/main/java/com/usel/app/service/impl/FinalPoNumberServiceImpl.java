@@ -22,17 +22,19 @@ public class FinalPoNumberServiceImpl implements FinalPoNumberService{
 	VendorService vendorService;
 	
 	@Override
-	public String generateSaveAndReturnFinalPoNumber(int user_id, int customer_id, int vessel_id, int job_id,
-			int vendor_id) throws ServiceException {
+	public String generateSaveAndReturnFinalPoNumber(int user_id, int customer_id, int vessel_id, int job_id, int vendor_id) throws ServiceException {
 		
-			/*Purchase purchase = new Purchase();
+			User user = new User();
+			Customer customer = new Customer();
+			Vendor vendor = new Vendor();
+			Purchase purchase = new Purchase();
 
 			Date dateCreated = new Date();
 			Date dateUpdated = new Date();	
 			
-			User user = userService.findById(user_id).get();
-			Customer customer = customerService.findById(customer_id).get();
-			Vendor vendor = vendorService.findById(vendor_id).get();
+			user = userService.findById(user_id).get();
+			customer = customerService.findById(customer_id).get();
+			vendor = vendorService.findById(vendor_id).get();
 			
 			purchase.setUser(user);
 			purchase.setCustomer(customer);
@@ -47,9 +49,9 @@ public class FinalPoNumberServiceImpl implements FinalPoNumberService{
 												
 			purchase.setFinalPoNumber(finalPoNumber);
 												
-			purchaseService.update(purchase);*/
+			purchaseService.update(purchase);
 				
-			String finalPoNumber = user_id + "" + customer_id + "" + vessel_id + "" + job_id + "" + vendor_id;
+			finalPoNumber = user_id + "" + customer_id + "" + vessel_id + "" + job_id + "" + vendor_id;
 			return finalPoNumber;
 		
 	}
