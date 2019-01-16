@@ -3,10 +3,9 @@ package com.usel.app.services;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
 import java.util.Date;
 import java.util.Optional;
-
-import static org.junit.Assert.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -80,6 +79,19 @@ public class FinalPoNumberServiceImplTest {
 
 		int user_id = 1, customer_id = 1, vessel_id = 1, job_id = 1, vendor_id = 1;
 		
+		Date myDate = new Date();
+
+		user.setCreatedAt(myDate);		
+		user.setEmail("email@email.com");
+		user.setEnabled(true);
+		user.setId(1);
+		user.setLastName("lastName");
+		user.setName("name");
+		user.setPassword("password");
+		user.setShortName("shortName");
+		user.setUpdatedAt(myDate);
+		
+        
 		Optional<User> optionalUser = Optional.of(user);
 		Optional<Customer> optionalCustomer = Optional.of(customer);
 		Optional<Vessel> optionalVessel = Optional.of(vessel);
