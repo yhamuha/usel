@@ -14,9 +14,9 @@ import com.usel.app.service.VendorService;
 import com.usel.app.service.exception.ServiceException;
 
 @Service
-public class FinalPoNumberServiceImpl implements FinalPoNumberService{
+public class FinalPoNumberServiceImpl implements FinalPoNumberService{																						
 
-	PurchaseService purchaseService;
+	PurchaseService purchaseService;																														
 	CustomerService customerService;
 	UserService userService;
 	VendorService vendorService;
@@ -24,26 +24,26 @@ public class FinalPoNumberServiceImpl implements FinalPoNumberService{
 	@Override
 	public String generateSaveAndReturnFinalPoNumber(int user_id, int customer_id, int vessel_id, int job_id, int vendor_id) throws ServiceException {
 		
-			User user = new User();
+			User user = new User();																															
 			Customer customer = new Customer();
 			Vendor vendor = new Vendor();
-			Purchase purchase = new Purchase();
 
 			Date dateCreated = new Date();
 			Date dateUpdated = new Date();	
 			
-			user = userService.findById(user_id).get();
+			user = userService.findById(user_id).get();																										
 			customer = customerService.findById(customer_id).get();
 			vendor = vendorService.findById(vendor_id).get();
 			
-			purchase.setUser(user);
+			Purchase purchase = new Purchase();																												
+			purchase.setUser(user);																															
 			purchase.setCustomer(customer);
 			purchase.setVendor(vendor);
 			purchase.setFinalPoNumber(null);
 			purchase.setCreatedAt(dateCreated);
 			purchase.setUpdatedAt(dateUpdated);
 			
-			purchaseService.create(purchase);
+			purchaseService.create(purchase);																												
 									
 			String finalPoNumber = user_id + " " + job_id + " - " + purchase.getPo();
 												
