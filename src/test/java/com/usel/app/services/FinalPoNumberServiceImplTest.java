@@ -106,12 +106,8 @@ public class FinalPoNumberServiceImplTest {
 		customer = mockCustomerService.findById(customer_id).get();
 		vendor = mockVendorService.findById(vendor_id).get();
 		
-		purchase.setUser(user);																																	
-		purchase.setCustomer(customer);																															
-		purchase.setVendor(vendor);
-		purchase.setFinalPoNumber(null);
-		purchase.setCreatedAt(dateCreated);
-		purchase.setUpdatedAt(dateUpdated);
+		
+		Purchase purchase = new Purchase(user, customer, vendor, null, dateCreated, dateUpdated);
 		
 		purchaseService.create(purchase);																				
 								

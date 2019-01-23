@@ -63,7 +63,9 @@ public class Purchase {
 	public Purchase() {
 	}
 	
-	public Purchase(/*int po,*/ String finalPoNumber, Date createdAt, Date updatedAt /*int userId ,*/ /*int jobId,*//* int vendorId*/) {
+	
+	public Purchase(/*int po,*/ User user, Customer customer, Vendor vendor, String finalPoNumber, Date createdAt, Date updatedAt /*int userId ,*/ /*int jobId,*//* int vendorId*/) {
+	// public Purchase(/*int po,*/ String finalPoNumber, Date createdAt, Date updatedAt /*int userId ,*/ /*int jobId,*//* int vendorId*/) {
 		//this.po = po;
 		this.finalPoNumber = finalPoNumber;
 		this.createdAt = createdAt;
