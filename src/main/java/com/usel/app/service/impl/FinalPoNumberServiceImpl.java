@@ -1,6 +1,8 @@
 package com.usel.app.service.impl;
 
 import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.usel.app.model.Customer;
 import com.usel.app.model.Purchase;
@@ -16,9 +18,13 @@ import com.usel.app.service.exception.ServiceException;
 @Service
 public class FinalPoNumberServiceImpl implements FinalPoNumberService{																						
 
-	PurchaseService purchaseService;																														
+	@Autowired
+	PurchaseService purchaseService;	
+	@Autowired
 	CustomerService customerService;
+	@Autowired
 	UserService userService;
+	@Autowired
 	VendorService vendorService;
 	
 	@Override
@@ -35,13 +41,7 @@ public class FinalPoNumberServiceImpl implements FinalPoNumberService{
 			customer = customerService.findById(customer_id).get();
 			vendor = vendorService.findById(vendor_id).get();
 			
-			Purchase purchase = new Purchase();																												
-			purchase.setUser(user);																															
-			purchase.setCustomer(customer);
-			purchase.setVendor(vendor);
-			purchase.setFinalPoNumber(null);
-			purchase.setCreatedAt(dateCreated);
-			purchase.setUpdatedAt(dateUpdated);
+			Purchase purchase = new Purchase(user, customer, vendor, null, dateCreated, dateUpdated);
 			
 			purchaseService.create(purchase);																												
 									

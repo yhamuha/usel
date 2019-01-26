@@ -81,6 +81,7 @@ public class FinalPoNumberServiceImplTest {
 		int user_id = 1, customer_id = 1, vessel_id = 1, job_id = 1, vendor_id = 1;																				
 			
 		Date currentDate = new Date();
+		
 		User user = new User("User_name", "User_lastName", "email@email.com", "password", "User_shortName", true, currentDate, currentDate);					
 		Customer customer = new Customer("Cust_name", 2, currentDate, currentDate);																				
 		Vessel vessel = new Vessel ("Vessel_name", currentDate, currentDate);																					
@@ -100,12 +101,10 @@ public class FinalPoNumberServiceImplTest {
 		when((mockVendorService.findById(1))).thenReturn(optionalVendor);
 		
 		String actual = finalPoNumberService.generateSaveAndReturnFinalPoNumber(user_id, customer_id, vessel_id, job_id, vendor_id);					
-																																						
 		
 		user = mockUserService.findById(user_id).get();																									
 		customer = mockCustomerService.findById(customer_id).get();
 		vendor = mockVendorService.findById(vendor_id).get();
-		
 		
 		Purchase purchase = new Purchase(user, customer, vendor, null, dateCreated, dateUpdated);
 		
