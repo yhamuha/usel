@@ -42,30 +42,30 @@ public class VesselServiceImplTest {
 	}
 
 	@Test
-	public void findAllShouldInvokeOnceUserRepositoryFindAllMethod() throws ServiceException {
+	public void findAll_ShouldInvokeOnceUserRepositoryFindAllMethod() throws ServiceException {
 		vesselService.findAll();
 		verify(mockVesselRepository, times(1)).findAll();
 	}
 
 	@Test
-	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
+	public void create_ShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
 		vesselService.create(vessel);
 		verify(mockVesselRepository, times(1)).save(vessel);
 	}
 	
 	@Test
-	public void  updateShouldInvokeOnceVesselRepositorySaveAndFlushMethod() throws ServiceException {
+	public void  update_ShouldInvokeOnceVesselRepositorySaveAndFlushMethod() throws ServiceException {
 		vesselService.update(vessel);
 		verify(mockVesselRepository, times(1)).saveAndFlush(vessel);
 	}
 
 	@Test
-	public void findByIdShouldNotReturnNull() throws ServiceException {
+	public void findById_ShouldNotReturnNull() throws ServiceException {
 		assertNotNull(vesselService.findById(id));
 	}
 	
 	@Test
-	public void deleteByIdInvokeOnceDeleteByIdRepositoryMethod() throws ServiceException {
+	public void deleteById_InvokeOnceDeleteByIdRepositoryMethod() throws ServiceException {
 		vesselService.deleteById(id);
 		verify(mockVesselRepository, times(1)).deleteById(id);
 	}

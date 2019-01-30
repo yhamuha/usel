@@ -42,30 +42,30 @@ public class VendorServiceImplTest {
 	}
 	
 	@Test
-	public void findAllShouldInvokeOnceVendorRepositoryFindAllMethod() throws ServiceException {
+	public void findAll_ShouldInvokeOnceVendorRepositoryFindAllMethod() throws ServiceException {
 		vendorService.findAll();
 		verify(mockVendorRepository, times(1)).findAll();
 	}
 		
 	@Test
-	public void createShouldInvokeOnceVendorRepositorySaveMethod() throws ServiceException {
+	public void create_ShouldInvokeOnceVendorRepositorySaveMethod() throws ServiceException {
 		vendorService.create(vendor);
 		verify(mockVendorRepository, times(1)).save(vendor);
 	}
 	
 	@Test
-	public void  updateShouldInvokeOnceVendorRepositorySaveAndFlushMethod() throws ServiceException {
+	public void  update_ShouldInvokeOnceVendorRepositorySaveAndFlushMethod() throws ServiceException {
 		vendorService.update(vendor);
 		verify(mockVendorRepository, times(1)).saveAndFlush(vendor);
 	}
 	
 	@Test
-	public void findByIdShouldNotReturnNull() throws ServiceException {
+	public void findById_ShouldNotReturnNull() throws ServiceException {
 		assertNotNull(vendorService.findById(id));
 	}
 	
 	@Test
-	public void deleteByIdInvokeOnceDeleteByIdRepositoryMethod() throws ServiceException {
+	public void deleteById_InvokeOnceDeleteByIdRepositoryMethod() throws ServiceException {
 		vendorService.deleteById(id);
 		verify(mockVendorRepository, times(1)).deleteById(id);
 	}

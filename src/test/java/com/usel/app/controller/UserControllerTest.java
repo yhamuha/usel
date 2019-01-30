@@ -76,7 +76,7 @@ public class UserControllerTest {
 	}
 	
 	@Test
-	public void getAllShouldReturnStatusNoContentWhenUserListEmpty() throws Exception {
+	public void getAll_ShouldReturnStatusNoContentWhenUserListEmpty() throws Exception {
 		when(userService.findAll()).thenReturn(users);
 		
 		mockMvc.perform(get("/users"))
@@ -84,7 +84,7 @@ public class UserControllerTest {
 	}
 	
 	@Test
-	public void getAllShouldReturnStatusServiceTemporarilyUnavailableWhenUserServiceFailed() throws Exception {
+	public void getAll_ShouldReturnStatusServiceTemporarilyUnavailableWhenUserServiceFailed() throws Exception {
 		when(userService.findAll()).thenThrow(new ServiceException("Problem with DB connection"));
 		
 		mockMvc.perform(get("/users"))
@@ -108,7 +108,7 @@ public class UserControllerTest {
 	}
 	
 	@Test
-	public void createShouldReturnStatusConflictWhenUserExists() throws Exception {
+	public void create_ShouldReturnStatusConflictWhenUserExists() throws Exception {
 		when(userService.exist(user.getEmail())).thenReturn(true);
 		mockMvc.perform(post("/users")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -117,7 +117,7 @@ public class UserControllerTest {
 	}
 	
 	@Test
-	public void createShouldReturnStatusServiceTemporarilyUnavailableWhenUserServiceFailed() throws Exception {
+	public void create_ShouldReturnStatusServiceTemporarilyUnavailableWhenUserServiceFailed() throws Exception {
 		when(userService.exist(fakeEmail)).thenReturn(false);
         when(userService.create(user)).thenThrow(new ServiceException("Problem with DB connection"));
         

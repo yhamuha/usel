@@ -29,21 +29,28 @@ import com.usel.app.service.exception.ServiceException;
 import com.usel.app.service.impl.FinalPoNumberServiceImpl;
 import com.usel.app.service.impl.PurchaseServiceImpl;
 
-@RunWith(SpringRunner.class)
+@RunWith(SpringRunner.class)																																								
 public class FinalPoNumberServiceImplTest {
 
-	User user;
+	User user;																																											
 	Customer customer;
 	Vessel vessel;
 	Job job;
 	Purchase purchase;
 	Vendor vendor;
 	Date dateCreated;
-	Date dateUpdated;
+	Date dateUpdated;																																									
+	
+	
+	@InjectMocks																												
+	FinalPoNumberServiceImpl finalPoNumberServiceImpl;																			
+
+	@InjectMocks
+	PurchaseServiceImpl purchaseService;																						
 	
 	@Mock
-	PurchaseRepository mockPurchaseRepository;
-
+	PurchaseRepository mockPurchaseRepository;																					
+																																
 	@Mock
 	UserService mockUserService;
 
@@ -59,24 +66,20 @@ public class FinalPoNumberServiceImplTest {
 	@Mock
 	VendorService mockVendorService;
 
-	@InjectMocks
-	FinalPoNumberServiceImpl finalPoNumberService;
+	
 
-	@InjectMocks
-	PurchaseServiceImpl purchaseService;
-
-	@Before
+	@Before																														
 	public void setUp() throws ServiceException {
 		
-		MockitoAnnotations.initMocks(this);
+		MockitoAnnotations.initMocks(this);																						
 		
-		when(mockPurchaseRepository.save(purchase)).thenReturn(purchase);
-		when(mockPurchaseRepository.saveAndFlush(purchase)).thenReturn(purchase);
+		when(mockPurchaseRepository.save(purchase)).thenReturn(purchase);														
+		when(mockPurchaseRepository.saveAndFlush(purchase)).thenReturn(purchase);												
 		
 	}
 
 	@Test
-	public void generateSaveAndReturnFinalPoNumberShouldReturnString() throws ServiceException{
+	public void generateSaveAndReturnFinalPoNumber_ShouldReturnString() throws ServiceException{
 
 		int user_id = 1, customer_id = 1, vessel_id = 1, job_id = 1, vendor_id = 1;																				
 			
@@ -88,26 +91,30 @@ public class FinalPoNumberServiceImplTest {
 		Job job = new Job("Job_desc", currentDate, "mmssale", true, currentDate, currentDate);
 		Vendor vendor = new Vendor ("Vendor_name", currentDate, currentDate);																					
 		
-		Optional<User> optionalUser = Optional.of(user);																										
+		Optional<User> optionalUser = Optional.of(user);																																											
 		Optional<Customer> optionalCustomer = Optional.of(customer);
 		Optional<Vessel> optionalVessel = Optional.of(vessel);
 		Optional<Job> optionalJob = Optional.of(job);
 		Optional<Vendor> optionalVendor = Optional.of(vendor);
-		
-		when((mockUserService.findById(1))).thenReturn(optionalUser);																							
-		when((mockCustomerService.findById(1))).thenReturn(optionalCustomer);
+
+		when((mockUserService.findById(1))).thenReturn(optionalUser);																																
+		when((mockCustomerService.findById(1))).thenReturn(optionalCustomer);																								
 		when((mockVesselService.findById(1))).thenReturn(optionalVessel);
 		when((mockJobService.findById(1))).thenReturn(optionalJob);
 		when((mockVendorService.findById(1))).thenReturn(optionalVendor);
 		
-		String actual = finalPoNumberService.generateSaveAndReturnFinalPoNumber(user_id, customer_id, vessel_id, job_id, vendor_id);					
+														
 		
-		user = mockUserService.findById(user_id).get();																									
+		String actual = finalPoNumberServiceImpl.generateSaveAndReturnFinalPoNumber(user_id, customer_id, vessel_id, job_id, vendor_id);		
+		
+		user = mockUserService.findById(user_id).get();																																	//																									
 		customer = mockCustomerService.findById(customer_id).get();
 		vendor = mockVendorService.findById(vendor_id).get();
-		
+		System.out.println(user);
+		System.out.println(customer);
+		System.out.println(vendor);
 		Purchase purchase = new Purchase(user, customer, vendor, null, dateCreated, dateUpdated);
-		
+		System.out.println(purchase);
 		purchaseService.create(purchase);																				
 								
 		String finalPoNumber = user_id + " " + job_id + " - " + purchase.getPo();																				
@@ -121,7 +128,7 @@ public class FinalPoNumberServiceImplTest {
 	}
 
 	@Test
-	public void createPurchaseShouldReturnNotNull() throws ServiceException {
+	public void createPurchase_ShouldReturnNotNull() throws ServiceException {
 
 		Date dateCreated = new Date();
 		Date dateUpdated = new Date();
@@ -141,13 +148,13 @@ public class FinalPoNumberServiceImplTest {
 	}
 
 	@Test
-	public void createPurchaseShouldInvokeOnce() throws ServiceException {
+	public void createPurchase_ShouldInvokeOnce() throws ServiceException {
 		purchaseService.create(purchase);
 		verify(mockPurchaseRepository, times(1)).save(purchase);
 	}
 
 	@Test
-	public void updatePurchaseShouldInvokeOnce() throws ServiceException {
+	public void updatePurchase_ShouldInvokeOnce() throws ServiceException {
 		purchaseService.update(purchase);
 		verify(mockPurchaseRepository, times(1)).saveAndFlush(purchase);
 	}

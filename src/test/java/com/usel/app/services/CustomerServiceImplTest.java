@@ -42,30 +42,30 @@ public class CustomerServiceImplTest {
 	}
 
 	@Test
-	public void findAllShouldInvokeOnceUserRepositoryFindAllMethod() throws ServiceException {
+	public void findAll_ShouldInvokeOnceUserRepositoryFindAllMethod() throws ServiceException {
 		customerService.findAll();
 		verify(mockCustomerRepository, times(1)).findAll();
 	}
 	
 	@Test
-	public void createShouldInvokeOnceCustomerRepositorySaveMethod() throws ServiceException {
+	public void create_ShouldInvokeOnceCustomerRepositorySaveMethod() throws ServiceException {
 		customerService.create(customer);
 		verify(mockCustomerRepository, times(1)).save(customer);
 	}
 	
 	@Test
-	public void  updateShouldInvokeOnceCustomerRepositorySaveAndFlushMethod() throws ServiceException {
+	public void  update_ShouldInvokeOnceCustomerRepositorySaveAndFlushMethod() throws ServiceException {
 		customerService.update(customer);
 		verify(mockCustomerRepository, times(1)).saveAndFlush(customer);
 	}
 
 	@Test
-	public void findByIdShouldNotReturnNull() throws ServiceException {
+	public void findById_ShouldNotReturnNull() throws ServiceException {
 		assertNotNull(customerService.findById(id));
 	}
 	
 	@Test
-	public void deleteByIdInvokeOnceDeleteByIdRepositoryMethod() throws ServiceException {
+	public void deleteById_InvokeOnceDeleteByIdRepositoryMethod() throws ServiceException {
 		customerService.deleteById(id);
 		verify(mockCustomerRepository, times(1)).deleteById(id);
 	}

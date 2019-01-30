@@ -75,7 +75,7 @@ public class JobControllerTest {
 	}
 	
 	@Test
-	public void getAllShouldReturnStatusNoContentWhenJobListEmpty() throws Exception {
+	public void getAll_ShouldReturnStatusNoContentWhenJobListEmpty() throws Exception {
 		when(jobService.findAll()).thenReturn(jobs);
 		
 		mockMvc.perform(get("/jobs"))
@@ -83,7 +83,7 @@ public class JobControllerTest {
 	}
 	
 	@Test
-	public void getAllShouldReturnStatusServiceTemporarilyUnavailableWhenJobServiceFailed() throws Exception {
+	public void getAll_ShouldReturnStatusServiceTemporarilyUnavailableWhenJobServiceFailed() throws Exception {
 		when(jobService.findAll()).thenThrow(new ServiceException("Problem with DB connection"));
 		
 		mockMvc.perform(get("/jobs"))
@@ -107,7 +107,7 @@ public class JobControllerTest {
 	}
 	
 	@Test
-	public void createShouldReturnStatusConflictWhenJobExists() throws Exception {
+	public void create_ShouldReturnStatusConflictWhenJobExists() throws Exception {
 		when(jobService.exist(job.getId())).thenReturn(true);
 		mockMvc.perform(post("/jobs")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -116,7 +116,7 @@ public class JobControllerTest {
 	}
 	
 	@Test
-	public void createShouldReturnStatusServiceTemporarilyUnavailableWhenJobServiceFailed() throws Exception {
+	public void create_ShouldReturnStatusServiceTemporarilyUnavailableWhenJobServiceFailed() throws Exception {
 		when(jobService.exist(fakeId)).thenReturn(false);
         when(jobService.create(job)).thenThrow(new ServiceException("Problem with DB connection"));
         

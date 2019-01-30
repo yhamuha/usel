@@ -70,7 +70,7 @@ public class CustomerControllerTest {
 	}
 	
 	@Test
-	public void getAllShouldReturnStatusNoContentWhenCustomerListEmpty() throws Exception {
+	public void getAll_ShouldReturnStatusNoContentWhenCustomerListEmpty() throws Exception {
 		when(customerService.findAll()).thenReturn(customers);
 		
 		mockMvc.perform(get("/customers"))
@@ -78,7 +78,7 @@ public class CustomerControllerTest {
 	}
 	
 	@Test
-	public void getAllShouldReturnStatusServiceTemporarilyUnavailableWhenCustomerServiceFailed() throws Exception {
+	public void getAll_ShouldReturnStatusServiceTemporarilyUnavailableWhenCustomerServiceFailed() throws Exception {
 		when(customerService.findAll()).thenThrow(new ServiceException("Problem with DB connection"));
 		
 		mockMvc.perform(get("/customers"))
@@ -102,7 +102,7 @@ public class CustomerControllerTest {
 	}
 	
 	@Test
-	public void createShouldReturnStatusConflictWhenCustomerExists() throws Exception {
+	public void create_ShouldReturnStatusConflictWhenCustomerExists() throws Exception {
 		when(customerService.exist(customer.getId())).thenReturn(true);
 		mockMvc.perform(post("/customers")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -111,7 +111,7 @@ public class CustomerControllerTest {
 	}
 
 	@Test
-	public void createShouldReturnStatusServiceTemporarilyUnavailableWhenCustomerServiceFailed() throws Exception {
+	public void create_ShouldReturnStatusServiceTemporarilyUnavailableWhenCustomerServiceFailed() throws Exception {
 		when(customerService.exist(fakeId)).thenReturn(false);
         when(customerService.create(customer)).thenThrow(new ServiceException("Problem with DB connection"));
         

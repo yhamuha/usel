@@ -42,30 +42,30 @@ public class PurchaseServiceImplTest {
 	}
 
 	@Test
-	public void findAllShouldInvokeOnceUserRepositoryFindAllMethod() throws ServiceException {
+	public void findAll_ShouldInvokeOnceUserRepositoryFindAllMethod() throws ServiceException {
 		purchaseService.findAll();
 		verify(mockPurchaseRepository, times(1)).findAll();
 	}
 
 	@Test
-	public void createShouldInvokeOncePurchaseRepositorySaveMethod() throws ServiceException {
+	public void create_ShouldInvokeOncePurchaseRepositorySaveMethod() throws ServiceException {
 		purchaseService.create(purchase);
 		verify(mockPurchaseRepository, times(1)).save(purchase);
 	}
 	
 	@Test
-	public void  updateShouldInvokeOncePurchaseRepositorySaveAndFlushMethod() throws ServiceException {
+	public void  update_ShouldInvokeOncePurchaseRepositorySaveAndFlushMethod() throws ServiceException {
 		purchaseService.update(purchase);
 		verify(mockPurchaseRepository, times(1)).saveAndFlush(purchase);
 	}
 	
 	@Test
-	public void findByIdShouldNotReturnNull() throws ServiceException {
+	public void findById_ShouldNotReturnNull() throws ServiceException {
 		assertNotNull(purchaseService.findById(id));
 	}
 	
 	@Test
-	public void deleteByIdInvokeOnceDeleteByIdRepositoryMethod() throws ServiceException {
+	public void deleteById_InvokeOnceDeleteByIdRepositoryMethod() throws ServiceException {
 		purchaseService.deleteById(id);
 		verify(mockPurchaseRepository, times(1)).deleteById(id);
 	}

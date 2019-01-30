@@ -69,7 +69,7 @@ public class VendorControllerTest {
 	}
 	
 	@Test
-	public void getAllShouldReturnStatusNoContentWhenVendorListEmpty() throws Exception {
+	public void getAll_ShouldReturnStatusNoContentWhenVendorListEmpty() throws Exception {
 		when(vendorService.findAll()).thenReturn(vendors);
 		
 		mockMvc.perform(get("/vendors"))
@@ -77,7 +77,7 @@ public class VendorControllerTest {
 	}
 	
 	@Test
-	public void getAllShouldReturnStatusServiceTemporarilyUnavailableWhenVendorServiceFailed() throws Exception {
+	public void getAll_ShouldReturnStatusServiceTemporarilyUnavailableWhenVendorServiceFailed() throws Exception {
 		when(vendorService.findAll()).thenThrow(new ServiceException("Problem with DB connection"));
 		
 		mockMvc.perform(get("/vendors"))
@@ -101,7 +101,7 @@ public class VendorControllerTest {
 	}
 	
 	@Test
-	public void createShouldReturnStatusConflictWhenVendorExists() throws Exception {
+	public void create_ShouldReturnStatusConflictWhenVendorExists() throws Exception {
 		when(vendorService.exist(vendor.getId())).thenReturn(true);
 		mockMvc.perform(post("/vendors")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -110,7 +110,7 @@ public class VendorControllerTest {
 	}
 	
 	@Test
-	public void createShouldReturnStatusServiceTemporarilyUnavailableWhenVendorServiceFailed() throws Exception {
+	public void create_ShouldReturnStatusServiceTemporarilyUnavailableWhenVendorServiceFailed() throws Exception {
 		when(vendorService.exist(fakeId)).thenReturn(false);
         when(vendorService.create(vendor)).thenThrow(new ServiceException("Problem with DB connection"));
         

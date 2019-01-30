@@ -70,7 +70,7 @@ public class VesselControllerTest {
 	}
 	
 	@Test
-	public void getAllShouldReturnStatusNoContentWhenVesselListEmpty() throws Exception {
+	public void getAll_ShouldReturnStatusNoContentWhenVesselListEmpty() throws Exception {
 		when(vesselService.findAll()).thenReturn(vessels);
 		
 		mockMvc.perform(get("/vessels"))
@@ -78,7 +78,7 @@ public class VesselControllerTest {
 	}
 	
 	@Test
-	public void getAllShouldReturnStatusServiceTemporarilyUnavailableWhenVesselServiceFailed() throws Exception {
+	public void getAll_ShouldReturnStatusServiceTemporarilyUnavailableWhenVesselServiceFailed() throws Exception {
 		when(vesselService.findAll()).thenThrow(new ServiceException("Problem with DB connection"));
 		
 		mockMvc.perform(get("/vessels"))
@@ -102,7 +102,7 @@ public class VesselControllerTest {
 	}
 	
 	@Test
-	public void createShouldReturnStatusConflictWhenVesselExists() throws Exception {
+	public void create_ShouldReturnStatusConflictWhenVesselExists() throws Exception {
 		when(vesselService.exist(vessel.getId())).thenReturn(true);
 		mockMvc.perform(post("/vessels")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -111,7 +111,7 @@ public class VesselControllerTest {
 	}
 	
 	@Test
-	public void createShouldReturnStatusServiceTemporarilyUnavailableWhenVesselServiceFailed() throws Exception {
+	public void create_ShouldReturnStatusServiceTemporarilyUnavailableWhenVesselServiceFailed() throws Exception {
 		when(vesselService.exist(fakeId)).thenReturn(false);
         when(vesselService.create(vessel)).thenThrow(new ServiceException("Problem with DB connection"));
         

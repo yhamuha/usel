@@ -42,30 +42,30 @@ public class JobServiceImplTest {
 	}
 
 	@Test
-	public void findAllShouldInvokeOnceUserRepositoryfindAllMethod() throws ServiceException {
+	public void findAll_ShouldInvokeOnceUserRepositoryfindAllMethod() throws ServiceException {
 		jobService.findAll();
 		verify(mockJobRepository, times(1)).findAll();
 	}
 
 	@Test
-	public void createShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
+	public void create_ShouldInvokeOnceUserRepositorySaveMethod() throws ServiceException {
 		jobService.create(job);
 		verify(mockJobRepository, times(1)).save(job);
 	}
 
 	@Test
-	public void  updateShouldInvokeOnceJobRepositorySaveAndFlushMethod() throws ServiceException {
+	public void  update_ShouldInvokeOnceJobRepositorySaveAndFlushMethod() throws ServiceException {
 		jobService.update(job);
 		verify(mockJobRepository, times(1)).saveAndFlush(job);
 	}
 
 	@Test
-	public void findByIdShouldNotReturnNull() throws ServiceException {
+	public void findById_ShouldNotReturnNull() throws ServiceException {
 		assertNotNull(jobService.findById(id));
 	}
 	
 	@Test
-	public void deleteByIdInvokeOnceDeleteByIdRepositoryMethod() throws ServiceException {
+	public void deleteById_InvokeOnceDeleteByIdRepositoryMethod() throws ServiceException {
 		jobService.deleteById(id);
 		verify(mockJobRepository, times(1)).deleteById(id);
 	}

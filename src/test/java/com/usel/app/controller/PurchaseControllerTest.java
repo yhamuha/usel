@@ -70,7 +70,7 @@ public class PurchaseControllerTest {
 	}
 	
 	@Test
-	public void getAllShouldReturnStatusNoContentWhenPurchaseListEmpty() throws Exception {
+	public void getAll_ShouldReturnStatusNoContentWhenPurchaseListEmpty() throws Exception {
 		when(purchaseService.findAll()).thenReturn(purchases);
 		
 		mockMvc.perform(get("/purchases"))
@@ -78,7 +78,7 @@ public class PurchaseControllerTest {
 	}
 	
 	@Test
-	public void getAllShouldReturnStatusServiceTemporarilyUnavailableWhenPurchaseServiceFailed() throws Exception {
+	public void getAll_ShouldReturnStatusServiceTemporarilyUnavailableWhenPurchaseServiceFailed() throws Exception {
 		when(purchaseService.findAll()).thenThrow(new ServiceException("Problem with DB connection"));
 		
 		mockMvc.perform(get("/purchases"))
@@ -102,7 +102,7 @@ public class PurchaseControllerTest {
 	}
 	
 	@Test
-	public void createShouldReturnStatusConflictWhenPurchaseExists() throws Exception {
+	public void create_ShouldReturnStatusConflictWhenPurchaseExists() throws Exception {
 		when(purchaseService.exist(purchase.getPo())).thenReturn(true);
 		mockMvc.perform(post("/purchases")
 				.contentType(MediaType.APPLICATION_JSON)
