@@ -33,7 +33,7 @@ public class FinalPoNumberServiceImpl implements FinalPoNumberService{
 	JobService jobService;
 	
 	@Autowired
-	VendorService vendorService;																								// accordance +
+	VendorService vendorService;																								
 	
 	@Autowired																											
 	UserService userService;
@@ -43,44 +43,29 @@ public class FinalPoNumberServiceImpl implements FinalPoNumberService{
 																					
 	
 	@Override
-	public String generateSaveAndReturnFinalPoNumber(int user_id, int customer_id, int vessel_id, int job_id, int vendor_id) throws ServiceException {   // accordance +
+	public String generateSaveAndReturnFinalPoNumber(int user_id, int customer_id, int vessel_id, int job_id, int vendor_id) throws ServiceException {   
 			
-			// Right sequence in accordance to flow
-		
-			// customer
-			// vessel
-		    // job
-			// vendor
-		
-							// user ?? We'll need user.ShortNAme after ?? How can we get user object ?? Spring security will carry real user !
-		
 			Date dateCreated = new Date();																		
 			Date dateUpdated = new Date();	
 			
-			
+			User user = userService.findById(user_id).get();
 			Customer customer = customerService.findById(customer_id).get();
 			Vessel vessel = vesselService.findById(vessel_id).get();
 			Job job = jobService.findById(job_id).get();
 			Vendor vendor = vendorService.findById(vendor_id).get();
-			
-			User user = userService.findById(user_id).get();																								// could get user object from db throught CRUDRepository findByID ?													
 													
-			  
-			
-			
-			
 			System.out.println(user);
 			System.out.println(customer);
+			System.out.println(vessel);
+			System.out.println(job);
 			System.out.println(vendor);
 			
-			// ? null ? what is null ?
-			Purchase purchase = new Purchase(user, customer, vendor, null, dateCreated, dateUpdated);				// check purchase for right signature
+			Purchase purchase = new Purchase(user, customer, vendor, null, dateCreated, dateUpdated);				
 			
 			System.out.println(purchase);
-			// save object Purchase
-			purchaseService.create(purchase);																													// ERROR																											
+
+			purchaseService.create(purchase);                                                              																												
 			
-			// 
 			String finalPoNumber = user.getShortName() + " " + job.getId() + " - " + purchase.getPo();							
 			
 			System.out.println(finalPoNumber);																	
@@ -89,8 +74,10 @@ public class FinalPoNumberServiceImpl implements FinalPoNumberService{
 												
 			purchaseService.update(purchase);																			
 				
-			finalPoNumber = user_id + "" + customer_id + "" + vessel_id + "" + job_id + "" + vendor_id;																						
+			finalPoNumber = user_id + "" + customer_id + "" + vessel_id + "" + job_id + "" + vendor_id;																	// ?
+																						
 			System.out.println(finalPoNumber);																																				
+			
 			return finalPoNumber;																																							
 		
 	}
