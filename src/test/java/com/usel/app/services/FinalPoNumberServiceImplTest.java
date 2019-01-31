@@ -32,14 +32,14 @@ import com.usel.app.service.impl.PurchaseServiceImpl;
 @RunWith(SpringRunner.class)																																								
 public class FinalPoNumberServiceImplTest {
 
-	User user;																																											
-	Customer customer;
-	Vessel vessel;
-	Job job;
+	//User user;																																											
+	//Customer customer;
+	//Vessel vessel;
+	//Job job;
 	Purchase purchase;
-	Vendor vendor;
-	Date dateCreated;
-	Date dateUpdated;																																									
+	//Vendor vendor;																																						// Defined regular variable of type?
+	//Date dateCreated;
+	//Date dateUpdated;																																									
 	
 	
 	@InjectMocks																												
@@ -73,7 +73,7 @@ public class FinalPoNumberServiceImplTest {
 		
 		MockitoAnnotations.initMocks(this);																						
 		
-		when(mockPurchaseRepository.save(purchase)).thenReturn(purchase);														
+		//when(mockPurchaseRepository.save(purchase)).thenReturn(purchase);														
 		when(mockPurchaseRepository.saveAndFlush(purchase)).thenReturn(purchase);												
 		
 	}
@@ -82,14 +82,15 @@ public class FinalPoNumberServiceImplTest {
 	public void generateSaveAndReturnFinalPoNumber_ShouldReturnString() throws ServiceException{
 
 		int user_id = 1, customer_id = 1, vessel_id = 1, job_id = 1, vendor_id = 1;																				
-			
 		Date currentDate = new Date();
+		Date dateCreated = new Date();
+		Date dateUpdated = new Date();
 		
-		User user = new User("User_name", "User_lastName", "email@email.com", "password", "User_shortName", true, currentDate, currentDate);					
-		Customer customer = new Customer("Cust_name", 2, currentDate, currentDate);																				
-		Vessel vessel = new Vessel ("Vessel_name", currentDate, currentDate);																					
-		Job job = new Job("Job_desc", currentDate, "mmssale", true, currentDate, currentDate);
-		Vendor vendor = new Vendor ("Vendor_name", currentDate, currentDate);																					
+		User user = new User("User_name", "User_lastName", "email@email.com", "password", "User_shortName", true, dateCreated, dateUpdated);					
+		Customer customer = new Customer("Cust_name", 2, dateCreated, dateUpdated);																				
+		Vessel vessel = new Vessel ("Vessel_name", dateCreated, dateUpdated);																					
+		Job job = new Job("Job_desc", currentDate, "mmssale", true, dateCreated, dateUpdated);
+		Vendor vendor = new Vendor ("Vendor_name", dateCreated, dateUpdated);																					
 		
 		Optional<User> optionalUser = Optional.of(user);																																											
 		Optional<Customer> optionalCustomer = Optional.of(customer);
@@ -103,25 +104,30 @@ public class FinalPoNumberServiceImplTest {
 		when((mockJobService.findById(1))).thenReturn(optionalJob);
 		when((mockVendorService.findById(1))).thenReturn(optionalVendor);
 		
-														
+		String actual = finalPoNumberServiceImpl.generateSaveAndReturnFinalPoNumber(user_id, customer_id, vessel_id, job_id, vendor_id);									// ERROR
 		
-		String actual = finalPoNumberServiceImpl.generateSaveAndReturnFinalPoNumber(user_id, customer_id, vessel_id, job_id, vendor_id);		
-		
-		user = mockUserService.findById(user_id).get();																																	//																									
+		/*user = mockUserService.findById(user_id).get();																																																										
 		customer = mockCustomerService.findById(customer_id).get();
-		vendor = mockVendorService.findById(vendor_id).get();
+		vendor = mockVendorService.findById(vendor_id).get();*/
+		
 		System.out.println(user);
 		System.out.println(customer);
 		System.out.println(vendor);
-		Purchase purchase = new Purchase(user, customer, vendor, null, dateCreated, dateUpdated);
+		
+		Purchase purchase = new Purchase(user, customer, vendor, null, dateCreated, dateUpdated); 				// all this params must have full matching with Model <-> Hibernate <-> Database Table Right?
+		
 		System.out.println(purchase);
-		purchaseService.create(purchase);																				
+		
+		// what I meant here ??
+		// I think I need just check actual variable with expected. Thats it.
+		
+		// purchaseService.create(purchase);																				
 								
-		String finalPoNumber = user_id + " " + job_id + " - " + purchase.getPo();																				
+		// String finalPoNumber = user_id + " " + job_id + " - " + purchase.getPo();																				
 											
-		purchase.setFinalPoNumber(finalPoNumber);
+		// purchase.setFinalPoNumber(finalPoNumber);
 											
-		purchaseService.update(purchase);
+		// purchaseService.update(purchase);
 			
 		String expected = "00000";																																
 		assertEquals(expected, actual);
